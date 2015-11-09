@@ -1,4 +1,4 @@
 # AutomatorDemo
 --
 
-PinkDiary Automation ofAndroid Native Part. Version Demo
+PinkDiary Automation of Android Native Part. Version Demo

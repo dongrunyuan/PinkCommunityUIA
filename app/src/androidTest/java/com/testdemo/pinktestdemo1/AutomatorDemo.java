@@ -78,7 +78,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
             fail(e.toString());
         }
     }
-    /*
+
     //发现--搜索
     public void test003Search(){
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
@@ -129,7 +129,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
             fail(e.toString());
         }
     }
-*/
+
     @After
     public void testzzzTestFinished(){
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
