@@ -54,86 +54,86 @@ public class AutomatorDemo extends InstrumentationTestCase{
         }
     }
 
-    //启动
-    @Before
-    public void test001StartApp(){
-        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
-        try {
-            excuteCommand("am force-stop pinkdiary.xiaoxiaotu.com");
-            SystemClock.sleep(1000);
-            excuteCommand("am start -n pinkdiary.xiaoxiaotu.com/pinkdiary.xiaoxiaotu.com.MainActivity");
-        } catch (Exception e) {
-            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/startApp.png"));
-            fail(e.toString());
-        }
-    }
-
-    @Test
-    //主页
-    public void test002Index(){
-        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
-        try {
-            index();
-        } catch (UiObjectNotFoundException e) {
-            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testIndex.png"));
-            fail(e.toString());
-        }
-    }
-
-    //发现--搜索
-    public void test003Search(){
-        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
-        try {
-            discover_search();
-        } catch (UiObjectNotFoundException e) {
-            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testSearch.png"));
-            fail(e.toString());
-        }
-    }
-
-    //发现--粉粉圈
-    public void test004Circle(){
-        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
-        try {
-            discover_circle();
-        } catch (UiObjectNotFoundException e) {
-            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testCircle.png"));
-            fail(e.toString());
-        }
-    }
-
-    //群组
-    public void test005GroupChat(){
-        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
-        try {
-            discover_groupChat();
-        } catch (UiObjectNotFoundException e){
-            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testGroupChat.png"));
-            fail(e.toString());
-        }
-    }
-
-    //消息
-    public void test006Notification(){
-        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
-        try {
-            notification();
-        } catch (UiObjectNotFoundException e){
-            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testNotification.png"));
-            fail(e.toString());
-        }
-    }
-
-//    //旧版聊天室
-//    public void test007DyingChatRoom(){
+//    //启动
+//    @Before
+//    public void test001StartApp(){
 //        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
 //        try {
-//            discover_dyingChatRoom();
-//        } catch (UiObjectNotFoundException e){
-//            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testDyingChatRoom.png"));
+//            excuteCommand("am force-stop pinkdiary.xiaoxiaotu.com");
+//            SystemClock.sleep(1000);
+//            excuteCommand("am start -n pinkdiary.xiaoxiaotu.com/pinkdiary.xiaoxiaotu.com.MainActivity");
+//        } catch (Exception e) {
+//            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/startApp.png"));
 //            fail(e.toString());
 //        }
 //    }
+//
+//    @Test
+//    //主页
+//    public void test002Index(){
+//        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+//        try {
+//            index();
+//        } catch (UiObjectNotFoundException e) {
+//            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testIndex.png"));
+//            fail(e.toString());
+//        }
+//    }
+//
+//    //发现--搜索
+//    public void test003Search(){
+//        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+//        try {
+//            discover_search();
+//        } catch (UiObjectNotFoundException e) {
+//            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testSearch.png"));
+//            fail(e.toString());
+//        }
+//    }
+//
+//    //发现--粉粉圈
+//    public void test004Circle(){
+//        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+//        try {
+//            discover_circle();
+//        } catch (UiObjectNotFoundException e) {
+//            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testCircle.png"));
+//            fail(e.toString());
+//        }
+//    }
+//
+//    //群组
+//    public void test005GroupChat(){
+//        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+//        try {
+//            discover_groupChat();
+//        } catch (UiObjectNotFoundException e){
+//            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testGroupChat.png"));
+//            fail(e.toString());
+//        }
+//    }
+//
+//    //消息
+//    public void test006Notification(){
+//        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+//        try {
+//            notification();
+//        } catch (UiObjectNotFoundException e){
+//            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testNotification.png"));
+//            fail(e.toString());
+//        }
+//    }
+
+    //旧版聊天室
+    public void test007DyingChatRoom(){
+        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+        try {
+            discover_dyingChatRoom();
+        } catch (UiObjectNotFoundException e){
+            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testDyingChatRoom.png"));
+            fail(e.toString());
+        }
+    }
 
     @After
     public void testzzzTestFinished(){
@@ -1081,24 +1081,22 @@ public class AutomatorDemo extends InstrumentationTestCase{
     private void discover_dyingChatRoom() throws UiObjectNotFoundException{
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
         //控件
-        UiObject index = mDevice.findObject(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(0))
-                .getFromParent(new UiSelector().className(android.widget.TabWidget.class.getName()));
+        UiObject index = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/tabsLayout").index(0));
         //聊天室入口
-        UiObject discover = mDevice.findObject(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(1))
-                .getFromParent(new UiSelector().className(android.widget.TabWidget.class.getName()));
-        UiObject chatRoomEntrance = mDevice.findObject(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(3))
-                .getFromParent(new UiSelector().className(android.widget.ExpandableListView.class.getName()).clickable(true));
-        //聊天室列表
+        UiObject discover = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/tabsLayout").index(1));
+        UiObject chatRoomEntrance = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/discover_item_lay").index(3));
+        //聊天记录
         UiScrollable chatList = new UiScrollable(new UiSelector().className(android.widget.ListView.class.getName()));
         //输入内容
         UiObject input = mDevice.findObject(new UiSelector().className(android.widget.EditText.class.getName()));
         UiObject expression = mDevice.findObject(new UiSelector().className(android.widget.ImageView.class.getName())
                 .resourceId("pinkdiary.xiaoxiaotu.com:id/icon_btn"));
-        UiObject asciiArt = mDevice.findObject(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(1))
-                .getFromParent(new UiSelector().className(android.widget.GridView.class.getName()));
-        UiScrollable expressionList = new UiScrollable(new UiSelector().className(android.widget.GridView.class.getName()));
-        UiObject chooseExpression = mDevice.findObject(new UiSelector().className(android.widget.LinearLayout.class.getName()).index(0))
-                .getFromParent(new UiSelector().className(android.widget.GridView.class.getName()));
+        UiObject asciiArt = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/emotion_item_lay")
+                .childSelector(new UiSelector().className(android.widget.GridView.class.getName())
+                        .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(1))));
+        UiScrollable expressionList = new UiScrollable(new UiSelector().className(android.widget.GridView.class.getName())).setAsHorizontalList();
+        UiObject chooseExpression = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/emotion_item_grid")
+                .childSelector(new UiSelector().className(android.widget.LinearLayout.class.getName()).index(3)));
         UiObject confirm = mDevice.findObject(new UiSelector().className(android.widget.ImageView.class.getName())
                 .resourceId("pinkdiary.xiaoxiaotu.com:id/btn_send"));
 
@@ -1107,13 +1105,17 @@ public class AutomatorDemo extends InstrumentationTestCase{
         discover.click();
         SystemClock.sleep(1500);
         chatRoomEntrance.clickAndWaitForNewWindow(2000);
-        chatList.flingToBeginning(3);
+        chatList.flingToBeginning(4);
         SystemClock.sleep(1500);
         input.click();
         input.setText("新人报道");
         expression.click();
+        expressionList.scrollForward(2);
+        if (chooseExpression.exists()) {
+            chooseExpression.click();
+        }
         asciiArt.click();
-        expressionList.scrollForward(3);
+        expressionList.scrollForward(2);
         if (chooseExpression.exists()) {
             chooseExpression.click();
         }
