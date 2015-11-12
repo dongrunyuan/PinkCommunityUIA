@@ -167,7 +167,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
             fail(e.toString());
         }
     }
-    
+
     @After
     public void testzzzTestFinished(){
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
