@@ -54,75 +54,75 @@ public class AutomatorDemo extends InstrumentationTestCase{
         }
     }
 
-//    //启动
-//    @Before
-//    public void test001StartApp(){
-//        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
-//        try {
-//            excuteCommand("am force-stop pinkdiary.xiaoxiaotu.com");
-//            SystemClock.sleep(1000);
-//            excuteCommand("am start -n pinkdiary.xiaoxiaotu.com/pinkdiary.xiaoxiaotu.com.MainActivity");
-//        } catch (Exception e) {
-//            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/startApp.png"));
-//            fail(e.toString());
-//        }
-//    }
-//
-//    @Test
-//    //主页
-//    public void test002Index(){
-//        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
-//        try {
-//            index();
-//        } catch (UiObjectNotFoundException e) {
-//            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testIndex.png"));
-//            fail(e.toString());
-//        }
-//    }
-//
-//    //发现--搜索
-//    public void test003Search(){
-//        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
-//        try {
-//            discover_search();
-//        } catch (UiObjectNotFoundException e) {
-//            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testSearch.png"));
-//            fail(e.toString());
-//        }
-//    }
-//
-//    //发现--粉粉圈
-//    public void test004Circle(){
-//        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
-//        try {
-//            discover_circle();
-//        } catch (UiObjectNotFoundException e) {
-//            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testCircle.png"));
-//            fail(e.toString());
-//        }
-//    }
-//
-//    //群组
-//    public void test005GroupChat(){
-//        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
-//        try {
-//            discover_groupChat();
-//        } catch (UiObjectNotFoundException e){
-//            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testGroupChat.png"));
-//            fail(e.toString());
-//        }
-//    }
-//
-//    //消息
-//    public void test006Notification(){
-//        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
-//        try {
-//            notification();
-//        } catch (UiObjectNotFoundException e){
-//            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testNotification.png"));
-//            fail(e.toString());
-//        }
-//    }
+    //启动
+    @Before
+    public void test001StartApp(){
+        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+        try {
+            excuteCommand("am force-stop pinkdiary.xiaoxiaotu.com");
+            SystemClock.sleep(1000);
+            excuteCommand("am start -n pinkdiary.xiaoxiaotu.com/pinkdiary.xiaoxiaotu.com.MainActivity");
+        } catch (Exception e) {
+            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/startApp.png"));
+            fail(e.toString());
+        }
+    }
+
+    @Test
+    //主页
+    public void test002Index(){
+        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+        try {
+            index();
+        } catch (UiObjectNotFoundException e) {
+            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testIndex.png"));
+            fail(e.toString());
+        }
+    }
+
+    //发现--搜索
+    public void test003Search(){
+        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+        try {
+            discover_search();
+        } catch (UiObjectNotFoundException e) {
+            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testSearch.png"));
+            fail(e.toString());
+        }
+    }
+
+    //发现--粉粉圈
+    public void test004Circle(){
+        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+        try {
+            discover_circle();
+        } catch (UiObjectNotFoundException e) {
+            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testCircle.png"));
+            fail(e.toString());
+        }
+    }
+
+    //群组
+    public void test005GroupChat(){
+        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+        try {
+            discover_groupChat();
+        } catch (UiObjectNotFoundException e){
+            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testGroupChat.png"));
+            fail(e.toString());
+        }
+    }
+
+    //消息
+    public void test006Notification(){
+        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+        try {
+            notification();
+        } catch (UiObjectNotFoundException e){
+            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testNotification.png"));
+            fail(e.toString());
+        }
+    }
 
     //旧版聊天室
     public void test007DyingChatRoom(){
