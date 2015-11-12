@@ -167,21 +167,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
             fail(e.toString());
         }
     }
-
-<<<<<<< HEAD
-    //旧版聊天室
-    public void test007DyingChatRoom(){
-        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
-        try {
-            discover_dyingChatRoom();
-        } catch (UiObjectNotFoundException e){
-            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testDyingChatRoom.png"));
-            fail(e.toString());
-        }
-    }
-
-=======
->>>>>>> master
+    
     @After
     public void testzzzTestFinished(){
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
@@ -195,8 +181,6 @@ public class AutomatorDemo extends InstrumentationTestCase{
             fail(e.toString());
         }
     }
-
-
 
     private void index() throws UiObjectNotFoundException{
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
