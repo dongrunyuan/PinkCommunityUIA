@@ -112,8 +112,14 @@ public class AutomatorDemo extends InstrumentationTestCase{
         }
     }
 
+<<<<<<< HEAD
     /*//旧版聊天室
     public void test005_5DyingChatRoom(){
+=======
+/*
+    //旧版聊天室
+    public void test005P_DyingChatRoom(){
+>>>>>>> master
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
         try {
             discover_dyingChatRoom();
@@ -121,7 +127,12 @@ public class AutomatorDemo extends InstrumentationTestCase{
             mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testDyingChatRoom.png"));
             fail(e.toString());
         }
+<<<<<<< HEAD
     }*/
+=======
+    }
+*/
+>>>>>>> master
 
     //申请达人认证
     public void test006Ablilty(){
@@ -179,8 +190,6 @@ public class AutomatorDemo extends InstrumentationTestCase{
             fail(e.toString());
         }
     }
-
-
 
     private void index() throws UiObjectNotFoundException{
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
@@ -1243,7 +1252,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
                 mDevice.pressBack();
             }
         }else{
-            mDevice.pressBack();
+                mDevice.pressBack();
         }
     }
 
@@ -1301,8 +1310,8 @@ public class AutomatorDemo extends InstrumentationTestCase{
                 .childSelector(new UiSelector().className(android.widget.LinearLayout.class.getName())
                         .childSelector(new UiSelector().className(android.widget.LinearLayout.class.getName()).index(2))));
         //不同位置-加圈子
-        UiObject joinGroupInList = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_recgroup_join"));
-        UiObject joinGroupInDetail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_group_add_exit"));
+        UiObject joinCircleInList = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_recgroup_join"));
+        UiObject joinCircleInDetail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_group_add_exit"));
         //查看群组详情
         UiObject groupCover = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/user_album_lay").index(0));
         UiObject groupLevel = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_gc_level_lay"));
@@ -1380,16 +1389,24 @@ public class AutomatorDemo extends InstrumentationTestCase{
         mDevice.pressBack();
         followInInfo.click();
         mDevice.pressBack();
-        //推荐圈子
+        //推荐圈子-列表和详情加圈退圈
         recommendCircle.click();
+        SystemClock.sleep(1500);
+        if (recommendObjectInfo.exists()) {
+            recommendObjectInfo.click();
+            SystemClock.sleep(3000);
+            joinCircleInDetail.click();
+            mDevice.pressBack();
+            joinCircleInList.click();
+            recommendObjectInfo.click();
+            SystemClock.sleep(3000);
+            joinCircleInDetail.click();
+            mDevice.pressBack();
+            joinCircleInList.click();
+        }
         recommendList.flingToEnd(3);
         recommendList.scrollForward(50);
         recommendList.scrollForward(50);
-        joinGroupInList.click();
-        recommendObjectInfo.click();
-        SystemClock.sleep(5000);
-        joinGroupInDetail.click();
-        mDevice.pressBack();
         //推荐群组
         recommendGroup.click();
         recommendList.flingToEnd(3);
