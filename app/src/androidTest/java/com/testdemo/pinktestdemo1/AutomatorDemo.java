@@ -123,7 +123,8 @@ public class AutomatorDemo extends InstrumentationTestCase{
             mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testDyingChatRoom.png"));
             fail(e.toString());
         }
-    }*/
+    }
+*/
 
     //申请达人认证
     public void test006Ablilty(){
@@ -1518,7 +1519,8 @@ public class AutomatorDemo extends InstrumentationTestCase{
                 .childSelector(new UiSelector().className(android.widget.TextView.class.getName())));
         //社区用户推荐
         UiObject UserRecommend = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_list_message_add_attention_btn"));
-
+        UiObject OfficalUser1 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/official_gc_ly1"));
+        
 
 
     }
