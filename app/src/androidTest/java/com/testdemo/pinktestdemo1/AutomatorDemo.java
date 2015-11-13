@@ -69,7 +69,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
     }
 
     @Test
-   /* //主页
+    //主页
     public void test002Index(){
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
         try {
@@ -113,7 +113,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         }
     }
 
-        //旧版聊天室
+    //旧版聊天室
     public void test005_5DyingChatRoom(){
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
         try {
@@ -122,7 +122,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
             mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testDyingChatRoom.png"));
             fail(e.toString());
         }
-    }*/
+    }
 
     //申请达人认证
     public void test006Ablilty(){
@@ -672,7 +672,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         addOption.click();
         option3.setText("CCCCCCCCCC");
         confirmVote.click();
-        /*//录音
+        //录音
         try {
             startRecord.click();
             SystemClock.sleep(5000);
@@ -693,7 +693,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         } catch (UiObjectNotFoundException e) {
             mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/EndRecordNotExist.png"));
             fail(e.toString());
-        }*/
+        }
         //发送
         sendTopic.click();
         SystemClock.sleep(5000);
@@ -751,7 +751,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         SystemClock.sleep(500);
     }
 
-    private void  discover_groupChat() throws UiObjectNotFoundException{
+    private void discover_groupChat() throws UiObjectNotFoundException{
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
         //控件
         UiObject index = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/tabsLayout").index(0));
@@ -1074,13 +1074,13 @@ public class AutomatorDemo extends InstrumentationTestCase{
             enterTopic.clickAndWaitForNewWindow(1500);
             mDevice.pressBack();
         }
-        /*//录音
+        //录音
         addRecording.click();
         startRecording.longClick();
         if (playRecording.exists()) {
             playRecording.click();
             SystemClock.sleep(2500);
-        }*/
+        }
         //群聊界面功能
         chatSubFunction.click();
         groupData.clickAndWaitForNewWindow(1500);
