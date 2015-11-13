@@ -159,7 +159,18 @@ public class AutomatorDemo extends InstrumentationTestCase{
     }
 
     //消息
-    public void test009Notification(){
+    public void test009Community(){
+        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+        try {
+            community();
+        } catch (UiObjectNotFoundException e){
+            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testCommunity.png"));
+            fail(e.toString());
+        }
+    }
+
+    //消息
+    public void test010Notification(){
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
         try {
             notification();
@@ -1455,6 +1466,61 @@ public class AutomatorDemo extends InstrumentationTestCase{
         SystemClock.sleep(3500);
         back.click();
         index.click();
+    }
+
+    private void community() throws UiObjectNotFoundException{
+        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+        //控件
+        UiObject index = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/tabsLayout").index(0));
+        //社区入口
+        UiObject community = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/tabsLayout").index(2));
+        //banner
+        UiObject banner = mDevice.findObject(new UiSelector().className(android.support.v4.view.ViewPager.class.getName()).index(0)
+                .childSelector(new UiSelector().className(android.widget.ImageView.class.getName())));
+        //社区列表
+        UiScrollable communityContent = new UiScrollable(new UiSelector().className(android.support.v4.view.ViewPager.class.getName()).index(2)).setAsVerticalList();
+        //社区列表中头像
+        UiObject portraitInList = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_portrait_lay"));
+        //列表中图片
+        UiObject ImageInContent = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/img_plazatimeline_attachment1"));
+        UiObject swipeImage = mDevice.findObject(new UiSelector().className(android.support.v4.view.ViewPager.class.getName()));
+        UiObject saveImage = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/save_btn"));
+        //列表--转发/评论
+        UiObject transpondInList = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/btn_plazatimeline_transpond_lay"));
+        UiObject reviewInList = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/btn_plazatimeline_review_lay"));
+        UiObject transpondEditText = mDevice.findObject(new UiSelector().className(android.widget.EditText.class.getName()));
+        UiObject transpondTansfer = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/icon_btn"));
+        UiObject transpondIcon = mDevice.findObject(new UiSelector().className(android.widget.GridView.class.getName())
+                .childSelector(new UiSelector().className(android.widget.LinearLayout.class.getName()).index(2)));
+        UiObject transpondConfirm = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/btn_send"));
+        //列表--喜欢
+        UiObject likeInList = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/btn_plazatimeline_like_lay"));
+        //列表--分享
+        UiObject shareInList = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/btn_plazatimeline_share_lay"));
+        //热门列表--精选话题1
+        UiObject topicInList = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_essence_url_struct1"));
+        UiObject DetailList = mDevice.findObject(new UiSelector().className(android.widget.ListView.class.getName()));
+        UiObject jumpToCircle = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_essence_url_groupname_tv1"));
+        //点滴详情
+        UiObject diaryDetail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_diary_list_mainlay"));
+        UiScrollable diaryCommentList = new UiScrollable(new UiSelector().className(android.widget.ListView.class.getName()));
+        UiObject followInDiaryDetail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_follow_btn"));
+        UiObject enterUserInfo = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_user_brief_info_lay"));
+        UiObject followInUserInfo = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snsherinfo_followed_lay"));
+        UiObject diaryImg = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snsdiarydetail_attach_img1"));
+        UiObject replyInList = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snsdiarydetail_commentlist_reply_img"));
+        UiObject transpondInDetail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snsdiarydetail_transpond_btn"));
+        UiObject reviewInDetail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snsdiarydetail_comment_btn"));
+        UiObject likeInDetail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snsdiarydetail_like_btn"));
+        UiObject shareInDetail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/diary_detail_share"));
+        UiObject moreFunction = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snsdiarydetail_more_btn"));
+        UiObject accuse = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/popup_layout").index(1)
+                .childSelector(new UiSelector().className(android.widget.TextView.class.getName())));
+        //社区用户推荐
+        UiObject UserRecommend = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_list_message_add_attention_btn"));
+
+
+
     }
 
     private void notification() throws UiObjectNotFoundException{
