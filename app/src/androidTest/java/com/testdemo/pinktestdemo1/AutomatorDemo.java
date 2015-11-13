@@ -90,6 +90,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
             fail(e.toString());
         }
     }
+
     //发现--粉粉圈
     public void test004Circle(){
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
@@ -112,14 +113,9 @@ public class AutomatorDemo extends InstrumentationTestCase{
         }
     }
 
-<<<<<<< HEAD
-    /*//旧版聊天室
-    public void test005_5DyingChatRoom(){
-=======
 /*
     //旧版聊天室
     public void test005P_DyingChatRoom(){
->>>>>>> master
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
         try {
             discover_dyingChatRoom();
@@ -127,12 +123,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
             mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testDyingChatRoom.png"));
             fail(e.toString());
         }
-<<<<<<< HEAD
     }*/
-=======
-    }
-*/
->>>>>>> master
 
     //申请达人认证
     public void test006Ablilty(){
@@ -177,6 +168,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
             fail(e.toString());
         }
     }
+
     @After
     public void testzzzTestFinished(){
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
