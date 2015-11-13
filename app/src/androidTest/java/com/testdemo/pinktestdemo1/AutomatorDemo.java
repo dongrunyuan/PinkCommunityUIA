@@ -90,7 +90,6 @@ public class AutomatorDemo extends InstrumentationTestCase{
             fail(e.toString());
         }
     }
-
     //发现--粉粉圈
     public void test004Circle(){
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
@@ -113,9 +112,14 @@ public class AutomatorDemo extends InstrumentationTestCase{
         }
     }
 
+<<<<<<< HEAD
+    /*//旧版聊天室
+    public void test005_5DyingChatRoom(){
+=======
 /*
     //旧版聊天室
     public void test005P_DyingChatRoom(){
+>>>>>>> master
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
         try {
             discover_dyingChatRoom();
@@ -123,8 +127,12 @@ public class AutomatorDemo extends InstrumentationTestCase{
             mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testDyingChatRoom.png"));
             fail(e.toString());
         }
+<<<<<<< HEAD
+    }*/
+=======
     }
 */
+>>>>>>> master
 
     //申请达人认证
     public void test006Ablilty(){
@@ -169,7 +177,6 @@ public class AutomatorDemo extends InstrumentationTestCase{
             fail(e.toString());
         }
     }
-
     @After
     public void testzzzTestFinished(){
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
@@ -249,6 +256,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
                 .getFromParent(new UiSelector().className(android.widget.TabWidget.class.getName()));
 
         //动作
+        home_scroll.flingToBeginning(3);
         //首页皮肤商店入口
         skinShop.clickAndWaitForNewWindow();
         SystemClock.sleep(1500);
@@ -451,9 +459,12 @@ public class AutomatorDemo extends InstrumentationTestCase{
                 .resourceId("pinkdiary.xiaoxiaotu.com:id/sns_comment"));
         UiObject topicFunction = mDevice.findObject(new UiSelector().className(android.widget.ImageView.class.getName())
                 .resourceId("pinkdiary.xiaoxiaotu.com:id/sns_btn_right"));
-        UiObject jump = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/popup_layout").index(2));
-        UiObject accuse = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/popup_layout").index(1));
-        UiObject popularize = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/popup_layout").index(3));
+        UiObject jump = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/popup_layout").index(2)
+                .childSelector(new UiSelector().text("楼层跳转")));
+        UiObject accuse = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/popup_layout").index(1)
+                .childSelector(new UiSelector().text("举报")));
+        UiObject popularize = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/popup_layout").index(3)
+                .childSelector(new UiSelector().text("推广")));
         UiObject floor999 = mDevice.findObject(new UiSelector().className(android.widget.TextView.class.getName()).text("9")
                 .resourceId("pinkdiary.xiaoxiaotu.com:id/num_9"));
         UiObject backspace = mDevice.findObject(new UiSelector().className(android.widget.ImageView.class.getName()).index(4)
@@ -603,21 +614,26 @@ public class AutomatorDemo extends InstrumentationTestCase{
         SystemClock.sleep(1000);
         topicNewest.click();
         SystemClock.sleep(1000);
-        //举报&推广
+        //举报
         topicFunction.click();
         SystemClock.sleep(500);
-        accuse.clickAndWaitForNewWindow();
-        accuseType.click();
-        accuseDesc.setText("测试姬测试举报功能中，请勿删除话题，谢谢~");
-        accuseConfirm.click();
+        if(accuse.exists()){
+            accuse.clickAndWaitForNewWindow();
+            accuseType.click();
+            accuseDesc.setText("测试姬测试举报功能中，请勿删除话题，谢谢~");
+            accuseConfirm.click();
+        }else{
+            mDevice.pressBack();
+        }
         SystemClock.sleep(1000);
+        //推广
         topicFunction.click();
         SystemClock.sleep(500);
         if (popularize.exists()){
             popularize.click();
             SystemClock.sleep(500);
         }else{
-            jump.click();
+            mDevice.pressBack();
         }
         //评论&喜欢&分享弹出
         comment.click();
@@ -659,16 +675,20 @@ public class AutomatorDemo extends InstrumentationTestCase{
         heart.click();
         SystemClock.sleep(500);
         topicImg.clickAndWaitForNewWindow(1000);
-        chooseImg.click();
-        imgConfirm.click();
-        SystemClock.sleep(500);
+        if(chooseImg.exists()){
+            chooseImg.click();
+            imgConfirm.click();
+            SystemClock.sleep(500);
+        }
         startvote.clickAndWaitForNewWindow(500);
         option1.setText("AAAAAAAAAA");
         option2.setText("BBBBBBBBBB");
         setFinishButton.click();
-        setFinishTime.click();
-        chooseFinishTime.swipeUp(50);
-        confirmFinishTime.click();
+        if(setFinishTime.exists()){
+            setFinishTime.click();
+            chooseFinishTime.swipeUp(50);
+            confirmFinishTime.click();
+        }
         addOption.click();
         option3.setText("CCCCCCCCCC");
         confirmVote.click();
@@ -707,17 +727,20 @@ public class AutomatorDemo extends InstrumentationTestCase{
         recommend_topic_button.click();
         SystemClock.sleep(1500);
         top_recommend_topic.clickAndWaitForNewWindow(1500);
-        floorList.scrollForward(100);
+        floorList.flingToEnd(5);
         if (floorPraise.exists()) {
             floorPraise.click();
             SystemClock.sleep(1000);
         }
+        SystemClock.sleep(500);
         if (floorReply.exists()) {
             floorReply.click();
             inputBox.setText("楼主好顶赞~");
             commentConfirm.click();
             SystemClock.sleep(5000);
-            mDevice.pressBack();
+            back.click();
+        }else{
+            back.click();
         }
         //我的话题
         topicSubFunction.click();
@@ -749,7 +772,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         SystemClock.sleep(500);
     }
 
-    private void  discover_groupChat() throws UiObjectNotFoundException{
+    private void discover_groupChat() throws UiObjectNotFoundException{
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
         //控件
         UiObject index = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/tabsLayout").index(0));
@@ -941,8 +964,10 @@ public class AutomatorDemo extends InstrumentationTestCase{
         groupMaster.clickAndWaitForNewWindow(1500);
         mDevice.pressBack();
         groupMember.clickAndWaitForNewWindow(1500);
-        groupMemberDetail.clickAndWaitForNewWindow(1500);
-        mDevice.pressBack();
+        if(groupMemberDetail.exists()){
+            groupMemberDetail.clickAndWaitForNewWindow(1500);
+            mDevice.pressBack();
+        }
         groupMemberList.scrollForward(30);
         mDevice.pressBack();
         //加入群组
@@ -968,22 +993,25 @@ public class AutomatorDemo extends InstrumentationTestCase{
         mDevice.pressBack();
         mDevice.pressBack();
         //创建群组
+
         groupSubFunction.click();
         createGroup.clickAndWaitForNewWindow(1000);
         create.click();
         SystemClock.sleep(500);
-        createTag.click();
-        tagNext.clickAndWaitForNewWindow(1000);
-        createGroupName.clearTextField();
-        createGroupName.setText("测试姬の里屋");
-        createGroupCover.clickAndWaitForNewWindow(1500);
-        chooseImg.click();
-        imgConfirm.click();
-        groupInfoNext.clickAndWaitForNewWindow(1500);
-        createGroupIntro.clearTextField();
-        createGroupIntro.setText("测试姬的小黑屋呐～不要过来呐～！");
-        introConfirm.clickAndWaitForNewWindow(2500);
-        createSuccess.click();
+        if(createTag.exists()){
+            createTag.click();
+            tagNext.clickAndWaitForNewWindow(1000);
+            createGroupName.clearTextField();
+            createGroupName.setText("测试姬の里屋");
+            createGroupCover.clickAndWaitForNewWindow(1500);
+            chooseImg.click();
+            imgConfirm.click();
+            groupInfoNext.clickAndWaitForNewWindow(1500);
+            createGroupIntro.clearTextField();
+            createGroupIntro.setText("测试姬的小黑屋呐～不要过来呐～！");
+            introConfirm.clickAndWaitForNewWindow(2500);
+            createSuccess.click();
+        }
         //更改群资料
         editGroupInfoEntrance.clickAndWaitForNewWindow(1500);
         editGroupCover.clickAndWaitForNewWindow(1000);
@@ -1069,13 +1097,13 @@ public class AutomatorDemo extends InstrumentationTestCase{
             enterTopic.clickAndWaitForNewWindow(1500);
             mDevice.pressBack();
         }
-        //录音
+        /*//录音
         addRecording.click();
         startRecording.longClick();
         if (playRecording.exists()) {
             playRecording.click();
             SystemClock.sleep(2500);
-        }
+        }*/
         //群聊界面功能
         chatSubFunction.click();
         groupData.clickAndWaitForNewWindow(1500);
@@ -1205,6 +1233,12 @@ public class AutomatorDemo extends InstrumentationTestCase{
             shareText.setText("测试中~~请忽视QAQ");
             shareSend.clickAndWaitForNewWindow(5000);
             mDevice.pressBack();
+            ability_share.click();
+            myDrip.click();
+            shareText.clearTextField();
+            shareText.setText("测试中~~请忽视QAQ");
+            shareSend.clickAndWaitForNewWindow(5000);
+            SystemClock.sleep(500);
             mDevice.pressBack();
         }else if(regist_ability.exists()){
             //申请
@@ -1251,6 +1285,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject inviteFromWechat = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_invite_weixin_friend_layout"));
         UiObject inviteFromTencent = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_invite_qq_friend_layout"));
         UiObject weChatExit = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName()).index(1));
+        UiObject weChatBack = mDevice.findObject(new UiSelector().resourceId("com.tencent.mm:id/fb"));
         //推荐列表
         UiScrollable recommendList = new UiScrollable(new UiSelector().className(android.widget.ListView.class.getName())).setAsVerticalList();
         //列表项详情
@@ -1326,6 +1361,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         keywords.clearTextField();
         keywords.setText("图");
         search.click();
+        searchID.click();
         mDevice.pressBack();
         //邀请好友
         inviteFromSina.clickAndWaitForNewWindow();
@@ -1333,9 +1369,12 @@ public class AutomatorDemo extends InstrumentationTestCase{
         mDevice.pressBack();
         inviteFromWechat.click();
         SystemClock.sleep(5000);
-        mDevice.pressBack();
-        weChatExit.clickAndWaitForNewWindow();
-        inviteFromTencent.clickAndWaitForNewWindow(5000);
+        if(weChatBack.exists()){
+            weChatBack.click();
+            weChatExit.clickAndWaitForNewWindow();
+        }
+        inviteFromTencent.clickAndWaitForNewWindow();
+        SystemClock.sleep(5000);
         mDevice.pressBack();
         //感兴趣的人
         recommendList.flingToEnd(3);
@@ -1389,14 +1428,16 @@ public class AutomatorDemo extends InstrumentationTestCase{
         mDevice.pressBack();
         //加入群组
         apply.clickAndWaitForNewWindow(500);
-        applyReason.setText("群申请测试中，请拒绝，谢谢~");
-        SystemClock.sleep(500);
-        applyConfirm.click();
-        SystemClock.sleep(2500);
-        if(applyWaiting.exists()){
-            applyWaiting.click();
-        }else{
-            mDevice.pressBack();
+        if(applyReason.exists()){
+            applyReason.setText("群申请测试中，请拒绝，谢谢~");
+            SystemClock.sleep(500);
+            applyConfirm.click();
+            SystemClock.sleep(2500);
+            if(applyWaiting.exists()){
+                applyWaiting.click();
+            }else{
+                mDevice.pressBack();
+            }
         }
         SystemClock.sleep(1500);
         mDevice.pressBack();
@@ -1469,5 +1510,4 @@ public class AutomatorDemo extends InstrumentationTestCase{
         //回到主页
         index.click();
     }
-
 }
