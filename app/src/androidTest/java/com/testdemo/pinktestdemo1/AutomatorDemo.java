@@ -69,7 +69,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
     }
 
     @Test
-    //主页
+   /* //主页
     public void test002Index(){
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
         try {
@@ -122,7 +122,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
             mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testDyingChatRoom.png"));
             fail(e.toString());
         }
-    }
+    }*/
 
     //申请达人认证
     public void test006Ablilty(){
@@ -672,7 +672,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         addOption.click();
         option3.setText("CCCCCCCCCC");
         confirmVote.click();
-        //录音
+        /*//录音
         try {
             startRecord.click();
             SystemClock.sleep(5000);
@@ -693,7 +693,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         } catch (UiObjectNotFoundException e) {
             mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/EndRecordNotExist.png"));
             fail(e.toString());
-        }
+        }*/
         //发送
         sendTopic.click();
         SystemClock.sleep(5000);
@@ -707,7 +707,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         recommend_topic_button.click();
         SystemClock.sleep(1500);
         top_recommend_topic.clickAndWaitForNewWindow(1500);
-        floorList.scrollForward(100);
+        floorList.flingToEnd(5);
         if (floorPraise.exists()) {
             floorPraise.click();
             SystemClock.sleep(1000);
@@ -717,6 +717,8 @@ public class AutomatorDemo extends InstrumentationTestCase{
             inputBox.setText("楼主好顶赞~");
             commentConfirm.click();
             SystemClock.sleep(5000);
+            mDevice.pressBack();
+        }else{
             mDevice.pressBack();
         }
         //我的话题
@@ -968,22 +970,25 @@ public class AutomatorDemo extends InstrumentationTestCase{
         mDevice.pressBack();
         mDevice.pressBack();
         //创建群组
+
         groupSubFunction.click();
         createGroup.clickAndWaitForNewWindow(1000);
         create.click();
         SystemClock.sleep(500);
-        createTag.click();
-        tagNext.clickAndWaitForNewWindow(1000);
-        createGroupName.clearTextField();
-        createGroupName.setText("测试姬の里屋");
-        createGroupCover.clickAndWaitForNewWindow(1500);
-        chooseImg.click();
-        imgConfirm.click();
-        groupInfoNext.clickAndWaitForNewWindow(1500);
-        createGroupIntro.clearTextField();
-        createGroupIntro.setText("测试姬的小黑屋呐～不要过来呐～！");
-        introConfirm.clickAndWaitForNewWindow(2500);
-        createSuccess.click();
+        if(createTag.exists()){
+            createTag.click();
+            tagNext.clickAndWaitForNewWindow(1000);
+            createGroupName.clearTextField();
+            createGroupName.setText("测试姬の里屋");
+            createGroupCover.clickAndWaitForNewWindow(1500);
+            chooseImg.click();
+            imgConfirm.click();
+            groupInfoNext.clickAndWaitForNewWindow(1500);
+            createGroupIntro.clearTextField();
+            createGroupIntro.setText("测试姬的小黑屋呐～不要过来呐～！");
+            introConfirm.clickAndWaitForNewWindow(2500);
+            createSuccess.click();
+        }
         //更改群资料
         editGroupInfoEntrance.clickAndWaitForNewWindow(1500);
         editGroupCover.clickAndWaitForNewWindow(1000);
@@ -1069,13 +1074,13 @@ public class AutomatorDemo extends InstrumentationTestCase{
             enterTopic.clickAndWaitForNewWindow(1500);
             mDevice.pressBack();
         }
-        //录音
+        /*//录音
         addRecording.click();
         startRecording.longClick();
         if (playRecording.exists()) {
             playRecording.click();
             SystemClock.sleep(2500);
-        }
+        }*/
         //群聊界面功能
         chatSubFunction.click();
         groupData.clickAndWaitForNewWindow(1500);
@@ -1205,6 +1210,12 @@ public class AutomatorDemo extends InstrumentationTestCase{
             shareText.setText("测试中~~请忽视QAQ");
             shareSend.clickAndWaitForNewWindow(5000);
             mDevice.pressBack();
+            ability_share.click();
+            myDrip.click();
+            shareText.clearTextField();
+            shareText.setText("测试中~~请忽视QAQ");
+            shareSend.clickAndWaitForNewWindow(5000);
+            SystemClock.sleep(500);
             mDevice.pressBack();
         }else if(regist_ability.exists()){
             //申请
@@ -1278,7 +1289,6 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject joinGroupInList = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_recgroup_join"));
         UiObject joinGroupInDetail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_group_add_exit"));
         //查看群组详情
-        UiObject groupItem = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/groupchat_item_lay").index(1));
         UiObject groupCover = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/user_album_lay").index(0));
         UiObject groupLevel = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_gc_level_lay"));
         UiObject levelRefresh = mDevice.findObject(new UiSelector().className(android.widget.ImageView.class.getName())
@@ -1327,6 +1337,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         keywords.clearTextField();
         keywords.setText("图");
         search.click();
+        searchID.click();
         mDevice.pressBack();
         //邀请好友
         inviteFromSina.clickAndWaitForNewWindow();
@@ -1382,14 +1393,16 @@ public class AutomatorDemo extends InstrumentationTestCase{
         mDevice.pressBack();
         //加入群组
         apply.clickAndWaitForNewWindow(500);
-        applyReason.setText("群申请测试中，请拒绝，谢谢~");
-        SystemClock.sleep(500);
-        applyConfirm.click();
-        SystemClock.sleep(2500);
-        if(applyWaiting.exists()){
-            applyWaiting.click();
-        }else{
-            mDevice.pressBack();
+        if(applyReason.exists()){
+            applyReason.setText("群申请测试中，请拒绝，谢谢~");
+            SystemClock.sleep(500);
+            applyConfirm.click();
+            SystemClock.sleep(2500);
+            if(applyWaiting.exists()){
+                applyWaiting.click();
+            }else{
+                mDevice.pressBack();
+            }
         }
         SystemClock.sleep(1500);
         mDevice.pressBack();
