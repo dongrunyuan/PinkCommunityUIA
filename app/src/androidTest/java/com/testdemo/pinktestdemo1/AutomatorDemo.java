@@ -159,19 +159,30 @@ public class AutomatorDemo extends InstrumentationTestCase{
         }
     }
 
-    //消息
-    public void test009Community(){
+    //社区浏览
+    public void test009VisitCommunity(){
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
         try {
-            community();
+            visitCommunity();
         } catch (UiObjectNotFoundException e){
-            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testCommunity.png"));
+            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testVisitCommunity.png"));
+            fail(e.toString());
+        }
+    }
+
+    //写社区点滴
+    public void test010PublishCommunityDiary(){
+        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+        try {
+            publishCommunityDiary();
+        } catch (UiObjectNotFoundException e){
+            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/publishCommunityDiary.png"));
             fail(e.toString());
         }
     }
 
     //消息
-    public void test010Notification(){
+    public void test011Notification(){
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
         try {
             notification();
@@ -1469,7 +1480,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         index.click();
     }
 
-    private void community() throws UiObjectNotFoundException{
+    private void visitCommunity() throws UiObjectNotFoundException{
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
         //控件
         UiObject index = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/tabsLayout").index(0));
@@ -1518,10 +1529,26 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject accuse = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/popup_layout").index(1)
                 .childSelector(new UiSelector().className(android.widget.TextView.class.getName())));
         //社区用户推荐
-        UiObject UserRecommend = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_list_message_add_attention_btn"));
-        UiObject OfficalUser1 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/official_gc_ly1"));
-        
+        UiObject userRecommend = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_list_message_add_attention_btn"));
+        UiObject recommendTabPage = mDevice.findObject(new UiSelector().className(android.support.v4.view.ViewPager.class.getName()));
+        UiObject recommendTabButton = mDevice.findObject(new UiSelector().className(android.widget.LinearLayout.class.getName()).index(0)
+                .childSelector(new UiSelector().className(android.widget.TextView.class.getName())));
+        UiObject officalUser1 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/official_gc_ly1"));
+        UiObject portaitAlbum = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/user_album_img"));
+        UiObject recommendUserInfo = mDevice.findObject(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(3)
+                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()))
+                .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_myfans_userinfo_lay")));
+        UiObject recommendFollowInList = mDevice.findObject(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(3)
+                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()))
+                .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_myfans_userinfo_lay"))
+                .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snsfeed_recomuser_item_follow")));
 
+
+        //动作
+
+    }
+
+    private void publishCommunityDiary() throws UiObjectNotFoundException{
 
     }
 
