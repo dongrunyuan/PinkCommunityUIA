@@ -20,6 +20,7 @@ import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiScrollable;
 import android.support.test.uiautomator.UiSelector;
 import android.view.Window;
+import android.widget.LinearLayout;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -209,6 +210,8 @@ public class AutomatorDemo extends InstrumentationTestCase{
     private void index() throws UiObjectNotFoundException{
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
         //控件
+        //首页tab
+        UiObject index = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/tabsLayout").index(0));
         //首页scrollable
         UiScrollable home_scroll = new UiScrollable(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/home_scroll")).setAsVerticalList();
         //换肤
@@ -267,6 +270,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject rec_foryou_switch = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/rec_foryou_lay").index(5));
 
         //动作
+        index.click();
         home_scroll.flingToBeginning(3);
         //首页皮肤商店入口
         skinShop.clickAndWaitForNewWindow();
@@ -486,8 +490,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
                 .resourceId("pinkdiary.xiaoxiaotu.com:id/snsinform_radio10"));
         UiObject accuseDesc = mDevice.findObject(new UiSelector().className(android.widget.EditText.class.getName())
                 .resourceId("pinkdiary.xiaoxiaotu.com:id/snsinform_input"));
-        UiObject accuseConfirm = mDevice.findObject(new UiSelector().className(android.widget.ImageView.class.getName())
-                .resourceId("pinkdiary.xiaoxiaotu.com:id/snsinform_btn_send").index(2));
+        UiObject accuseConfirm = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snsinform_btn_send").index(2));
         //楼主
         UiObject floorHost = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName())
                 .resourceId("pinkdiary.xiaoxiaotu.com:id/sns_ti_master"));
@@ -539,10 +542,12 @@ public class AutomatorDemo extends InstrumentationTestCase{
         //录音
         UiObject startRecord = mDevice.findObject(new UiSelector().className(android.widget.ImageView.class.getName())
                 .resourceId("pinkdiary.xiaoxiaotu.com:id/add_audio").clickable(true));
-        UiObject endRecord = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName()).text("结束录音"));
-        UiObject reRecord = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName()).text("重录"));
-        UiObject deleteRecord = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName()).text("删除"));
-        UiObject completeRecord = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName()).text("完成"));
+        UiObject endRecord = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName()));
+        UiObject reRecord = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName()).index(2));
+        UiObject deleteRecord = mDevice.findObject(new UiSelector().className(android.widget.LinearLayout.class.getName())
+                .childSelector(new UiSelector().className(android.widget.Button.class.getName()).index(0)));
+        UiObject completeRecord = mDevice.findObject(new UiSelector().className(android.widget.RelativeLayout.class.getName())
+                .childSelector(new UiSelector().className(android.widget.Button.class.getName()).index(0)));
         //投票功能
         UiObject startvote = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_topic_release_bottom_lay")
                 .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(3)));
@@ -1108,13 +1113,13 @@ public class AutomatorDemo extends InstrumentationTestCase{
             enterTopic.clickAndWaitForNewWindow(1500);
             mDevice.pressBack();
         }
-        /*//录音
+        //录音
         addRecording.click();
         startRecording.longClick();
         if (playRecording.exists()) {
             playRecording.click();
             SystemClock.sleep(2500);
-        }*/
+        }
         //群聊界面功能
         chatSubFunction.click();
         groupData.clickAndWaitForNewWindow(1500);
@@ -1556,18 +1561,23 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject discover = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/tabsLayout").index(1));
         UiObject noticeEntrance = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/tabsLayout").index(3));
         //动态&通知&聊天
-        UiScrollable list = new UiScrollable(new UiSelector().className(android.widget.ListView.class.getName())).setAsVerticalList();
+        UiScrollable list = new UiScrollable(new UiSelector().resourceId("android:id/list")).setAsVerticalList();
         UiObject listItem = mDevice.findObject(new UiSelector().resourceId("android:id/list")
                 .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(1)));
+        //动态标签
         UiObject dynamic = mDevice.findObject(new UiSelector().className(android.widget.RadioButton.class.getName())
                 .resourceId("pinkdiary.xiaoxiaotu.com:id/sns_rb_me_attention"));
+        //通知标签
         UiObject notice = mDevice.findObject(new UiSelector().className(android.widget.RadioButton.class.getName())
                 .resourceId("pinkdiary.xiaoxiaotu.com:id/sns_rb_relation_me"));
+        //聊天标签
         UiObject privateMessage = mDevice.findObject(new UiSelector().className(android.widget.RadioButton.class.getName())
                 .resourceId("pinkdiary.xiaoxiaotu.com:id/sns_rb_private_letter"));
         //返回
         UiObject back = mDevice.findObject(new UiSelector().className(android.widget.RelativeLayout.class.getName())
                 .childSelector(new UiSelector().className(android.widget.ImageView.class.getName()).index(0)));
+        UiObject userBack = mDevice.findObject(new UiSelector().className(android.widget.RelativeLayout.class.getName())
+                .childSelector(new UiSelector().className(android.widget.ImageView.class.getName()).index(1)));
         //动作
         //分别获取3个列表，如果列表中有数据的话，进入第一条数据的详情界面再返回
         discover.click();
@@ -1575,21 +1585,21 @@ public class AutomatorDemo extends InstrumentationTestCase{
         dynamic.click();
         if (listItem.exists()) {
             listItem.clickAndWaitForNewWindow(1500);
+            back.click();
         }
-        back.click();
-        list.scrollForward(100);
+        list.flingToEnd(2);
         notice.click();
         if (listItem.exists()) {
             listItem.clickAndWaitForNewWindow(1500);
+            userBack.click();
         }
-        back.click();
-        list.scrollForward(100);
+        list.flingToEnd(2);
         privateMessage.click();
         if (listItem.exists()) {
             listItem.clickAndWaitForNewWindow(1500);
+            back.click();
         }
-        back.click();
-        list.scrollForward(100);
+        list.flingToEnd(2);
         //回到主页
         index.click();
     }
