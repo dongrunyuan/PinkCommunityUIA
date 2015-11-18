@@ -265,10 +265,6 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject weather_switch = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/weather_lay").index(1));
         UiObject daily_word_switch = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/daily_word_lay").index(3));
         UiObject rec_foryou_switch = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/rec_foryou_lay").index(5));
-        @SuppressWarnings("unused")
-        //首页tab
-                UiObject index = mDevice.findObject(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(0).clickable(true))
-                .getFromParent(new UiSelector().className(android.widget.TabWidget.class.getName()));
 
         //动作
         home_scroll.flingToBeginning(3);
