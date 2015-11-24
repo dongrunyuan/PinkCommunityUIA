@@ -3,22 +3,19 @@ package com.testdemo.pinktestdemo1;
 import android.app.Application;
 import android.app.Instrumentation;
 import android.content.Context;
-import android.test.ApplicationTestCase;
 
-import android.R.anim;
-import android.R.integer;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Rect ;
 import android.os.Environment;
 import android.os.SystemClock;
 
+import android.provider.Settings;
+import android.support.test.uiautomator.Configurator;
 import android.test.InstrumentationTestCase;
 import android.support.test.uiautomator.UiDevice;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiScrollable;
 import android.support.test.uiautomator.UiSelector;
+import android.view.accessibility.AccessibilityNodeInfo;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -35,6 +32,21 @@ import org.junit.FixMethodOrder;
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class AutomatorDemo extends InstrumentationTestCase{
+
+    //获取手机api版本
+    public static int currentapiVersion = android.os.Build.VERSION.SDK_INT;
+
+    //双击方法
+    public void doubleClick(int num,UiObject mObject) throws UiObjectNotFoundException{
+        if(currentapiVersion >= 18){
+            long timeout = Configurator.getInstance().getActionAcknowledgmentTimeout();
+            Configurator.getInstance().setActionAcknowledgmentTimeout(10);
+            for(int i = 0;i < num; i++){
+                mObject.click();
+            }
+            Configurator.getInstance().setActionAcknowledgmentTimeout(timeout);
+        }
+    }
 
     //进程控制
     public static void excuteCommand(String command) {
@@ -112,18 +124,16 @@ public class AutomatorDemo extends InstrumentationTestCase{
         }
     }
 
-/*
-    //旧版聊天室
-    public void test005P_DyingChatRoom(){
-        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
-        try {
-            discover_dyingChatRoom();
-        } catch (UiObjectNotFoundException e){
-            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testDyingChatRoom.png"));
-            fail(e.toString());
-        }
-    }
-*/
+//    //旧版聊天室
+//    public void test005P_DyingChatRoom(){
+//        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+//        try {
+//            discover_dyingChatRoom();
+//        } catch (UiObjectNotFoundException e){
+//            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testDyingChatRoom.png"));
+//            fail(e.toString());
+//        }
+//    }
 
     //申请达人认证
     public void test006Ablilty(){
@@ -1162,6 +1172,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         }
     }
 
+    @SuppressWarnings("unused")
     private void discover_dyingChatRoom() throws UiObjectNotFoundException{
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
         //控件
@@ -1494,9 +1505,19 @@ public class AutomatorDemo extends InstrumentationTestCase{
     private void visitCommunity() throws UiObjectNotFoundException{
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
         //控件
-        UiObject index = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/tabsLayout").index(0));
+        UiObject index = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/home"));
         //社区入口
-        UiObject community = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/tabsLayout").index(2));
+        UiObject community = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns"));
+        //列表切换
+        UiObject focusList = mDevice.findObject(new UiSelector().className(android.widget.HorizontalScrollView.class.getName())
+                .childSelector(new UiSelector().className(android.widget.LinearLayout.class.getName()).index(0))
+                .childSelector(new UiSelector().className(android.widget.TextView.class.getName())));
+        UiObject hotList = mDevice.findObject(new UiSelector().className(android.widget.HorizontalScrollView.class.getName())
+                .childSelector(new UiSelector().className(android.widget.LinearLayout.class.getName()).index(1))
+                .childSelector(new UiSelector().className(android.widget.TextView.class.getName())));
+        UiObject newList = mDevice.findObject(new UiSelector().className(android.widget.HorizontalScrollView.class.getName())
+                .childSelector(new UiSelector().className(android.widget.LinearLayout.class.getName()).index(2))
+                .childSelector(new UiSelector().className(android.widget.TextView.class.getName())));
         //banner
         UiObject banner = mDevice.findObject(new UiSelector().className(android.support.v4.view.ViewPager.class.getName()).index(0)
                 .childSelector(new UiSelector().className(android.widget.ImageView.class.getName())));
@@ -1505,7 +1526,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         //社区列表中头像
         UiObject portraitInList = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_portrait_lay"));
         //列表中图片
-        UiObject ImageInContent = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/img_plazatimeline_attachment1"));
+        UiObject imageInContent = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/img_plazatimeline_attachment1"));
         UiObject swipeImage = mDevice.findObject(new UiSelector().className(android.support.v4.view.ViewPager.class.getName()));
         UiObject saveImage = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/save_btn"));
         //列表--转发/评论
@@ -1522,7 +1543,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject shareInList = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/btn_plazatimeline_share_lay"));
         //热门列表--精选话题1
         UiObject topicInList = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_essence_url_struct1"));
-        UiObject DetailList = mDevice.findObject(new UiSelector().className(android.widget.ListView.class.getName()));
+        UiScrollable DetailList = new UiScrollable(new UiSelector().className(android.widget.ListView.class.getName()));
         UiObject jumpToCircle = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_essence_url_groupname_tv1"));
         //点滴详情
         UiObject diaryDetail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_diary_list_mainlay"));
@@ -1541,22 +1562,158 @@ public class AutomatorDemo extends InstrumentationTestCase{
                 .childSelector(new UiSelector().className(android.widget.TextView.class.getName())));
         //社区用户推荐
         UiObject userRecommend = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_list_message_add_attention_btn"));
-        UiObject recommendTabPage = mDevice.findObject(new UiSelector().className(android.support.v4.view.ViewPager.class.getName()));
+        UiScrollable recommendTabPage = new UiScrollable(new UiSelector().className(android.support.v4.view.ViewPager.class.getName()));
         UiObject recommendTabButton = mDevice.findObject(new UiSelector().className(android.widget.LinearLayout.class.getName()).index(0)
                 .childSelector(new UiSelector().className(android.widget.TextView.class.getName())));
         UiObject officalUser1 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/official_gc_ly1"));
+        UiObject officalUserDetail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/user_portrait"));
         UiObject portaitAlbum = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/user_album_img"));
         UiObject recommendUserInfo = mDevice.findObject(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(3)
-                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()))
-                .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_myfans_userinfo_lay")));
-        UiObject recommendFollowInList = mDevice.findObject(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(3)
-                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()))
+                .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_recommend_lay"))
+                .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_recommend_list_lay")));
+        UiObject recommendFollowInList = mDevice.findObject(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(5)
+                .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_recommend_lay"))
+                .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_recommend_list_lay"))
                 .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_myfans_userinfo_lay"))
                 .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snsfeed_recomuser_item_follow")));
 
 
         //动作
-
+        //进入社区
+        index.click();
+        community.click();
+        SystemClock.sleep(1000);
+        //进banner
+        banner.clickAndWaitForNewWindow(2500);
+        mDevice.pressBack();
+        //社区列表翻页
+        hotList.click();
+        communityContent.flingToEnd(3);
+        communityContent.scrollForward(70);
+        communityContent.flingToEnd(1);
+        //点击个人头像
+        if (portraitInList.exists()){
+            portraitInList.clickAndWaitForNewWindow(1500);
+            mDevice.pressBack();
+        }
+        //点击列表中图片
+        if (imageInContent.exists()){
+            imageInContent.clickAndWaitForNewWindow(1500);
+            swipeImage.swipeLeft(50);
+            swipeImage.swipeLeft(50);
+            if (currentapiVersion>=18) {
+                doubleClick(2, swipeImage);
+                doubleClick(2, swipeImage);
+            }
+            saveImage.click();
+            mDevice.pressBack();
+        }
+        //列表中转发、评论
+        transpondInList.click();
+        transpondEditText.setText("赞~！");
+        transpondTansfer.click();
+        transpondIcon.click();
+        transpondIcon.click();
+        transpondIcon.click();
+        transpondConfirm.click();
+        SystemClock.sleep(2500);
+        reviewInList.click();
+        transpondEditText.setText("好评~！");
+        transpondConfirm.click();
+        SystemClock.sleep(2500);
+        //列表-喜欢,分享
+        likeInList.click();
+        likeInList.click();
+        shareInList.click();
+        mDevice.pressBack();
+        //热门-话题
+        hotList.click();
+        communityContent.scrollIntoView(topicInList);
+        topicInList.clickAndWaitForNewWindow(2500);
+        DetailList.flingToEnd(5);
+        DetailList.swipeUp(70);
+        SystemClock.sleep(500);
+        mDevice.pressBack();
+        jumpToCircle.clickAndWaitForNewWindow(2500);
+        mDevice.pressBack();
+        //热门-日记详情
+        communityContent.swipeUp(25);
+        diaryDetail.clickAndWaitForNewWindow(2500);
+        //日记评论列表翻页
+        diaryCommentList.flingToEnd(3);
+        diaryCommentList.swipeDown(50);
+        diaryCommentList.flingToBeginning(6);
+        //日记详情关注
+        followInDiaryDetail.click();
+        enterUserInfo.clickAndWaitForNewWindow(2500);
+        followInUserInfo.click();
+        //图片详情
+        if (diaryImg.exists()){
+            diaryImg.click();
+            mDevice.pressBack();
+        }
+        //转发、评论
+        transpondInDetail.click();
+        transpondEditText.setText("赞~！");
+        transpondConfirm.click();
+        SystemClock.sleep(2500);
+        reviewInDetail.click();
+        transpondEditText.setText("好评~！");
+        transpondConfirm.click();
+        SystemClock.sleep(2500);
+        //回复楼层
+        communityContent.scrollIntoView(replyInList);
+        replyInList.click();
+        transpondEditText.setText("nice~!");
+        transpondConfirm.click();
+        SystemClock.sleep(2500);
+        //喜欢
+        likeInDetail.click();
+        likeInDetail.click();
+        //分享
+        shareInDetail.click();
+        mDevice.pressBack();
+        moreFunction.click();
+        //举报
+        accuse.clickAndWaitForNewWindow(1000);
+        mDevice.pressBack();
+        //回到社区列表
+        mDevice.pressBack();
+        //关注列表-翻页
+        focusList.click();
+        communityContent.flingToEnd(3);
+        communityContent.scrollForward(70);
+        communityContent.flingToEnd(1);
+        //最新列表-翻页
+        newList.click();
+        communityContent.flingToEnd(3);
+        communityContent.scrollForward(70);
+        communityContent.flingToEnd(1);
+        //社区-用户推荐
+        userRecommend.clickAndWaitForNewWindow(2500);
+        //推荐-翻页
+        recommendTabPage.flingToEnd(3);
+        recommendTabPage.swipeUp(50);
+        recommendTabPage.flingToBeginning(5);
+        //查看官方账号详情
+        officalUser1.clickAndWaitForNewWindow(1500);
+        officalUserDetail.clickAndWaitForNewWindow(1500);
+        portaitAlbum.clickAndWaitForNewWindow(1500);
+        mDevice.pressBack();
+        mDevice.pressBack();
+        mDevice.pressBack();
+        //切换至相同属性列表
+        recommendTabButton.click();
+        recommendTabPage.flingToEnd(3);
+        recommendTabPage.swipeUp(50);
+        recommendTabPage.flingToBeginning(5);
+        recommendFollowInList.click();
+        recommendUserInfo.clickAndWaitForNewWindow(1500);
+        followInUserInfo.click();
+        mDevice.pressBack();
+        //返回主界面
+        mDevice.pressBack();
+        index.click();
     }
 
     private void publishCommunityDiary() throws UiObjectNotFoundException{
