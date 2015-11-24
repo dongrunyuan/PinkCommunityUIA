@@ -209,7 +209,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
         //控件
         //首页tab
-        UiObject index = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/tabsLayout").index(0));
+        UiObject index = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/home"));
         //首页scrollable
         UiScrollable home_scroll = new UiScrollable(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/home_scroll")).setAsVerticalList();
         //换肤
@@ -359,9 +359,9 @@ public class AutomatorDemo extends InstrumentationTestCase{
     private void discover_search() throws UiObjectNotFoundException{
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
         //控件
-        UiObject index = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/tabsLayout").index(0));
+        UiObject index = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/home"));
         //搜索入口
-        UiObject discover = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/tabsLayout").index(1));
+        UiObject discover = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/discover"));
         UiObject startSearch = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_discover_search_btn"));
         UiObject keywords = mDevice.findObject(new UiSelector().className(android.widget.EditText.class.getName()));
         UiObject search = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName())
@@ -438,9 +438,9 @@ public class AutomatorDemo extends InstrumentationTestCase{
     private void discover_circle() throws UiObjectNotFoundException{
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
         //控件
-        UiObject index = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/tabsLayout").index(0));
+        UiObject index = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/home"));
         //粉粉圈入口
-        UiObject discover = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/tabsLayout").index(1));
+        UiObject discover = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/discover"));
         UiObject topicCenter = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/discover_item_lay").index(1));
         //推荐话题&我的圈子&评论我的
         UiObject top_recommend_topic = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_topic_item_rl").index(1));
@@ -546,6 +546,8 @@ public class AutomatorDemo extends InstrumentationTestCase{
                 .childSelector(new UiSelector().className(android.widget.Button.class.getName()).index(0)));
         UiObject completeRecord = mDevice.findObject(new UiSelector().className(android.widget.RelativeLayout.class.getName())
                 .childSelector(new UiSelector().className(android.widget.Button.class.getName()).index(0)));
+        //授权允许
+        UiObject allow = mDevice.findObject(new UiSelector().resourceId("android:id/button1").index(1));
         //投票功能
         UiObject startvote = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_topic_release_bottom_lay")
                 .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(3)));
@@ -709,6 +711,9 @@ public class AutomatorDemo extends InstrumentationTestCase{
         //录音
         try {
             startRecord.click();
+            if(allow.exists()){
+                allow.click();
+            }
             SystemClock.sleep(5000);
             endRecord.click();
             SystemClock.sleep(500);
@@ -789,9 +794,9 @@ public class AutomatorDemo extends InstrumentationTestCase{
     private void discover_groupChat() throws UiObjectNotFoundException{
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
         //控件
-        UiObject index = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/tabsLayout").index(0));
+        UiObject index = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/home"));
         //群组入口
-        UiObject discover = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/tabsLayout").index(1));
+        UiObject discover = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/discover"));
         UiObject groupChat = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/discover_item_lay").index(2));
         /*旧功能键
 		UiObject back = mDevice.findObject(new UiSelector().className(android.widget.ImageView.class.getName()).clickable(true).index(0))
@@ -882,8 +887,8 @@ public class AutomatorDemo extends InstrumentationTestCase{
                 .resourceId("pinkdiary.xiaoxiaotu.com:id/sns_gc_msg_notice_lay"));
         UiObject switchNotice = mDevice.findObject(new UiSelector().className(android.widget.RelativeLayout.class.getName())
                 .resourceId("pinkdiary.xiaoxiaotu.com:id/close_notice_lay"));
-        UiObject switchSound = mDevice.findObject(new UiSelector().className(android.widget.RelativeLayout.class.getName())
-                .resourceId("pinkdiary.xiaoxiaotu.com:id/no_sound_mode_lay"));
+//        UiObject switchSound = mDevice.findObject(new UiSelector().className(android.widget.RelativeLayout.class.getName())
+//                .resourceId("pinkdiary.xiaoxiaotu.com:id/no_sound_mode_lay"));
         //新成员
         UiObject enterInvite = mDevice.findObject(new UiSelector().className(android.widget.RelativeLayout.class.getName())
                 .resourceId("pinkdiary.xiaoxiaotu.com:id/sns_gc_invite_lay"));
@@ -948,6 +953,8 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject playRecording = mDevice.findObject(new UiSelector().className(android.widget.RelativeLayout.class.getName())
                 .resourceId("pinkdiary.xiaoxiaotu.com:id/play_audio_lay")
                 .clickable(true));
+        //授权允许
+        UiObject allow = mDevice.findObject(new UiSelector().resourceId("android:id/button1").index(1));
         //群聊界面功能入口
         UiObject chatSubFunction = mDevice.findObject(new UiSelector().className(android.widget.ImageView.class.getName())
                 .resourceId("pinkdiary.xiaoxiaotu.com:id/sq_gc_chat_morebtn"));
@@ -1050,7 +1057,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         //消息提醒
         enterGroupNotification.clickAndWaitForNewWindow(500);
         switchNotice.click();
-        switchSound.click();
+//        switchSound.click();
         mDevice.pressBack();
         //邀请新成员
         enterInvite.clickAndWaitForNewWindow(1000);
@@ -1113,6 +1120,11 @@ public class AutomatorDemo extends InstrumentationTestCase{
         }
         //录音
         addRecording.click();
+        startRecording.click();
+        if(allow.exists()){
+            allow.click();
+        }
+        SystemClock.sleep(3000);
         startRecording.longClick();
         if (playRecording.exists()) {
             playRecording.click();
@@ -1153,9 +1165,9 @@ public class AutomatorDemo extends InstrumentationTestCase{
     private void discover_dyingChatRoom() throws UiObjectNotFoundException{
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
         //控件
-        UiObject index = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/tabsLayout").index(0));
+        UiObject index = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/home"));
         //聊天室入口
-        UiObject discover = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/tabsLayout").index(1));
+        UiObject discover = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/discover"));
         UiObject chatRoomEntrance = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/discover_item_lay").index(3));
         //聊天记录
         UiScrollable chatList = new UiScrollable(new UiSelector().className(android.widget.ListView.class.getName()));
@@ -1202,8 +1214,8 @@ public class AutomatorDemo extends InstrumentationTestCase{
         //控件
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
         //入口
-        UiObject index = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/tabsLayout").index(0));
-        UiObject discover = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/tabsLayout").index(1));
+        UiObject index = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/home"));
+        UiObject discover = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/discover"));
         UiObject ability = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/discover_item_lay").index(5));
         //达人分享
         UiObject ability_share = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName()).index(2));
@@ -1273,9 +1285,9 @@ public class AutomatorDemo extends InstrumentationTestCase{
     private void discover_find() throws UiObjectNotFoundException{
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
         //控件
-        UiObject index = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/tabsLayout").index(0));
+        UiObject index = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/home"));
         //找找入口
-        UiObject discover = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/tabsLayout").index(1));
+        UiObject discover = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/discover"));
         UiObject findEntrance = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/discover_item_lay").index(6));
         //搜索
         UiObject startSearch = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_rec_search_btn"));
@@ -1462,9 +1474,9 @@ public class AutomatorDemo extends InstrumentationTestCase{
     private void discover_ranking() throws UiObjectNotFoundException{
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
         //控件
-        UiObject index = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/tabsLayout").index(0));
+        UiObject index = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/home"));
         //排行榜入口
-        UiObject discover = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/tabsLayout").index(1));
+        UiObject discover = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/discover"));
         UiObject rankingEntrance = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/discover_item_lay").index(7));
         UiObject refresh = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/web_right_btn"));
         UiObject back = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/web_browser_btn_back"));
@@ -1554,10 +1566,10 @@ public class AutomatorDemo extends InstrumentationTestCase{
     private void notification() throws UiObjectNotFoundException{
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
         //控件
-        UiObject index = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/tabsLayout").index(0));
+        UiObject index = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/home"));
         //消息入口
-        UiObject discover = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/tabsLayout").index(1));
-        UiObject noticeEntrance = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/tabsLayout").index(3));
+        UiObject discover = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/discover"));
+        UiObject noticeEntrance = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/dynamic"));
         //动态&通知&聊天
         UiScrollable list = new UiScrollable(new UiSelector().resourceId("android:id/list")).setAsVerticalList();
         UiObject listItem = mDevice.findObject(new UiSelector().resourceId("android:id/list")
