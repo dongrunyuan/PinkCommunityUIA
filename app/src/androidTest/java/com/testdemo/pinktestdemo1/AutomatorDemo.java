@@ -40,7 +40,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
     public void doubleClick(int num,UiObject mObject) throws UiObjectNotFoundException{
         if(currentapiVersion >= 18){
             long timeout = Configurator.getInstance().getActionAcknowledgmentTimeout();
-            Configurator.getInstance().setActionAcknowledgmentTimeout(10);
+            Configurator.getInstance().setActionAcknowledgmentTimeout(50);
             for(int i = 0;i < num; i++){
                 mObject.click();
             }
@@ -897,8 +897,9 @@ public class AutomatorDemo extends InstrumentationTestCase{
                 .resourceId("pinkdiary.xiaoxiaotu.com:id/sns_gc_msg_notice_lay"));
         UiObject switchNotice = mDevice.findObject(new UiSelector().className(android.widget.RelativeLayout.class.getName())
                 .resourceId("pinkdiary.xiaoxiaotu.com:id/close_notice_lay"));
-//        UiObject switchSound = mDevice.findObject(new UiSelector().className(android.widget.RelativeLayout.class.getName())
-//                .resourceId("pinkdiary.xiaoxiaotu.com:id/no_sound_mode_lay"));
+        @SuppressWarnings("unused")
+        UiObject switchSound = mDevice.findObject(new UiSelector().className(android.widget.RelativeLayout.class.getName())
+                .resourceId("pinkdiary.xiaoxiaotu.com:id/no_sound_mode_lay"));
         //新成员
         UiObject enterInvite = mDevice.findObject(new UiSelector().className(android.widget.RelativeLayout.class.getName())
                 .resourceId("pinkdiary.xiaoxiaotu.com:id/sns_gc_invite_lay"));
@@ -1528,6 +1529,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         //列表中图片
         UiObject imageInContent = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/img_plazatimeline_attachment1"));
         UiObject swipeImage = mDevice.findObject(new UiSelector().className(android.support.v4.view.ViewPager.class.getName()));
+        UiObject zoomImage = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_viewatt_image"));
         UiObject saveImage = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/save_btn"));
         //列表--转发/评论
         UiObject transpondInList = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/btn_plazatimeline_transpond_lay"));
@@ -1544,7 +1546,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         //热门列表--精选话题1
         UiObject topicInList = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_essence_url_struct1"));
         UiScrollable DetailList = new UiScrollable(new UiSelector().className(android.widget.ListView.class.getName()));
-        UiObject jumpToCircle = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_essence_url_groupname_tv1"));
+        UiObject jumpToCircle = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_essence_url_group_name1"));
         //点滴详情
         UiObject diaryDetail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_diary_list_mainlay"));
         UiScrollable diaryCommentList = new UiScrollable(new UiSelector().className(android.widget.ListView.class.getName()));
@@ -1560,11 +1562,13 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject moreFunction = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snsdiarydetail_more_btn"));
         UiObject accuse = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/popup_layout").index(1)
                 .childSelector(new UiSelector().className(android.widget.TextView.class.getName())));
+        UiScrollable floorList = new UiScrollable(new UiSelector().resourceId("android:id/list"));
         //社区用户推荐
         UiObject userRecommend = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_list_message_add_attention_btn"));
         UiScrollable recommendTabPage = new UiScrollable(new UiSelector().className(android.support.v4.view.ViewPager.class.getName()));
-        UiObject recommendTabButton = mDevice.findObject(new UiSelector().className(android.widget.LinearLayout.class.getName()).index(0)
-                .childSelector(new UiSelector().className(android.widget.TextView.class.getName())));
+        UiObject recommendTabButton = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/indicator")
+                .childSelector(new UiSelector().className(android.widget.LinearLayout.class.getName())
+                        .childSelector(new UiSelector().className(android.widget.LinearLayout.class.getName()).index(1))));
         UiObject officalUser1 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/official_gc_ly1"));
         UiObject officalUserDetail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/user_portrait"));
         UiObject portaitAlbum = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/user_album_img"));
@@ -1584,11 +1588,12 @@ public class AutomatorDemo extends InstrumentationTestCase{
         community.click();
         SystemClock.sleep(1000);
         //进banner
+        communityContent.flingToBeginning(7);
         banner.clickAndWaitForNewWindow(2500);
         mDevice.pressBack();
         //社区列表翻页
         hotList.click();
-        communityContent.flingToEnd(3);
+        communityContent.flingToEnd(5);
         communityContent.scrollForward(70);
         communityContent.flingToEnd(1);
         //点击个人头像
@@ -1597,17 +1602,17 @@ public class AutomatorDemo extends InstrumentationTestCase{
             mDevice.pressBack();
         }
         //点击列表中图片
-        if (imageInContent.exists()){
-            imageInContent.clickAndWaitForNewWindow(1500);
-            swipeImage.swipeLeft(50);
-            swipeImage.swipeLeft(50);
-            if (currentapiVersion>=18) {
-                doubleClick(2, swipeImage);
-                doubleClick(2, swipeImage);
-            }
-            saveImage.click();
-            mDevice.pressBack();
+        communityContent.scrollIntoView(imageInContent);
+        imageInContent.clickAndWaitForNewWindow(1500);
+        swipeImage.swipeLeft(50);
+        swipeImage.swipeLeft(50);
+        if (currentapiVersion>=18) {
+            doubleClick(2, zoomImage);
+            SystemClock.sleep(2000);
+            doubleClick(2, zoomImage);
         }
+        saveImage.click();
+        mDevice.pressBack();
         //列表中转发、评论
         transpondInList.click();
         transpondEditText.setText("赞~！");
@@ -1642,11 +1647,12 @@ public class AutomatorDemo extends InstrumentationTestCase{
         //日记评论列表翻页
         diaryCommentList.flingToEnd(3);
         diaryCommentList.swipeDown(50);
-        diaryCommentList.flingToBeginning(6);
+        diaryCommentList.flingToBeginning(3);
         //日记详情关注
         followInDiaryDetail.click();
         enterUserInfo.clickAndWaitForNewWindow(2500);
         followInUserInfo.click();
+        mDevice.pressBack();
         //图片详情
         if (diaryImg.exists()){
             diaryImg.click();
@@ -1662,9 +1668,10 @@ public class AutomatorDemo extends InstrumentationTestCase{
         transpondConfirm.click();
         SystemClock.sleep(2500);
         //回复楼层
-        communityContent.scrollIntoView(replyInList);
+        floorList.scrollIntoView(replyInList);
         replyInList.click();
         transpondEditText.setText("nice~!");
+        SystemClock.sleep(3000);
         transpondConfirm.click();
         SystemClock.sleep(2500);
         //喜欢
@@ -1694,7 +1701,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         //推荐-翻页
         recommendTabPage.flingToEnd(3);
         recommendTabPage.swipeUp(50);
-        recommendTabPage.flingToBeginning(5);
+        recommendTabPage.flingToBeginning(3);
         //查看官方账号详情
         officalUser1.clickAndWaitForNewWindow(1500);
         officalUserDetail.clickAndWaitForNewWindow(1500);
@@ -1706,7 +1713,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         recommendTabButton.click();
         recommendTabPage.flingToEnd(3);
         recommendTabPage.swipeUp(50);
-        recommendTabPage.flingToBeginning(5);
+        recommendTabPage.flingToBeginning(3);
         recommendFollowInList.click();
         recommendUserInfo.clickAndWaitForNewWindow(1500);
         followInUserInfo.click();
