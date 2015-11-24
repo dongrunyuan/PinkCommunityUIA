@@ -19,8 +19,6 @@ import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiScrollable;
 import android.support.test.uiautomator.UiSelector;
-import android.view.Window;
-import android.widget.LinearLayout;
 
 import java.io.BufferedReader;
 import java.io.File;
