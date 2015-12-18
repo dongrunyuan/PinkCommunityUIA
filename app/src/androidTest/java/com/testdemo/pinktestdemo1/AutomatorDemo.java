@@ -73,27 +73,27 @@ public class AutomatorDemo extends InstrumentationTestCase{
     }
 
     @Test
-//    //主页
-//    public void test002Index(){
-//        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
-//        try {
-//            index();
-//        } catch (UiObjectNotFoundException e) {
-//            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testIndex.png"));
-//            fail(e.toString());
-//        }
-//    }
-//
-//    //发现--搜索
-//    public void test003Search(){
-//        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
-//        try {
-//            discover_search();
-//        } catch (UiObjectNotFoundException e) {
-//            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testSearch.png"));
-//            fail(e.toString());
-//        }
-//    }
+    //主页
+    public void test002Index(){
+        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+        try {
+            index();
+        } catch (UiObjectNotFoundException e) {
+            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testIndex.png"));
+            fail(e.toString());
+        }
+    }
+
+    //发现--搜索
+    public void test003Search(){
+        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+        try {
+            discover_search();
+        } catch (UiObjectNotFoundException e) {
+            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testSearch.png"));
+            fail(e.toString());
+        }
+    }
 
     //发现--粉粉圈
     public void test004Circle(){
@@ -105,95 +105,95 @@ public class AutomatorDemo extends InstrumentationTestCase{
             fail(e.toString());
         }
     }
-//
-//    //群组
-////    public void test005GroupChat(){
-////        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
-////        try {
-////            discover_groupChat();
-////        } catch (UiObjectNotFoundException e){
-////            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testGroupChat.png"));
-////            fail(e.toString());
-////        }
-////    }
-//
-////    //旧版聊天室
-////    public void test005P_DyingChatRoom(){
-////        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
-////        try {
-////            discover_dyingChatRoom();
-////        } catch (UiObjectNotFoundException e){
-////            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testDyingChatRoom.png"));
-////            fail(e.toString());
-////        }
-////    }
-//
-//    //申请达人认证
-//    public void test006Ablilty(){
+
+    //群组
+    public void test005GroupChat(){
+        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+        try {
+            discover_groupChat();
+        } catch (UiObjectNotFoundException e){
+            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testGroupChat.png"));
+            fail(e.toString());
+        }
+    }
+
+//    //旧版聊天室
+//    public void test005P_DyingChatRoom(){
 //        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
 //        try {
-//            discover_ability();
+//            discover_dyingChatRoom();
 //        } catch (UiObjectNotFoundException e){
-//            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testAblilty.png"));
+//            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testDyingChatRoom.png"));
 //            fail(e.toString());
 //        }
 //    }
-//
-//    //找找
-//    public void test007Find(){
-//        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
-//        try {
-//            discover_find();
-//        } catch (UiObjectNotFoundException e){
-//            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testFind.png"));
-//            fail(e.toString());
-//        }
-//    }
-//
-//    //排行榜
-//    public void test008Ranking(){
-//        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
-//
-//        try {
-//            discover_ranking();
-//        } catch (UiObjectNotFoundException e){
-//            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testRanking.png"));
-//            fail(e.toString());
-//        }
-//    }
-//
-//    //社区浏览
-//    public void test009VisitCommunity(){
-//        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
-//        try {
-//            visitCommunity();
-//        } catch (UiObjectNotFoundException e){
-//            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testVisitCommunity.png"));
-//            fail(e.toString());
-//        }
-//    }
-//
-//    //写社区点滴
-//    public void test010PublishCommunityDiary(){
-//        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
-//        try {
-//            publishCommunityDiary();
-//        } catch (UiObjectNotFoundException e){
-//            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/publishCommunityDiary.png"));
-//            fail(e.toString());
-//        }
-//    }
-//
-//    //消息
-//    public void test011Notification(){
-//        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
-//        try {
-//            notification();
-//        } catch (UiObjectNotFoundException e){
-//            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testNotification.png"));
-//            fail(e.toString());
-//        }
-//    }
+
+    //申请达人认证
+    public void test006Ablilty(){
+        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+        try {
+            discover_ability();
+        } catch (UiObjectNotFoundException e){
+            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testAblilty.png"));
+            fail(e.toString());
+        }
+    }
+
+    //找找
+    public void test007Find(){
+        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+        try {
+            discover_find();
+        } catch (UiObjectNotFoundException e){
+            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testFind.png"));
+            fail(e.toString());
+        }
+    }
+
+    //排行榜
+    public void test008Ranking(){
+        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+
+        try {
+            discover_ranking();
+        } catch (UiObjectNotFoundException e){
+            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testRanking.png"));
+            fail(e.toString());
+        }
+    }
+
+    //社区浏览
+    public void test009VisitCommunity(){
+        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+        try {
+            visitCommunity();
+        } catch (UiObjectNotFoundException e){
+            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testVisitCommunity.png"));
+            fail(e.toString());
+        }
+    }
+
+    //写社区点滴
+    public void test010PublishCommunityDiary(){
+        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+        try {
+            publishCommunityDiary();
+        } catch (UiObjectNotFoundException e){
+            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/publishCommunityDiary.png"));
+            fail(e.toString());
+        }
+    }
+
+    //消息
+    public void test011Notification(){
+        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+        try {
+            notification();
+        } catch (UiObjectNotFoundException e){
+            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testNotification.png"));
+            fail(e.toString());
+        }
+    }
 
     @After
     public void testzzzTestFinished(){
