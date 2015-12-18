@@ -134,16 +134,16 @@ public class AutomatorDemo extends InstrumentationTestCase{
         }
     }
 
-//    //旧版聊天室
-//    public void test005P_DyingChatRoom(){
-//        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
-//        try {
-//            discover_dyingChatRoom();
-//        } catch (UiObjectNotFoundException e){
-//            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testDyingChatRoom.png"));
-//            fail(e.toString());
-//        }
-//    }
+    //旧版聊天室
+    public void test005P_DyingChatRoom(){
+        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+        try {
+            discover_dyingChatRoom();
+        } catch (UiObjectNotFoundException e){
+            mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/AutomatorDemo/testDyingChatRoom.png"));
+            fail(e.toString());
+        }
+    }
 
     //申请达人认证
     public void test006Ablilty(){
@@ -1774,7 +1774,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
                 .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName())).index(3));
         //信纸
         UiObject addPaper = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snskeepdiary_paper"));
-        UiObject
+
         //录音
         UiObject startRecord = mDevice.findObject(new UiSelector().className(android.widget.ImageView.class.getName())
                 .resourceId("pinkdiary.xiaoxiaotu.com:id/add_audio").clickable(true));
