@@ -467,8 +467,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject joinCircle = mDevice.findObject(new UiSelector().className(android.widget.ImageView.class.getName())
                 .resourceId("pinkdiary.xiaoxiaotu.com:id/sns_group_add_exit"));
         UiObject joinTopic = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_topic_item_rl").index(9));
-        UiScrollable topicListScroll = new UiScrollable(new UiSelector().className(android.widget.ListView.class.getName())
-                .resourceId("android:id/list")).setAsVerticalList();
+        UiScrollable topicListScroll = new UiScrollable(new UiSelector().resourceId("android:id/list")).setAsVerticalList();
         //话题功能
         UiScrollable floorList = new UiScrollable(new UiSelector().className(android.widget.ListView.class.getName())).setAsVerticalList();
         UiObject floorPraise = mDevice.findObject(new UiSelector().className(android.widget.RelativeLayout.class.getName())
@@ -597,6 +596,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         topicCenter.clickAndWaitForNewWindow(2000);
         //进入圈子
         myCircle.click();
+        topicListScroll.scrollIntoView(addCircle);
         addCircle.clickAndWaitForNewWindow(2000);
         switchClassification.click();
         SystemClock.sleep(500);
@@ -926,8 +926,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
                 .childSelector(new UiSelector().className(android.widget.LinearLayout.class.getName()).index(2)));
         UiObject downloadExpression = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/emotion_lay"));
         UiObject expressionItem = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_emotion_list_item_lay").index(4));
-        UiObject buyExpression = mDevice.findObject(new UiSelector().className(android.widget.RelativeLayout.class.getName())
-                .resourceId("pinkdiary.xiaoxiaotu.com:id/emotion_detail_buy_lay"));
+        UiObject buyExpression = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/emotion_detail_buy_lay"));
         UiObject dialogNext = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName()).index(2));
         UiObject purchasedExpression = mDevice.findObject(new UiSelector().className(android.widget.GridView.class.getName())
                 .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(3)));
@@ -1098,6 +1097,10 @@ public class AutomatorDemo extends InstrumentationTestCase{
         mDevice.pressBack();
         //群聊
         enterGroupChat.clickAndWaitForNewWindow(1500);
+        mDevice.pressBack();
+        if(enterGroupChat.exists()){
+            enterGroupChat.click();
+        }
         inputText.setText("Hello World");
         expression.click();
         heart.click();
@@ -1177,6 +1180,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
             dissolve.click();
             SystemClock.sleep(500);
             dissolveConfirm.click();
+            mDevice.pressBack();
             myGroup.click();
         } catch (UiObjectNotFoundException e) {
             mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/DissolveNotExist.png"));
@@ -1422,7 +1426,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         mDevice.pressBack();
         //邀请好友
         inviteFromSina.clickAndWaitForNewWindow();
-        SystemClock.sleep(3000);
+        SystemClock.sleep(5000);
         mDevice.pressBack();
         inviteFromWechat.click();
         SystemClock.sleep(5000);
@@ -1492,7 +1496,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
             SystemClock.sleep(2500);
             if(applyWaiting.exists()){
                 applyWaiting.click();
-            }else{
+            }else{  
                 mDevice.pressBack();
             }
         }
@@ -1664,7 +1668,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         mDevice.pressBack();
         //热门-日记详情
         communityContent.scrollIntoView(diaryDetail);
-        diaryDetail.clickAndWaitForNewWindow(2500);
+        diaryDetail.clickTopLeft();
         //日记详情关注
         if(followInDiaryDetail.exists()){
             followInDiaryDetail.click();
