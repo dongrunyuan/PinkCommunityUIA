@@ -1,4 +1,10 @@
 # AutomatorDemo
 --
 
-PinkDiary Automation of Android Native Part. Version Demo
+### 需要手动测试的内容
+
+* 分享到各个平台
+* 第三方注册/绑定
+* 第三方邀请好友
+* 开机启动页/广告
+* 旧版本升级
