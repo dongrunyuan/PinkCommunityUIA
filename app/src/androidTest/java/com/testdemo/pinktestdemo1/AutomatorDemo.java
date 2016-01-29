@@ -550,14 +550,11 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject imgConfirm = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName())
                 .resourceId("pinkdiary.xiaoxiaotu.com:id/commit"));
         //录音
-        UiObject startRecord = mDevice.findObject(new UiSelector().className(android.widget.ImageView.class.getName())
+        UiObject enterRecord = mDevice.findObject(new UiSelector().className(android.widget.ImageView.class.getName())
                 .resourceId("pinkdiary.xiaoxiaotu.com:id/add_audio").clickable(true));
-        UiObject endRecord = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName()));
-        UiObject reRecord = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName()).index(2));
-        UiObject deleteRecord = mDevice.findObject(new UiSelector().className(android.widget.LinearLayout.class.getName())
-                .childSelector(new UiSelector().className(android.widget.Button.class.getName()).index(0)));
-        UiObject completeRecord = mDevice.findObject(new UiSelector().className(android.widget.RelativeLayout.class.getName())
-                .childSelector(new UiSelector().className(android.widget.Button.class.getName()).index(0)));
+        UiObject startRecord = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/audio_view_img_bg"));
+        UiObject reRecord = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/audio_view_remake"));
+        UiObject deleteRecord = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/audio_view_delete"));
         //授权允许
         UiObject allow = mDevice.findObject(new UiSelector().resourceId("android:id/button1").index(1));
         //投票功能
@@ -581,6 +578,10 @@ public class AutomatorDemo extends InstrumentationTestCase{
                 .resourceId("pinkdiary.xiaoxiaotu.com:id/dialog_ok"));
         UiObject confirmVote = mDevice.findObject(new UiSelector().className(android.widget.ImageView.class.getName())
                 .resourceId("pinkdiary.xiaoxiaotu.com:id/sns_topic_vote_post"));
+        //修改圈子
+        UiObject changeCircle = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/changGroup"));
+        UiObject confirmChange = mDevice.findObject(new UiSelector().className(android.widget.ListView.class.getName()).index(2)
+                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(0)));
         //发送
         UiObject sendTopic = mDevice.findObject(new UiSelector().className(android.widget.ImageView.class.getName())
                 .resourceId("pinkdiary.xiaoxiaotu.com:id/sns_btn_release"));
@@ -725,29 +726,37 @@ public class AutomatorDemo extends InstrumentationTestCase{
         confirmVote.click();
         //录音
         try {
-            startRecord.click();
+            enterRecord.click();
+            SystemClock.sleep(1000);
             if(allow.exists()){
                 allow.click();
             }
+            //停止录音按钮坐标
+            int recordButtonX = startRecord.getBounds().centerX();
+            int recordButtonY = startRecord.getBounds().centerY();
+            //开始录音
+            startRecord.click();
             SystemClock.sleep(5000);
-            endRecord.click();
+            mDevice.click(recordButtonX,recordButtonY);
             SystemClock.sleep(500);
             reRecord.click();
             SystemClock.sleep(5000);
-            endRecord.click();
+            mDevice.click(recordButtonX,recordButtonY);
             SystemClock.sleep(500);
             deleteRecord.click();
             SystemClock.sleep(1000);
             startRecord.click();
-            SystemClock.sleep(5000);
-            endRecord.click();
+            SystemClock.sleep(15000);
+            mDevice.click(recordButtonX,recordButtonY);
             SystemClock.sleep(500);
-            completeRecord.click();
-            SystemClock.sleep(1000);
         } catch (UiObjectNotFoundException e) {
             mDevice.takeScreenshot(new File(Environment.getExternalStorageDirectory().getPath()+"/EndRecordNotExist.png"));
             fail(e.toString());
         }
+        //更改发布的圈子
+        changeCircle.clickAndWaitForNewWindow(1500);
+        confirmChange.click();
+        SystemClock.sleep(1500);
         //发送
         sendTopic.click();
         SystemClock.sleep(5000);
@@ -1356,7 +1365,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject inviteFromWechat = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_invite_weixin_friend_layout"));
         UiObject inviteFromTencent = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_invite_qq_friend_layout"));
         UiObject weChatExit = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName()).index(1));
-        UiObject weChatBack = mDevice.findObject(new UiSelector().resourceId("com.tencent.mm:id/fb"));
+        UiObject weChatBack = mDevice.findObject(new UiSelector().className(android.widget.LinearLayout.class.getName()).index(0).clickable(true));
         //推荐列表
         UiScrollable recommendList = new UiScrollable(new UiSelector().className(android.widget.ListView.class.getName())).setAsVerticalList();
         //列表项详情
