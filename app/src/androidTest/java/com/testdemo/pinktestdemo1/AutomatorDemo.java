@@ -83,94 +83,94 @@ public class AutomatorDemo extends InstrumentationTestCase{
     }
 
     @Test
-//    //主页
-//    public void test002Index(){
-//        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
-//        try {
-//            index();
-//        } catch (UiObjectNotFoundException e) {
-//            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/testIndex.png"));
-//            fail(e.toString());
-//        }
-//    }
-//
-//    //发现--搜索
-//    public void test003Search(){
-//        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
-//        try {
-//            discover_search();
-//        } catch (UiObjectNotFoundException e) {
-//            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/testSearch.png"));
-//            fail(e.toString());
-//        }
-//    }
-//
-//    //发现--粉粉圈
-//    public void test004Circle(){
-//        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
-//        try {
-//            discover_circle();
-//        } catch (UiObjectNotFoundException e) {
-//            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/testCircle.png"));
-//            fail(e.toString());
-//        }
-//    }
-//
-//    //群组
-//    public void test005GroupChat(){
-//        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
-//        try {
-//            discover_groupChat();
-//        } catch (UiObjectNotFoundException e){
-//            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/testGroupChat.png"));
-//            fail(e.toString());
-//        }
-//    }
-//
-//    //旧版聊天室
-//    public void test005P_DyingChatRoom(){
-//        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
-//        try {
-//            discover_dyingChatRoom();
-//        } catch (UiObjectNotFoundException e){
-//            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/testDyingChatRoom.png"));
-//            fail(e.toString());
-//        }
-//    }
-//
-//    //申请达人认证
-//    public void test006Ablilty(){
-//        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
-//        try {
-//            discover_ability();
-//        } catch (UiObjectNotFoundException e){
-//            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/testAblilty.png"));
-//            fail(e.toString());
-//        }
-//    }
-//
-//    //找找
-//    public void test007Find(){
-//        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
-//        try {
-//            discover_find();
-//        } catch (UiObjectNotFoundException e){
-//            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/testFind.png"));
-//            fail(e.toString());
-//        }
-//    }
-//
-//    //排行榜
-//    public void test008Ranking(){
-//        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
-//
-//        try {
-//            discover_ranking();
-//        } catch (UiObjectNotFoundException e){
-//            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/testRanking.png"));
-//            fail(e.toString());
-//        }
-//    }
+    //主页
+    public void test002Index(){
+        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+        try {
+            index();
+        } catch (UiObjectNotFoundException e) {
+            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/testIndex.png"));
+            fail(e.toString());
+        }
+    }
+
+    //发现--搜索
+    public void test003Search(){
+        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+        try {
+            discover_search();
+        } catch (UiObjectNotFoundException e) {
+            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/testSearch.png"));
+            fail(e.toString());
+        }
+    }
+
+    //发现--粉粉圈
+    public void test004Circle(){
+        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+        try {
+            discover_circle();
+        } catch (UiObjectNotFoundException e) {
+            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/testCircle.png"));
+            fail(e.toString());
+        }
+    }
+
+    //群组
+    public void test005GroupChat(){
+        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+        try {
+            discover_groupChat();
+        } catch (UiObjectNotFoundException e){
+            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/testGroupChat.png"));
+            fail(e.toString());
+        }
+    }
+
+    //旧版聊天室
+    public void test005P_DyingChatRoom(){
+        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+        try {
+            discover_dyingChatRoom();
+        } catch (UiObjectNotFoundException e){
+            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/testDyingChatRoom.png"));
+            fail(e.toString());
+        }
+    }
+
+    //申请达人认证
+    public void test006Ablilty(){
+        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+        try {
+            discover_ability();
+        } catch (UiObjectNotFoundException e){
+            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/testAblilty.png"));
+            fail(e.toString());
+        }
+    }
+
+    //找找
+    public void test007Find(){
+        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+        try {
+            discover_find();
+        } catch (UiObjectNotFoundException e){
+            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/testFind.png"));
+            fail(e.toString());
+        }
+    }
+
+    //排行榜
+    public void test008Ranking(){
+        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+
+        try {
+            discover_ranking();
+        } catch (UiObjectNotFoundException e){
+            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/testRanking.png"));
+            fail(e.toString());
+        }
+    }
 
     //社区浏览
     public void test009VisitCommunity(){
@@ -248,9 +248,9 @@ public class AutomatorDemo extends InstrumentationTestCase{
         //每日一语分享(首页)
         UiObject dialy_word_home_share = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/daily_word_share"));
         //每日一语分享(内部)
-        UiObject dialy_word_detail_share = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/web_right_btn"));
+        UiObject dialy_word_detail_share = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/web_right_refresh_btn"));
         UiObject share_cancel = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName())
-                .resourceId("pinkdiary.xiaoxiaotu.com:id/cancel").index(4));
+                .resourceId("pinkdiary.xiaoxiaotu.com:id/cancel"));
         //为你推荐-列表
         UiObject hot_diary_list = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/hot_diary_layout"));
         //为你推荐-刷新
@@ -282,8 +282,28 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject weather_switch = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/weather_lay").index(1));
         UiObject daily_word_switch = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/daily_word_lay").index(3));
         UiObject rec_foryou_switch = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/rec_foryou_lay").index(5));
+        //密码锁解锁
+        UiObject unlockPwd = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/pwd_input_splash_edt"));
+        UiObject unlock = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/pwd_unlock"));
+        //版本更新提示-跳过
+        UiObject skipUpdate = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/umeng_update_id_cancel"));
+        //广告进入/跳过
+        UiObject jumpAd = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/splash_step_tv"));
+        @SuppressWarnings("unused")
+        UiObject enterAd = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/cnt_splash_lay"));
 
         //动作
+        if (unlockPwd.exists()){
+            unlockPwd.setText("1");
+            unlock.click();
+            SystemClock.sleep(1000);
+        }
+        if (jumpAd.exists()){
+            jumpAd.click();
+            SystemClock.sleep(1500);
+        }
+        if (skipUpdate.exists())
+            skipUpdate.click();
         index.click();
         home_scroll.flingToBeginning(3);
         //首页皮肤商店入口
@@ -556,7 +576,8 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject reRecord = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/audio_view_remake"));
         UiObject deleteRecord = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/audio_view_delete"));
         //授权允许
-        UiObject allow = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName()).index(1));
+        UiObject permit1 = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName()).text("允许"));
+        UiObject permit2 = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName()).resourceId("android:id/button1"));
         //投票功能
         UiObject startvote = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_topic_release_bottom_lay")
                 .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(3)));
@@ -728,9 +749,11 @@ public class AutomatorDemo extends InstrumentationTestCase{
         try {
             enterRecord.click();
             SystemClock.sleep(1000);
-            if(allow.exists()){
-                allow.click();
-            }
+            //如果出现录音授权需要确认
+            if(permit1.exists())
+                permit1.click();
+            else if (permit2.exists())
+                permit2.click();
             //停止录音按钮坐标
             int recordButtonX = startRecord.getBounds().centerX();
             int recordButtonY = startRecord.getBounds().centerY();
@@ -986,7 +1009,8 @@ public class AutomatorDemo extends InstrumentationTestCase{
                 .resourceId("pinkdiary.xiaoxiaotu.com:id/play_audio_lay")
                 .clickable(true));
         //授权允许
-        UiObject allow = mDevice.findObject(new UiSelector().resourceId("android:id/button1").index(1));
+        UiObject permit1 = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName()).text("允许"));
+        UiObject permit2 = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName()).resourceId("android:id/button1"));
         //群聊界面功能入口
         UiObject chatSubFunction = mDevice.findObject(new UiSelector().className(android.widget.ImageView.class.getName())
                 .resourceId("pinkdiary.xiaoxiaotu.com:id/sq_gc_chat_morebtn"));
@@ -1173,11 +1197,12 @@ public class AutomatorDemo extends InstrumentationTestCase{
             //录音
             addRecording.click();
             startRecording.click();
-            if (allow.exists()) {
-                allow.click();
-            }
-            SystemClock.sleep(3000);
-            startRecording.longClick();
+            if (permit1.exists())
+                permit1.click();
+            else if (permit2.exists())
+                permit2.click();
+            SystemClock.sleep(1500);
+            longClick(startRecording,5000);
             if (playRecording.exists()) {
                 playRecording.click();
                 SystemClock.sleep(2500);
@@ -1617,8 +1642,9 @@ public class AutomatorDemo extends InstrumentationTestCase{
                 .childSelector(new UiSelector().className(android.widget.TextView.class.getName())));
         UiScrollable floorList = new UiScrollable(new UiSelector().resourceId("android:id/list"));
         //话题、位置详情列表
-        UiScrollable additionalList = new UiScrollable(new UiSelector().className(android.widget.ListView.class.getName()));
-        UiObject detailFromAdditionalList = new UiObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_diary_list_mainlay"));
+        UiScrollable generalList = new UiScrollable(new UiSelector().className(android.widget.ListView.class.getName()));
+        UiObject detailFromAdditionalList = new UiObject(new UiSelector().className(android.widget.TextView.class.getName())
+                .resourceId("pinkdiary.xiaoxiaotu.com:id/txt_plazatimeline_content"));
         //社区用户推荐
         UiObject userRecommend = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_list_message_add_attention_btn"));
         UiScrollable recommendTabPage = new UiScrollable(new UiSelector().className(android.support.v4.view.ViewPager.class.getName()));
@@ -1639,140 +1665,143 @@ public class AutomatorDemo extends InstrumentationTestCase{
 
         //动作
         //进入社区
-//        index.click();
-//        community.click();
-//        SystemClock.sleep(1000);
-//        //进banner
-//        communityContent.flingToBeginning(2);
-//        banner.clickAndWaitForNewWindow(2500);
-//        SystemClock.sleep(1500);
-//        mDevice.pressBack();
-//        //社区列表翻页
-//        hotList.click();
-//        communityContent.flingToEnd(8);
-//        communityContent.scrollForward(70);
-//        communityContent.flingToEnd(1);
-//        //点击个人头像
-//        if (portraitInList.exists()){
-//            portraitInList.clickAndWaitForNewWindow(1500);
-//            mDevice.pressBack();
-//        }
-//        //点击列表中图片
-//        communityContent.scrollIntoView(imageInContent);
-//        imageInContent.clickAndWaitForNewWindow(1500);
-//        swipeImage.swipeLeft(50);
-//        swipeImage.swipeLeft(50);
-//        if (currentApiVersion>=18) {
-//            doubleClick(2, zoomImage);
-//            SystemClock.sleep(2500);
-//            doubleClick(2, zoomImage);
-//        }
-//        saveImage.click();
-//        mDevice.pressBack();
-//        //列表中转发、评论
-//        communityContent.scrollIntoView(transpondInList);
-//        transpondInList.click();
-//        transpondEditText.setText("赞~！");
-//        transpondTansfer.click();
-//        transpondIcon.click();
-//        transpondIcon.click();
-//        transpondIcon.click();
-//        transpondConfirm.click();
-//        SystemClock.sleep(2500);
-//        reviewInList.click();
-//        transpondEditText.setText("好评~！");
-//        transpondConfirm.click();
-//        SystemClock.sleep(2500);
-//        //列表-喜欢,分享
-//        likeInList.click();
-//        likeInList.click();
-//        shareInList.click();
-//        mDevice.pressBack();
-//        //热门-话题
-//        communityContent.flingToBeginning(3);
-//        communityContent.scrollIntoView(hotTopicInList);
-//        hotTopicInList.clickAndWaitForNewWindow(2500);
-//        DetailList.flingToEnd(3);
-//        DetailList.swipeUp(70);
-//        SystemClock.sleep(500);
-//        mDevice.pressBack();
-//        communityContent.scrollIntoView(jumpToCircle);
-//        jumpToCircle.clickAndWaitForNewWindow(2500);
-//        mDevice.pressBack();
-//        //热门-日记详情
-//        communityContent.scrollIntoView(diaryDetail);
-//        diaryDetail.clickTopLeft();
-//        //日记详情关注
-//        if(followInDiaryDetail.exists()){
-//            followInDiaryDetail.click();
-//        }
-//        enterUserInfo.clickAndWaitForNewWindow(2500);
-//        followInUserInfo.click();
-//        mDevice.pressBack();
-//        //图片详情
-//        diaryCommentList.scrollIntoView(commentSummary);
-//        if (imageInContent.exists()){
-//            imageInContent.click();
-//            diaryImg.swipeLeft(50);
-//            diaryImg.swipeLeft(50);
-//            mDevice.pressBack();
-//        }
-//        //日记评论列表翻页
-//        diaryCommentList.flingToEnd(6);
-//        diaryCommentList.swipeDown(50);
-//        //转发、评论
-//        transpondInDetail.click();
-//        transpondEditText.setText("赞~！");
-//        transpondConfirm.click();
-//        SystemClock.sleep(2500);
-//        reviewInDetail.click();
-//        transpondEditText.setText("好评~！");
-//        transpondConfirm.click();
-//        SystemClock.sleep(2500);
-//        //回复楼层
-//        floorList.scrollIntoView(replyComment);
-//        replyComment.click();
-//        transpondEditText.setText("nice~!");
-//        SystemClock.sleep(3000);
-//        transpondConfirm.click();
-//        SystemClock.sleep(2500);
-//        //喜欢
-//        likeInDetail.click();
-//        likeInDetail.click();
-//        //分享
-//        shareInDetail.click();
-//        mDevice.pressBack();
-//        moreFunction.click();
-//        //举报
-//        accuse.clickAndWaitForNewWindow(1000);
-//        mDevice.pressBack();
-//        //回到社区列表
-//        mDevice.pressBack();
-//        //关注列表-翻页
-//        focusList.click();
-//        communityContent.flingToEnd(8);
-//        communityContent.scrollForward(70);
-//        communityContent.flingToEnd(1);
-//        //最新列表-翻页
-//        newList.click();
-//        communityContent.flingToEnd(8);
-//        communityContent.scrollForward(70);
-//        communityContent.flingToEnd(1);
+        index.click();
+        community.click();
+        SystemClock.sleep(1000);
+        //进banner
+        communityContent.flingToBeginning(2);
+        banner.clickAndWaitForNewWindow(2500);
+        SystemClock.sleep(1500);
+        mDevice.pressBack();
+        //社区列表翻页
+        hotList.click();
+        communityContent.flingToEnd(8);
+        communityContent.scrollForward(70);
+        communityContent.flingToEnd(1);
+        //点击个人头像
+        if (portraitInList.exists()){
+            portraitInList.clickAndWaitForNewWindow(1500);
+            mDevice.pressBack();
+        }
+        //点击列表中图片
+        communityContent.scrollIntoView(imageInContent);
+        imageInContent.clickAndWaitForNewWindow(1500);
+        swipeImage.swipeLeft(50);
+        swipeImage.swipeLeft(50);
+        if (currentApiVersion>=18) {
+            doubleClick(2, zoomImage);
+            SystemClock.sleep(2500);
+            doubleClick(2, zoomImage);
+        }
+        saveImage.click();
+        mDevice.pressBack();
+        //列表中转发、评论
+        communityContent.scrollIntoView(transpondInList);
+        transpondInList.click();
+        transpondEditText.setText("赞~！");
+        transpondTansfer.click();
+        transpondIcon.click();
+        transpondIcon.click();
+        transpondIcon.click();
+        transpondConfirm.click();
+        SystemClock.sleep(2500);
+        reviewInList.click();
+        transpondEditText.setText("好评~！");
+        transpondConfirm.click();
+        SystemClock.sleep(2500);
+        //列表-喜欢,分享
+        likeInList.click();
+        likeInList.click();
+        shareInList.click();
+        mDevice.pressBack();
+        //热门-话题
+        communityContent.flingToBeginning(3);
+        communityContent.scrollIntoView(hotTopicInList);
+        hotTopicInList.clickAndWaitForNewWindow(2500);
+        DetailList.flingToEnd(3);
+        DetailList.swipeUp(70);
+        SystemClock.sleep(500);
+        mDevice.pressBack();
+        communityContent.scrollIntoView(jumpToCircle);
+        jumpToCircle.clickAndWaitForNewWindow(2500);
+        mDevice.pressBack();
+        //热门-日记详情
+        communityContent.scrollIntoView(diaryDetail);
+        diaryDetail.clickTopLeft();
+        //日记详情关注
+        if(followInDiaryDetail.exists()){
+            followInDiaryDetail.click();
+        }
+        enterUserInfo.clickAndWaitForNewWindow(2500);
+        followInUserInfo.click();
+        mDevice.pressBack();
+        //图片详情
+        diaryCommentList.scrollIntoView(commentSummary);
+        if (imageInContent.exists()){
+            imageInContent.click();
+            diaryImg.swipeLeft(50);
+            diaryImg.swipeLeft(50);
+            mDevice.pressBack();
+        }
+        //日记评论列表翻页
+        diaryCommentList.flingToEnd(6);
+        diaryCommentList.swipeDown(50);
+        //转发、评论
+        transpondInDetail.click();
+        transpondEditText.setText("赞~！");
+        transpondConfirm.click();
+        SystemClock.sleep(2500);
+        reviewInDetail.click();
+        transpondEditText.setText("好评~！");
+        transpondConfirm.click();
+        SystemClock.sleep(2500);
+        //回复楼层
+        floorList.scrollIntoView(replyComment);
+        replyComment.click();
+        transpondEditText.setText("nice~!");
+        SystemClock.sleep(3000);
+        transpondConfirm.click();
+        SystemClock.sleep(2500);
+        //喜欢
+        likeInDetail.click();
+        likeInDetail.click();
+        //分享
+        shareInDetail.click();
+        mDevice.pressBack();
+        moreFunction.click();
+        //举报
+        accuse.clickAndWaitForNewWindow(1000);
+        mDevice.pressBack();
+        //回到社区列表
+        mDevice.pressBack();
+        //关注列表-翻页
+        focusList.click();
+        communityContent.flingToEnd(8);
+        communityContent.scrollForward(70);
+        communityContent.flingToEnd(1);
+        //最新列表-翻页
+        newList.click();
+        communityContent.flingToEnd(8);
+        communityContent.scrollForward(70);
+        communityContent.flingToEnd(1);
         //最新列表--找到并进入话题列表
         try{
             communityContent.scrollIntoView(topicInList);
             topicInList.clickAndWaitForNewWindow(1500);
             //话题列表翻页
-            additionalList.flingToEnd(3);
-            additionalList.swipeUp(50);
-            additionalList.flingToEnd(1);
+            generalList.flingToEnd(3);
+            generalList.swipeUp(50);
+            generalList.flingToEnd(1);
             //进详情
-            additionalList.scrollIntoView(detailFromAdditionalList);
-            detailFromAdditionalList.clickBottomRight();
-            //日记详情再跳一次话题列表
-            diaryCommentList.scrollIntoView(topicInDetail);
+            generalList.scrollIntoView(detailFromAdditionalList);
+            detailFromAdditionalList.click();
+            //日记详情再跳一次话题列表(增加if判断加快运行效率)
+            if (topicInDetail.exists())
+                topicInDetail.clickAndWaitForNewWindow(1500);
+            else
+                diaryCommentList.scrollIntoView(topicInDetail);
             topicInDetail.clickAndWaitForNewWindow(1500);
-            additionalList.flingToEnd(3);
+            generalList.flingToEnd(3);
             //返回最新列表
             mDevice.pressBack();
             mDevice.pressBack();
@@ -1786,16 +1815,19 @@ public class AutomatorDemo extends InstrumentationTestCase{
             communityContent.scrollIntoView(locationInList);
             locationInList.clickAndWaitForNewWindow(1500);
             //话题列表翻页
-            additionalList.flingToEnd(5);
-            additionalList.swipeUp(50);
-            additionalList.flingToEnd(1);
+            generalList.flingToEnd(5);
+            generalList.swipeUp(50);
+            generalList.flingToEnd(1);
             //进详情
-            additionalList.scrollIntoView(detailFromAdditionalList);
-            detailFromAdditionalList.clickBottomRight();
-            //日记详情再跳一次话题列表
-            diaryCommentList.scrollIntoView(locationInDetail);
+            generalList.scrollIntoView(detailFromAdditionalList);
+            detailFromAdditionalList.click();
+            //日记详情再跳一次话题列表(增加if判断加快运行效率)
+            if (locationInDetail.exists())
+                locationInDetail.click();
+            else
+                diaryCommentList.scrollIntoView(locationInDetail);
             locationInDetail.clickAndWaitForNewWindow(1500);
-            additionalList.flingToEnd(3);
+            generalList.flingToEnd(3);
             //返回最新列表
             mDevice.pressBack();
             mDevice.pressBack();
@@ -1863,7 +1895,17 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject changeEmotion = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/select_tag_gridview_emotion")
                 .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName())).index(15));
         UiObject confirm = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_iv_sure"));
-        //字号颜色
+        //字体字号颜色
+        UiObject fontSettings = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snskeepdiary_txt_style"));
+        UiObject selectFontStyle = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/text_font_lay")
+                .childSelector(new UiSelector().className(android.widget.GridView.class.getName()))
+                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(2)));
+        UiObject addFontStyle = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/text_font_lay")
+                .childSelector(new UiSelector().className(android.widget.GridView.class.getName()))
+                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(1)));
+        UiObject chooseFont1 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_font_list_item_lay").index(1));
+        UiObject chooseFont2 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_font_list_item_lay").index(5));
+        UiObject downloadFont = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/font_detail_buy_lay"));
         UiObject fontSize = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/text_size_lay")
                 .childSelector(new UiSelector().className(android.widget.GridView.class.getName()))
                 .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName())).index(2));
@@ -1872,7 +1914,27 @@ public class AutomatorDemo extends InstrumentationTestCase{
                 .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName())).index(3));
         //信纸
         UiObject addPaper = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snskeepdiary_paper"));
-
+        UiObject enterPaperShop = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/add_more_paper"));
+        UiObject generalList = mDevice.findObject(new UiSelector().resourceId("android:id/list"));
+        UiObject hotlist = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/indicator")
+                .childSelector(new UiSelector().className(android.widget.LinearLayout.class.getName()))
+                .childSelector(new UiSelector().className(android.widget.LinearLayout.class.getName()).index(1))
+                .childSelector(new UiSelector().className(android.widget.TextView.class.getName())));
+        UiObject newlist = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/indicator")
+                .childSelector(new UiSelector().className(android.widget.LinearLayout.class.getName()))
+                .childSelector(new UiSelector().className(android.widget.LinearLayout.class.getName()).index(0))
+                .childSelector(new UiSelector().className(android.widget.TextView.class.getName())));
+        UiObject freelist = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/indicator")
+                .childSelector(new UiSelector().className(android.widget.LinearLayout.class.getName()))
+                .childSelector(new UiSelector().className(android.widget.LinearLayout.class.getName()).index(2))
+                .childSelector(new UiSelector().className(android.widget.TextView.class.getName())));
+        UiObject choosePaper1 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/list_paper_item_rl").index(2));
+        UiObject choosePaper2 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/list_paper_item_rl").index(3));
+        UiObject buyPaper = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/paper_detail_buy_lay"));
+        UiObject paperAlbumList = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/paper_item_hs"));
+        UiObject paperList = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/page_item_grid"));
+        UiObject choosePaper = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/page_item_grid")
+                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).clickable(true).index(3)));
         //录音
         UiObject startRecord = mDevice.findObject(new UiSelector().className(android.widget.ImageView.class.getName())
                 .resourceId("pinkdiary.xiaoxiaotu.com:id/add_audio").clickable(true));
@@ -1883,7 +1945,8 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject completeRecord = mDevice.findObject(new UiSelector().className(android.widget.RelativeLayout.class.getName())
                 .childSelector(new UiSelector().className(android.widget.Button.class.getName()).index(0)));
         //录音授权
-        UiObject allow = mDevice.findObject(new UiSelector().resourceId("android:id/button1").index(1));
+        UiObject permit1 = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName()).text("允许"));
+        UiObject permit2 = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName()).resourceId("android:id/button1"));
         //照片
         UiObject addImg = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snskeepdiary_attach_first_image_preview"));
         //选择照片
@@ -1941,18 +2004,28 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject deleteImg = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/delete_image"));
         UiObject addImgInList = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/thumbnail_image"));
         //表情
-
+        //TODO
+        
+        //添加话题
+        UiObject topicEntrance = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/create_dtopic_txt"));
+        UiObject editTopic = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/topic_create_et"));
+        UiObject historyTopic = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/history_diary_topic_listview")
+                .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_ability_class_lay")).index(1));
+        UiObject hotTopic = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/diary_topic_listview")
+                .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_ability_class_lay")).index(1));
+        //选择位置
+        UiObject location = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/location_layout"));
         //准备发布点滴
         UiObject readyForPublish = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snskeepdiary_btn_save"));
         //日记公开
-
-        //添加,修改标签
-
+        UiObject isPublic = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/is_public"));
+        //添加,修改标签(功能已取消)
         //分享
 
-        //确认发布点滴
+        //完成发布
         UiObject publish = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_diary_release"));
 
+        //动作
 
 
     }
@@ -2006,5 +2079,4 @@ public class AutomatorDemo extends InstrumentationTestCase{
         index.click();
     }
 
-    //TODO 发布一条不同的话题
 }
