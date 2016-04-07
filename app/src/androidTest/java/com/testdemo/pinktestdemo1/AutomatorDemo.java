@@ -560,8 +560,39 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject topicContent = mDevice.findObject(new UiSelector().className(android.widget.EditText.class.getName())
                 .resourceId("pinkdiary.xiaoxiaotu.com:id/sns_topic_content"));
         //话题表情
-        UiObject topicIcon = mDevice.findObject(new UiSelector().className(android.widget.ImageView.class.getName())
-                .resourceId("pinkdiary.xiaoxiaotu.com:id/icon_btn"));
+        UiObject addEmotion = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/icon_btn"));
+        UiObject enterEmotionShop = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/emotion_item_lay")
+                .childSelector(new UiSelector().className(android.widget.GridView.class.getName()))
+                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(0)));
+        UiObject generalList = mDevice.findObject(new UiSelector().resourceId("android:id/list"));
+        UiObject hotlist = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/indicator")
+                .childSelector(new UiSelector().className(android.widget.LinearLayout.class.getName()))
+                .childSelector(new UiSelector().className(android.widget.LinearLayout.class.getName()).index(1))
+                .childSelector(new UiSelector().className(android.widget.TextView.class.getName())));
+        UiObject newlist = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/indicator")
+                .childSelector(new UiSelector().className(android.widget.LinearLayout.class.getName()))
+                .childSelector(new UiSelector().className(android.widget.LinearLayout.class.getName()).index(0))
+                .childSelector(new UiSelector().className(android.widget.TextView.class.getName())));
+        UiObject freelist = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/indicator")
+                .childSelector(new UiSelector().className(android.widget.LinearLayout.class.getName()))
+                .childSelector(new UiSelector().className(android.widget.LinearLayout.class.getName()).index(2))
+                .childSelector(new UiSelector().className(android.widget.TextView.class.getName())));
+        UiObject emotionItem1 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_emotion_list_item_lay").index(2));
+        UiObject emotionItem2 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_emotion_list_item_lay").index(3));
+        UiObject buyEmotion = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/emotion_detail_buy_lay"));
+        UiObject emotionColumn = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/emotion_item_hs"));
+        UiObject emotionColumnItem1 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/emotion_item_lay")
+                .childSelector(new UiSelector().className(android.widget.GridView.class.getName()))
+                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(2)));
+        UiObject emotionColumnItem2 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/emotion_item_lay")
+                .childSelector(new UiSelector().className(android.widget.GridView.class.getName()))
+                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(2)));
+        UiObject emotionColumnItem3 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/emotion_item_lay")
+                .childSelector(new UiSelector().className(android.widget.GridView.class.getName()))
+                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(3)));
+        UiObject columDetailList = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/paper_panel_pager_vp"));
+        UiObject chooseEmotion = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/item_emotion_pager_lay").index(1));
+        UiObject deleteEmotion = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/delete_emotion"));
         //话题图片
         UiObject topicImg = mDevice.findObject(new UiSelector().className(android.widget.ImageView.class.getName())
                 .resourceId("pinkdiary.xiaoxiaotu.com:id/sns_add_images"));
@@ -721,11 +752,47 @@ public class AutomatorDemo extends InstrumentationTestCase{
         Random ne = new Random();
         int i = ne.nextInt(10000);
         topicContent.setText("测试姬话题试验中，这个话题马上就要炸上天了哦~boom~！" + i);
-        topicIcon.click();
+        addEmotion.click();
         SystemClock.sleep(500);
+        enterEmotionShop.clickAndWaitForNewWindow(1500);
+        hotlist.click();
+        generalList.swipeUp(3);
+        generalList.swipeUp(3);
+        generalList.swipeUp(3);
+        newlist.click();
+        generalList.swipeUp(3);
+        generalList.swipeUp(3);
+        generalList.swipeUp(3);
+        freelist.click();
+        emotionItem1.clickAndWaitForNewWindow(1500);
+        buyEmotion.click();
+        SystemClock.sleep(2500);
+        mDevice.pressBack();
+        emotionItem2.clickAndWaitForNewWindow(1500);
+        buyEmotion.click();
+        SystemClock.sleep(2500);
+        mDevice.pressBack();
+        mDevice.pressBack();
+        emotionColumn.swipeLeft(3);
+        emotionColumn.swipeLeft(5);
+        emotionColumnItem1.click();
         heart.click();
         heart.click();
         heart.click();
+        SystemClock.sleep(500);
+        emotionColumnItem2.click();
+        chooseEmotion.click();
+        chooseEmotion.click();
+        SystemClock.sleep(500);
+        emotionColumnItem3.click();
+        columDetailList.swipeLeft(3);
+        chooseEmotion.click();
+        chooseEmotion.click();
+        chooseEmotion.click();
+        chooseEmotion.click();
+        chooseEmotion.click();
+        deleteEmotion.click();
+        deleteEmotion.click();
         SystemClock.sleep(500);
         topicImg.clickAndWaitForNewWindow(1000);
         if(chooseImg.exists()){
@@ -1903,8 +1970,8 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject addFontStyle = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/text_font_lay")
                 .childSelector(new UiSelector().className(android.widget.GridView.class.getName()))
                 .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(1)));
-        UiObject chooseFont1 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_font_list_item_lay").index(1));
-        UiObject chooseFont2 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_font_list_item_lay").index(5));
+        UiObject fontItem1 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_font_list_item_lay").index(1));
+        UiObject fontItem2 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_font_list_item_lay").index(5));
         UiObject downloadFont = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/font_detail_buy_lay"));
         UiObject fontSize = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/text_size_lay")
                 .childSelector(new UiSelector().className(android.widget.GridView.class.getName()))
@@ -1928,10 +1995,16 @@ public class AutomatorDemo extends InstrumentationTestCase{
                 .childSelector(new UiSelector().className(android.widget.LinearLayout.class.getName()))
                 .childSelector(new UiSelector().className(android.widget.LinearLayout.class.getName()).index(2))
                 .childSelector(new UiSelector().className(android.widget.TextView.class.getName())));
-        UiObject choosePaper1 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/list_paper_item_rl").index(2));
-        UiObject choosePaper2 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/list_paper_item_rl").index(3));
+        UiObject paperItem1 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/list_paper_item_rl").index(2));
+        UiObject paperItem2 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/list_paper_item_rl").index(3));
         UiObject buyPaper = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/paper_detail_buy_lay"));
-        UiObject paperAlbumList = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/paper_item_hs"));
+        UiObject paperColumn = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/paper_item_hs"));
+        UiObject paperColumnItem1 = new UiObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/paper_item_lay")
+                .childSelector(new UiSelector().className(android.widget.GridView.class.getName()))
+                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(1)));
+        UiObject paperColumnItem2 = new UiObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/paper_item_lay")
+                .childSelector(new UiSelector().className(android.widget.GridView.class.getName()))
+                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(2)));
         UiObject paperList = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/page_item_grid"));
         UiObject choosePaper = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/page_item_grid")
                 .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).clickable(true).index(3)));
@@ -2004,8 +2077,23 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject deleteImg = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/delete_image"));
         UiObject addImgInList = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/thumbnail_image"));
         //表情
-        //TODO
-        
+        UiObject addEmotion = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/icon_btn"));
+        UiObject enterEmotionShop = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/emotion_item_lay")
+                .childSelector(new UiSelector().className(android.widget.GridView.class.getName()))
+                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(0)));
+        UiObject emotionItem1 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_emotion_list_item_lay").index(2));
+        UiObject emotionItem2 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_emotion_list_item_lay").index(3));
+        UiObject buyEmotion = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/emotion_detail_buy_lay"));
+        UiObject emotionColumn = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/emotion_item_hs"));
+        UiObject emotionColumnItem2 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/emotion_item_lay")
+                .childSelector(new UiSelector().className(android.widget.GridView.class.getName()))
+                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(2)));
+        UiObject emotionColumnItem3 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/emotion_item_lay")
+                .childSelector(new UiSelector().className(android.widget.GridView.class.getName()))
+                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(3)));
+        UiObject columDetailList = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/paper_panel_pager_vp"));
+        UiObject chooseEmotion = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/item_emotion_pager_lay").index(1));
+        UiObject deleteEmotion = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/delete_emotion"));
         //添加话题
         UiObject topicEntrance = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/create_dtopic_txt"));
         UiObject editTopic = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/topic_create_et"));
@@ -2021,12 +2109,19 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject isPublic = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/is_public"));
         //添加,修改标签(功能已取消)
         //分享
-
+        UiObject share_denied = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_dialog_bt_positiveButton"));
+        UiObject share_qzone = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/umeng_share_qzone"));
+        UiObject share_qq = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/umeng_share_qq"));
+        UiObject share_sina = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/umeng_share_sina"));
+        UiObject share_wechat = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/umeng_share_weixin"));
+        UiObject share_wechat_circle = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/umeng_share_weixin_circle"));
+        UiObject share_tencent = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/umeng_share_tencent"));
+        UiObject share_renren = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/umeng_share_renren"));
+        UiObject share_sms = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/umeng_share_sms"));
         //完成发布
         UiObject publish = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_diary_release"));
 
         //动作
-
 
     }
 
