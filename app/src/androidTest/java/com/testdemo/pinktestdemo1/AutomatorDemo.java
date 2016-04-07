@@ -77,7 +77,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
             excuteCommand("am start -n pinkdiary.xiaoxiaotu.com/pinkdiary.xiaoxiaotu.com.LogoScreen");
             SystemClock.sleep(4000);
         } catch (Exception e) {
-            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/startApp.png"));
+            mDevice.takeScreenshot(new File("//storage//sdcard0//AutomatorDemo"+"//startApp.png"));
             fail(e.toString());
         }
     }
@@ -89,7 +89,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         try {
             index();
         } catch (UiObjectNotFoundException e) {
-            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/testIndex.png"));
+            mDevice.takeScreenshot(new File("//storage//sdcard0//AutomatorDemo"+"//testIndex.png"));
             fail(e.toString());
         }
     }
@@ -100,7 +100,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         try {
             discover_search();
         } catch (UiObjectNotFoundException e) {
-            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/testSearch.png"));
+            mDevice.takeScreenshot(new File("//storage//sdcard0//AutomatorDemo"+"//testSearch.png"));
             fail(e.toString());
         }
     }
@@ -111,7 +111,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         try {
             discover_circle();
         } catch (UiObjectNotFoundException e) {
-            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/testCircle.png"));
+            mDevice.takeScreenshot(new File("//storage//sdcard0//AutomatorDemo"+"//testCircle.png"));
             fail(e.toString());
         }
     }
@@ -122,7 +122,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         try {
             discover_groupChat();
         } catch (UiObjectNotFoundException e){
-            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/testGroupChat.png"));
+            mDevice.takeScreenshot(new File("//storage//sdcard0//AutomatorDemo"+"//testGroupChat.png"));
             fail(e.toString());
         }
     }
@@ -133,7 +133,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         try {
             discover_dyingChatRoom();
         } catch (UiObjectNotFoundException e){
-            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/testDyingChatRoom.png"));
+            mDevice.takeScreenshot(new File("//storage//sdcard0//AutomatorDemo"+"//testDyingChatRoom.png"));
             fail(e.toString());
         }
     }
@@ -144,7 +144,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         try {
             discover_ability();
         } catch (UiObjectNotFoundException e){
-            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/testAblilty.png"));
+            mDevice.takeScreenshot(new File("//storage//sdcard0//AutomatorDemo"+"//testAblilty.png"));
             fail(e.toString());
         }
     }
@@ -155,7 +155,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         try {
             discover_find();
         } catch (UiObjectNotFoundException e){
-            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/testFind.png"));
+            mDevice.takeScreenshot(new File("//storage//sdcard0//AutomatorDemo"+"//testFind.png"));
             fail(e.toString());
         }
     }
@@ -167,7 +167,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         try {
             discover_ranking();
         } catch (UiObjectNotFoundException e){
-            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/testRanking.png"));
+            mDevice.takeScreenshot(new File("//storage//sdcard0//AutomatorDemo"+"//testRanking.png"));
             fail(e.toString());
         }
     }
@@ -178,7 +178,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         try {
             visitCommunity();
         } catch (UiObjectNotFoundException e){
-            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/testVisitCommunity.png"));
+            mDevice.takeScreenshot(new File("//storage//sdcard0//AutomatorDemo"+"//testVisitCommunity.png"));
             fail(e.toString());
         }
     }
@@ -189,7 +189,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         try {
             publishCommunityDiary();
         } catch (UiObjectNotFoundException e){
-            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/publishCommunityDiary.png"));
+            mDevice.takeScreenshot(new File("//storage//sdcard0//AutomatorDemo"+"//publishCommunityDiary.png"));
             fail(e.toString());
         }
     }
@@ -200,7 +200,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         try {
             notification();
         } catch (UiObjectNotFoundException e){
-            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/testNotification.png"));
+            mDevice.takeScreenshot(new File("//storage//sdcard0//AutomatorDemo"+"//testNotification.png"));
             fail(e.toString());
         }
     }
@@ -214,7 +214,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
             excuteCommand("logcat -f /sdcard.log");
             System.out.println("All testcases have been checked.Logs have been saved in /sdcard.log");
         }catch (Exception e){
-            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/TestFinished.png"));
+            mDevice.takeScreenshot(new File("//storage//sdcard0//AutomatorDemo"+"//TestFinished.png"));
             fail(e.toString());
         }
     }
@@ -583,7 +583,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject emotionColumn = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/emotion_item_hs"));
         UiObject emotionColumnItem1 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/emotion_item_lay")
                 .childSelector(new UiSelector().className(android.widget.GridView.class.getName()))
-                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(2)));
+                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(1)));
         UiObject emotionColumnItem2 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/emotion_item_lay")
                 .childSelector(new UiSelector().className(android.widget.GridView.class.getName()))
                 .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(2)));
@@ -840,7 +840,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
             mDevice.click(recordButtonX,recordButtonY);
             SystemClock.sleep(500);
         } catch (UiObjectNotFoundException e) {
-            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/EndRecordNotExist.png"));
+            mDevice.takeScreenshot(new File("//storage//sdcard0//AutomatorDemo"+"//EndRecordNotExist.png"));
             fail(e.toString());
         }
         //更改发布的圈子
@@ -1294,7 +1294,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
                 mDevice.pressBack();
                 myGroup.click();
             } catch (UiObjectNotFoundException e) {
-                mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo" + "/DissolveNotExist.png"));
+                mDevice.takeScreenshot(new File("//storage//sdcard0//AutomatorDemo" + "//DissolveNotExist.png"));
                 fail(e.toString());
             }
         } 
@@ -1631,7 +1631,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         //动作
         discover.click();
         rankingEntrance.clickAndWaitForNewWindow(3000);
-        mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo" + "/rankingDisplay.png"));
+        mDevice.takeScreenshot(new File("//storage//sdcard0//AutomatorDemo" + "//rankingDisplay.png"));
         refresh.click();
         SystemClock.sleep(3500);
         back.click();
@@ -1874,7 +1874,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
             mDevice.pressBack();
             mDevice.pressBack();
         }catch (Exception e){
-            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/NoTopicInList.png"));
+            mDevice.takeScreenshot(new File("//storage//sdcard0//AutomatorDemo"+"//NoTopicInList.png"));
             fail(e.toString());
         }
         //最新列表--找到并进入话LBS列表
@@ -1900,7 +1900,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
             mDevice.pressBack();
             mDevice.pressBack();
         }catch (Exception e){
-            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/NoLocationInList.png"));
+            mDevice.takeScreenshot(new File("//storage//sdcard0//AutomatorDemo"+"//NoLocationInList.png"));
             fail(e.toString());
         }
         //社区-用户推荐
@@ -1932,6 +1932,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
 
     private void publishCommunityDiary() throws UiObjectNotFoundException{
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+        Random rand = new Random();
         //控件
         UiObject index = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/home"));
         //社区入口
@@ -1948,37 +1949,31 @@ public class AutomatorDemo extends InstrumentationTestCase{
         //日记内容
         UiObject title = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snskeepdiary_title_input"));
         UiObject context = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snskeepdiary_body_input"));
-        //日记功能入口
-        UiObject weather = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/viewdiary_weather_imgbtn"));
-        UiObject emotion = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/viewdiary_weather_imgbtn"));
-        UiObject addExpression = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/icon_btn"));
-        UiObject addPhotos = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snskeepdiary_attach_first_image_preview"));
-        UiObject addRecord = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/add_audio"));
-        UiObject editPaper = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snskeepdiary_paper"));
-        UiObject editFontColor = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snskeepdiary_txt_style"));
         //天气心情详情
+        UiObject chooseWeather = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/viewdiary_weather_imgbtn"));
+        UiObject chooseMood = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/view_diary_emotion_imgbtn"));
         UiObject changeWeather = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/select_tag_gridview_weather")
-                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName())).index(15));
-        UiObject changeEmotion = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/select_tag_gridview_emotion")
-                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName())).index(15));
+                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName())).index(rand.nextInt(16)));
+        UiObject changeMood = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/select_tag_gridview_emotion")
+                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName())).index(rand.nextInt(16)));
         UiObject confirm = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_iv_sure"));
         //字体字号颜色
         UiObject fontSettings = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snskeepdiary_txt_style"));
         UiObject selectFontStyle = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/text_font_lay")
                 .childSelector(new UiSelector().className(android.widget.GridView.class.getName()))
-                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(2)));
+                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(rand.nextInt(3))));
         UiObject addFontStyle = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/text_font_lay")
                 .childSelector(new UiSelector().className(android.widget.GridView.class.getName()))
                 .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(1)));
-        UiObject fontItem1 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_font_list_item_lay").index(1));
-        UiObject fontItem2 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_font_list_item_lay").index(5));
+        UiObject fontItem1 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_font_list_item_lay").index(rand.nextInt(5)));
+        UiObject fontItem2 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_font_list_item_lay").index(rand.nextInt(5)));
         UiObject downloadFont = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/font_detail_buy_lay"));
         UiObject fontSize = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/text_size_lay")
                 .childSelector(new UiSelector().className(android.widget.GridView.class.getName()))
-                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName())).index(2));
+                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(2)));
         UiObject fontColor = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/text_color_lay")
                 .childSelector(new UiSelector().className(android.widget.GridView.class.getName()))
-                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName())).index(3));
+                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(3)));
         //信纸
         UiObject addPaper = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snskeepdiary_paper"));
         UiObject enterPaperShop = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/add_more_paper"));
@@ -1999,6 +1994,9 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject paperItem2 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/list_paper_item_rl").index(3));
         UiObject buyPaper = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/paper_detail_buy_lay"));
         UiObject paperColumn = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/paper_item_hs"));
+        UiObject recentPaper = new UiObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/paper_item_lay")
+                .childSelector(new UiSelector().className(android.widget.GridView.class.getName()))
+                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(0)));
         UiObject paperColumnItem1 = new UiObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/paper_item_lay")
                 .childSelector(new UiSelector().className(android.widget.GridView.class.getName()))
                 .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(1)));
@@ -2009,33 +2007,37 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject choosePaper = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/page_item_grid")
                 .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).clickable(true).index(3)));
         //录音
-        UiObject startRecord = mDevice.findObject(new UiSelector().className(android.widget.ImageView.class.getName())
+        UiObject enterRecord = mDevice.findObject(new UiSelector().className(android.widget.ImageView.class.getName())
                 .resourceId("pinkdiary.xiaoxiaotu.com:id/add_audio").clickable(true));
-        UiObject endRecord = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName()));
-        UiObject reRecord = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName()).index(2));
-        UiObject deleteRecord = mDevice.findObject(new UiSelector().className(android.widget.LinearLayout.class.getName())
-                .childSelector(new UiSelector().className(android.widget.Button.class.getName()).index(0)));
-        UiObject completeRecord = mDevice.findObject(new UiSelector().className(android.widget.RelativeLayout.class.getName())
-                .childSelector(new UiSelector().className(android.widget.Button.class.getName()).index(0)));
+        UiObject startRecord = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/audio_view_img_bg"));
+        UiObject reRecord = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/audio_view_remake"));
+        UiObject deleteRecord = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/audio_view_delete"));
         //录音授权
         UiObject permit1 = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName()).text("允许"));
         UiObject permit2 = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName()).resourceId("android:id/button1"));
         //照片
         UiObject addImg = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snskeepdiary_attach_first_image_preview"));
         //选择照片
-        UiObject chooseImg1 = mDevice.findObject(new UiSelector().className(android.widget.FrameLayout.class.getName()).index(1)
+        UiObject chooseImg1 = mDevice.findObject(new UiSelector().className(android.widget.FrameLayout.class.getName()).index(2)
                 .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/checkmark")));
-        UiObject chooseImg2 = mDevice.findObject(new UiSelector().className(android.widget.FrameLayout.class.getName()).index(2)
+        UiObject chooseImg2 = mDevice.findObject(new UiSelector().className(android.widget.FrameLayout.class.getName()).index(3)
                 .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/checkmark")));
-        UiObject chooseImg3 = mDevice.findObject(new UiSelector().className(android.widget.FrameLayout.class.getName()).index(3)
+        UiObject chooseImg3 = mDevice.findObject(new UiSelector().className(android.widget.FrameLayout.class.getName()).index(4)
                 .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/checkmark")));
-        UiObject chooseImg4 = mDevice.findObject(new UiSelector().className(android.widget.FrameLayout.class.getName()).index(4)
+        UiObject chooseImg4 = mDevice.findObject(new UiSelector().className(android.widget.FrameLayout.class.getName()).index(5)
                 .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/checkmark")));
-        UiObject chooseImg5 = mDevice.findObject(new UiSelector().className(android.widget.FrameLayout.class.getName()).index(5)
+        UiObject chooseImg5 = mDevice.findObject(new UiSelector().className(android.widget.FrameLayout.class.getName()).index(6)
                 .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/checkmark")));
-        UiObject chooseImg6 = mDevice.findObject(new UiSelector().className(android.widget.FrameLayout.class.getName()).index(6)
+        UiObject chooseImg6 = mDevice.findObject(new UiSelector().className(android.widget.FrameLayout.class.getName()).index(7)
+                .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/checkmark")));
+        UiObject chooseImg7 = mDevice.findObject(new UiSelector().className(android.widget.FrameLayout.class.getName()).index(8)
+                .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/checkmark")));
+        UiObject chooseImg8 = mDevice.findObject(new UiSelector().className(android.widget.FrameLayout.class.getName()).index(9)
+                .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/checkmark")));
+        UiObject chooseImg9 = mDevice.findObject(new UiSelector().className(android.widget.FrameLayout.class.getName()).index(10)
                 .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/checkmark")));
         //编辑照片-裁剪照片
+        UiObject Img9 = mDevice.findObject(new UiSelector().className(android.widget.FrameLayout.class.getName()).index(10));
         UiObject cutImage = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/lsq_cutButton"));
         UiObject cutBy2_3 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/lsq_ratio_2_3_Button"));
         UiObject cutBy9_16 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/lsq_ratio_9_16_Button"));
@@ -2046,9 +2048,9 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiScrollable changeFilterGroup = new UiScrollable(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/lsq_group_list_view")).setAsHorizontalList();
         UiObject chooseFilterGroup = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/lsq_group_list_view")
                 .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(4)));
-        UiScrollable changeFilter = new UiScrollable(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/lsq_filter_list_view")).setAsHorizontalList();
+        UiScrollable scanFilter = new UiScrollable(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/lsq_filter_list_view")).setAsHorizontalList();
         UiObject chooseFilter = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/lsq_filter_list_view")
-                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(4)));
+                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(3)));
         UiObject dragPoint = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/lsq_seekDrag"));
         int dragX = dragPoint.getBounds().centerX();
         int dragY = dragPoint.getBounds().centerY();
@@ -2066,8 +2068,8 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject preview = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/preview"));
         UiObject previewDetail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/viewpagerLayout"));
         //切换相册
-        UiObject category = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/category_btn"));
-        UiObject DCIM = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/multi_image_list")
+        UiObject categoryColumn = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/category_btn"));
+        UiObject category = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/multi_image_list")
                 .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(1)));
         //确认选择图片
         UiObject imgConfirm = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName())
@@ -2085,6 +2087,9 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject emotionItem2 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_emotion_list_item_lay").index(3));
         UiObject buyEmotion = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/emotion_detail_buy_lay"));
         UiObject emotionColumn = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/emotion_item_hs"));
+        UiObject emotionColumnItem1 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/emotion_item_lay")
+                .childSelector(new UiSelector().className(android.widget.GridView.class.getName()))
+                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(1)));
         UiObject emotionColumnItem2 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/emotion_item_lay")
                 .childSelector(new UiSelector().className(android.widget.GridView.class.getName()))
                 .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(2)));
@@ -2092,11 +2097,14 @@ public class AutomatorDemo extends InstrumentationTestCase{
                 .childSelector(new UiSelector().className(android.widget.GridView.class.getName()))
                 .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(3)));
         UiObject columDetailList = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/paper_panel_pager_vp"));
+        UiObject heart = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/emotion_item_grid")
+                .childSelector(new UiSelector().className(android.widget.LinearLayout.class.getName()).index(2)));
         UiObject chooseEmotion = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/item_emotion_pager_lay").index(1));
         UiObject deleteEmotion = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/delete_emotion"));
         //添加话题
         UiObject topicEntrance = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/create_dtopic_txt"));
         UiObject editTopic = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/topic_create_et"));
+        UiObject confirmTopic = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/diarytopic_create_sure"));
         UiObject historyTopic = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/history_diary_topic_listview")
                 .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_ability_class_lay")).index(1));
         UiObject hotTopic = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/diary_topic_listview")
@@ -2104,7 +2112,8 @@ public class AutomatorDemo extends InstrumentationTestCase{
         //选择位置
         UiObject location = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/location_layout"));
         //准备发布点滴
-        UiObject readyForPublish = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snskeepdiary_btn_save"));
+        UiObject cancelPublish = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snskeepdiary_btn_back"));
+        UiObject readyToPublish = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snskeepdiary_btn_save"));
         //日记公开
         UiObject isPublic = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/is_public"));
         //添加,修改标签(功能已取消)
@@ -2120,9 +2129,309 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject share_sms = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/umeng_share_sms"));
         //完成发布
         UiObject publish = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_diary_release"));
+        //取消保存，（不）保存草稿
+        UiObject saveDraft = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/content_list")
+                .childSelector(new UiSelector().className(android.widget.LinearLayout.class.getName()).index(1)));
+        UiObject abandonDraft = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/content_list")
+                .childSelector(new UiSelector().className(android.widget.LinearLayout.class.getName()).index(2)));
+        UiObject abandonCancel = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/content_list")
+                .childSelector(new UiSelector().className(android.widget.LinearLayout.class.getName()).index(3)));
 
         //动作
-
+        //检查3个写点滴入口
+        community.click();
+        SystemClock.sleep(500);
+        community.clickAndWaitForNewWindow(1000);
+        if (editAccount.exists()){
+            editAccount.setText("test6789");
+            editPassword.setText("q");
+            loginButton.click();
+            SystemClock.sleep(1800);
+        }
+        createWordDiary.clickAndWaitForNewWindow(1000);
+        mDevice.pressBack();
+        SystemClock.sleep(500);
+        community.click();
+        createRecordDiary.click();
+        //如果出现录音授权需要确认
+        if(permit1.exists())
+            permit1.click();
+        else if (permit2.exists())
+            permit2.click();
+        SystemClock.sleep(2500);
+        //放弃编辑，录音存草稿
+        mDevice.pressBack();
+        SystemClock.sleep(300);
+        for (int i = 0; i<5; i++) {
+            if (saveDraft.exists()) {
+                saveDraft.click();
+                SystemClock.sleep(300);
+                break;
+            }
+            else
+                mDevice.pressBack();
+        }
+        //顺便测一下从+号进圈子的功能
+        community.click();
+        createTopic.clickAndWaitForNewWindow(500);
+        mDevice.pressBack();
+        //测试x号有效性
+        community.click();
+        cancelCreate.click();
+        //从添加照片开始新建社区点滴
+        community.click();
+        createPhotoDiary.clickAndWaitForNewWindow(1000);
+        chooseImg1.click();
+        chooseImg2.click();
+        chooseImg3.click();
+        chooseImg4.click();
+        chooseImg5.click();
+        chooseImg6.click();
+        chooseImg7.click();
+        chooseImg8.click();
+        chooseImg9.click();
+        //裁剪照片9
+        Img9.clickAndWaitForNewWindow(500);
+        cutImage.clickAndWaitForNewWindow(500);
+        cutBy2_3.click();
+        cutBy9_16.click();
+        turnImg.click();
+        turnImg.click();
+        mirrorImg.click();
+        mirrorImg.click();
+        editImgConfirm.click();
+        //增加滤镜
+        filter.click();
+        changeFilterGroup.flingToEnd(2);
+        chooseFilterGroup.click();
+        scanFilter.flingToEnd(1);
+        chooseFilter.click();
+        chooseFilter.click();
+        dragPoint.dragTo(dragX - 50, dragY, 2);
+        resetDragPoint.click();
+        rangeLabel.click();
+        dragPoint.dragTo(dragX + 50, dragY, 2);
+        hueLabel.click();
+        dragPoint.dragTo(dragX - 30, dragY, 2);
+        filterConfirm.click();
+        editImgConfirm.click();
+        //贴纸为混合h5，uiautomator跳过
+        SystemClock.sleep(3000);
+        //预览
+        preview.clickAndWaitForNewWindow(500);
+        previewDetail.swipeLeft(30);
+        previewDetail.swipeLeft(30);
+        previewDetail.swipeLeft(30);
+        //双击放大&失效对策
+        doubleClick(2,previewDetail);
+        if (previewDetail.exists()){
+            doubleClick(2,previewDetail);
+        }
+        if (previewDetail.exists()){
+            previewDetail.click();
+        }
+        //切换相册
+        categoryColumn.click();
+        category.click();
+        imgConfirm.click();
+        SystemClock.sleep(500);
+        //滑动-删除-重新添加图片
+        for (int i=0;i<9;i++){
+            if (deleteImg.exists())
+                deleteImg.click();
+        }
+        addImgInList.clickAndWaitForNewWindow(500);
+        chooseImg1.click();
+        chooseImg2.click();
+        chooseImg3.click();
+        chooseImg4.click();
+        chooseImg5.click();
+        chooseImg6.click();
+        chooseImg7.click();
+        chooseImg8.click();
+        chooseImg9.click();
+        imgConfirm.click();
+        SystemClock.sleep(500);
+        scrollImgList.flingToEnd(3);
+        addImg.click();
+        //添加话题
+        topicEntrance.clickAndWaitForNewWindow(1500);
+        editTopic.clearTextField();
+        editTopic.setText("啊哇哇哇哇");
+        confirmTopic.click();
+        SystemClock.sleep(500);
+        topicEntrance.clickAndWaitForNewWindow(1500);
+        if (hotTopic.exists())
+            hotTopic.click();
+        else
+            mDevice.pressBack();
+        SystemClock.sleep(500);
+        topicEntrance.clickAndWaitForNewWindow(1500);
+        if (historyTopic.exists())
+            historyTopic.click();
+        else
+            mDevice.pressBack();
+        SystemClock.sleep(500);
+        //天气心情
+        chooseWeather.clickAndWaitForNewWindow(500);
+        changeWeather.click();
+        changeMood.click();
+        confirm.click();
+        SystemClock.sleep(500);
+        chooseMood.clickAndWaitForNewWindow(500);
+        mDevice.pressBack();
+        SystemClock.sleep(500);
+        //添加正文
+        context.clearTextField();
+        context.setText("野生的测试姬出现了！！！" + rand.nextInt(10000));
+        //添加表情
+        addEmotion.click();
+        //购买免费表情
+        enterEmotionShop.clickAndWaitForNewWindow(1500);
+        hotlist.click();
+        generalList.swipeUp(3);
+        generalList.swipeUp(3);
+        generalList.swipeUp(3);
+        newlist.click();
+        generalList.swipeUp(3);
+        generalList.swipeUp(3);
+        generalList.swipeUp(3);
+        freelist.click();
+        emotionItem1.clickAndWaitForNewWindow(1500);
+        buyEmotion.click();
+        SystemClock.sleep(2500);
+        mDevice.pressBack();
+        emotionItem2.clickAndWaitForNewWindow(1500);
+        buyEmotion.click();
+        SystemClock.sleep(2500);
+        mDevice.pressBack();
+        mDevice.pressBack();
+        emotionColumn.swipeLeft(3);
+        emotionColumn.swipeLeft(5);
+        emotionColumnItem1.click();
+        heart.click();
+        heart.click();
+        heart.click();
+        SystemClock.sleep(500);
+        emotionColumnItem2.click();
+        chooseEmotion.click();
+        chooseEmotion.click();
+        SystemClock.sleep(500);
+        emotionColumnItem3.click();
+        columDetailList.swipeLeft(3);
+        chooseEmotion.click();
+        chooseEmotion.click();
+        chooseEmotion.click();
+        chooseEmotion.click();
+        chooseEmotion.click();
+        deleteEmotion.click();
+        deleteEmotion.click();
+        SystemClock.sleep(500);
+        //信纸
+        addPaper.click();
+        enterPaperShop.clickAndWaitForNewWindow(1500);
+        hotlist.click();
+        generalList.swipeUp(3);
+        generalList.swipeUp(3);
+        generalList.swipeUp(3);
+        newlist.click();
+        generalList.swipeUp(3);
+        generalList.swipeUp(3);
+        generalList.swipeUp(3);
+        freelist.click();
+        paperItem1.clickAndWaitForNewWindow(1500);
+        buyPaper.click();
+        SystemClock.sleep(2500);
+        mDevice.pressBack();
+        paperItem2.clickAndWaitForNewWindow(1500);
+        buyPaper.click();
+        SystemClock.sleep(2500);
+        mDevice.pressBack();
+        mDevice.pressBack();
+        paperColumn.swipeLeft(3);
+        paperColumn.swipeRight(5);
+        paperColumnItem1.click();
+        paperList.swipeLeft(2);
+        paperList.swipeRight(3);
+        choosePaper.click();
+        paperColumnItem2.click();
+        paperList.swipeLeft(2);
+        if (choosePaper.exists())
+            choosePaper.click();
+        recentPaper.click();
+        if (choosePaper.exists())
+            choosePaper.click();
+        addPaper.click();
+        //字体
+        fontSettings.click();
+        addFontStyle.clickAndWaitForNewWindow(1500);
+        fontItem1.clickAndWaitForNewWindow(500);
+        downloadFont.click();
+        mDevice.pressBack();
+        fontItem2.clickAndWaitForNewWindow(500);
+        downloadFont.click();
+        mDevice.pressBack();
+        mDevice.pressBack();
+        selectFontStyle.click();
+        selectFontStyle.click();
+        fontSize.click();
+        fontSize.click();
+        fontColor.click();
+        fontColor.click();
+        fontSettings.click();
+        //录音
+        try {
+            enterRecord.click();
+            SystemClock.sleep(1000);
+            //如果出现录音授权需要确认
+            if(permit1.exists())
+                permit1.click();
+            else if (permit2.exists())
+                permit2.click();
+            //停止录音按钮坐标
+            int recordButtonX = startRecord.getBounds().centerX();
+            int recordButtonY = startRecord.getBounds().centerY();
+            //开始录音
+            mDevice.click(recordButtonX,recordButtonY);
+            SystemClock.sleep(5000);
+            mDevice.click(recordButtonX, recordButtonY);
+            SystemClock.sleep(500);
+            reRecord.click();
+            SystemClock.sleep(5000);
+            mDevice.click(recordButtonX, recordButtonY);
+            SystemClock.sleep(500);
+            deleteRecord.click();
+            SystemClock.sleep(1000);
+            mDevice.click(recordButtonX, recordButtonY);
+            SystemClock.sleep(15000);
+            mDevice.click(recordButtonX, recordButtonY);
+            SystemClock.sleep(500);
+            enterRecord.click();
+        } catch (UiObjectNotFoundException e) {
+            mDevice.takeScreenshot(new File("//storage//sdcard0//AutomatorDemo"+"//EndRecordNotExist.png"));
+            fail(e.toString());
+        }
+        //位置（随机是否显示）
+        for (int i = 0; i < rand.nextInt(2) + 1; i++)
+            location.click();
+        //公开/私密(随机)
+        for (int i = 0; i < rand.nextInt(2) + 1; i++)
+            isPublic.click();
+        //发布/取消发布
+        cancelPublish.click();
+        abandonCancel.click();
+        readyToPublish.clickAndWaitForNewWindow(5000);
+        //发布后分享
+        share_qzone.click();
+        if (share_denied.exists()){
+            share_denied.click();
+        }
+        else {
+            //TODO
+        }
+        publish.click();
+        SystemClock.sleep(3000);
+        index.click();
     }
 
     private void notification() throws UiObjectNotFoundException{
