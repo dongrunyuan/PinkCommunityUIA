@@ -2498,7 +2498,9 @@ public class AutomatorDemo extends InstrumentationTestCase{
     @SuppressWarnings("unused")
     private void mine() throws UiObjectNotFoundException{
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+        Random rand = new Random();
         UiObject back = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/btn_back"));
+        UiScrollable generalList = new UiScrollable(new UiSelector().className(android.widget.ListView.class.getName())).setAsVerticalList();
         //控件
         UiObject index = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/home"));
         UiObject mine = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/mine"));
@@ -2527,6 +2529,18 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject likenum = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/user_like_layout"));
         UiObject diaryList = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/diary_item_lay"));
 
+        UiObject deletePCDiary = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_mydiary_list_delete"));
+        UiObject review = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/btn_plazatimeline_review_lay"));
+        UiObject transpond = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/btn_plazatimeline_transpond_lay"));
+        UiObject like = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/btn_plazatimeline_like_lay"));
+        UiObject share = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/btn_plazatimeline_share_lay"));
+        UiObject transpondEditText = mDevice.findObject(new UiSelector().className(android.widget.EditText.class.getName()));
+        UiObject transpondTansfer = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/icon_btn"));
+        UiObject transpondIcon = mDevice.findObject(new UiSelector().className(android.widget.GridView.class.getName())
+                .childSelector(new UiSelector().className(android.widget.LinearLayout.class.getName()).index(2)));
+        UiObject transpondConfirm = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/btn_send"));
+
+
         //个人资料
         //头像
 
@@ -2548,8 +2562,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject ageConfirm = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/dialog_ok"));
         //城市
         UiObject reviseCity = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/edit_city_layout"));
-
-
+        UiObject editCity = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_location_item").index(rand.nextInt(10)));
         //签名
         UiObject reviseSign = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snsmyprofile_edit_sign_layout"));
         //标签
@@ -2562,11 +2575,31 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject deleteTag5 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/all_tags_lay").index(4)
                 .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_del_tag")));
         UiScrollable tagColumn = new UiScrollable(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/fancyCoverFlow")).setAsHorizontalList();
+        UiObject tagColumnItem = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/fancyCoverFlow")
+                .childSelector(new UiSelector().className(android.view.View.class.getName()).index(rand.nextInt(4))));
+        UiObject selectTag1 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/all_tags_lay").index(0));
+        UiObject selectTag2 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/all_tags_lay").index(6));
+        UiObject selectTag3 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/all_tags_lay").index(9));
+        UiObject selectTag4 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/all_tags_lay").index(15));
+        UiObject confirmTag = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_edit_tags_btn_ok"));
+        //关注详情
+        //TODO
+        UiObject following = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_item_people_follow_lay").index(rand.nextInt(7)));
+        UiObject editRemark = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_mask_her"));
+        UiObject remarkText = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_edit_input_mask"));
+        UiObject confirmRemark = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_maskset_ok"));
+        UiObject hisFollowing = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/user_follow_num_txt"));
+        UiObject hisFans = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/user_fans_num_txt"));
+        UiObject hisTopic = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/user_topic_layout"));
+        UiObject hisLike = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/user_like_layout"));
+        UiObject sendMsg = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snsherinfo_sendmsg_lay"));
+        UiObject followState = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snsherinfo_followed_lay"));
+        UiObject accuse = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_her_more_lay"));
 
         //个性装扮
+
         //设置
 
 
     }
-
 }
