@@ -1782,6 +1782,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
 
     private void visitCommunity() throws UiObjectNotFoundException{
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+        Random rand = new Random();
         //控件
         UiObject index = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/home"));
         //社区入口
@@ -1799,6 +1800,12 @@ public class AutomatorDemo extends InstrumentationTestCase{
         //banner
         UiObject banner = mDevice.findObject(new UiSelector().className(android.support.v4.view.ViewPager.class.getName()).index(0)
                 .childSelector(new UiSelector().className(android.widget.ImageView.class.getName())));
+        //话题banner
+        UiScrollable topicScroll = new UiScrollable(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/hot_dtopic_lay")
+                .childSelector(new UiSelector().className(android.widget.GridView.class.getName()))).setAsHorizontalList();
+        UiObject tbanner1 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/hot_timeline_backlay").index(0));
+        UiObject tbannermore = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/hot_timeline_backlay").index(5));
+        UiObject moreTopic = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_dtopic_lay").index(rand.nextInt(5)));
         //社区列表
         UiScrollable communityContent = new UiScrollable(new UiSelector().className(android.support.v4.view.ViewPager.class.getName()).index(2)).setAsVerticalList();
         //社区列表中头像
@@ -1854,6 +1861,8 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiScrollable generalList = new UiScrollable(new UiSelector().className(android.widget.ListView.class.getName()));
         UiObject detailFromAdditionalList = new UiObject(new UiSelector().className(android.widget.TextView.class.getName())
                 .resourceId("pinkdiary.xiaoxiaotu.com:id/txt_plazatimeline_content"));
+        UiObject createDiaryFromBannerDetail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/dtopic_list_add"));
+        UiObject createDiaryGuide = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/dtopic_list_add"));
         //社区用户推荐
         UiObject userRecommend = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_list_message_add_attention_btn"));
         UiScrollable recommendTabPage = new UiScrollable(new UiSelector().className(android.support.v4.view.ViewPager.class.getName()));
@@ -1878,12 +1887,27 @@ public class AutomatorDemo extends InstrumentationTestCase{
         community.click();
         SystemClock.sleep(1000);
         //进banner
+        hotList.click();
         communityContent.flingToBeginning(2);
         banner.clickAndWaitForNewWindow(2500);
         SystemClock.sleep(1500);
         mDevice.pressBack();
+        //话题banner
+        tbanner1.clickAndWaitForNewWindow(1500);
+        generalList.flingToEnd(5);
+        generalList.swipeUp(3);
+        generalList.flingToEnd(1);
+        mDevice.pressBack();
+        topicScroll.scrollIntoView(tbannermore);
+        if (tbannermore.exists()){
+            tbannermore.clickAndWaitForNewWindow(1500);
+            generalList.flingToEnd(5);
+            moreTopic.clickAndWaitForNewWindow(1500);
+            mDevice.pressBack();
+            moreTopic.clickAndWaitForNewWindow(1500);
+            mDevice.pressBack();
+        }
         //社区列表翻页
-        hotList.click();
         communityContent.flingToEnd(8);
         communityContent.scrollForward(70);
         communityContent.flingToEnd(1);
@@ -1997,6 +2021,12 @@ public class AutomatorDemo extends InstrumentationTestCase{
         try{
             communityContent.scrollIntoView(topicInList);
             topicInList.clickAndWaitForNewWindow(1500);
+            //新建点滴快捷入口
+            createDiaryFromBannerDetail.clickAndWaitForNewWindow(300);
+            if (createDiaryGuide.exists()){
+                createDiaryGuide.click();
+            }
+            mDevice.pressBack();
             //话题列表翻页
             generalList.flingToEnd(3);
             generalList.swipeUp(50);
