@@ -9,6 +9,7 @@ import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiScrollable;
 import android.support.test.uiautomator.UiSelector;
+import android.support.test.uiautomator.UiWatcher;
 import android.test.InstrumentationTestCase;
 
 import org.junit.*;
@@ -232,8 +233,26 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
         //控件
         //授权允许
-        UiObject permit1 = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName()).text("允许"));
-        UiObject permit2 = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName()).resourceId("android:id/button1"));
+        final UiObject permit1 = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName()).index(1));
+        final UiObject permit2 = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName()).resourceId("android:id/button1"));
+        UiWatcher watcher = new UiWatcher() {
+            @Override
+            public boolean checkForCondition() {
+                try {
+                    if (permit1.exists()){
+                        permit1.click();
+                        return true;
+                    }
+                    else if (permit2.exists()){
+                        permit1.click();
+                        return true;
+                    }
+                }catch (UiObjectNotFoundException e){
+                    fail(e.toString());
+                }
+                return false;
+            }
+        };
         //新功能引导
         UiObject upgradeImg = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/upgrade_version_item_image"));
         UiObject start = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/upgrade_version_sure"));
@@ -309,11 +328,14 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject enterAd = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/cnt_splash_lay"));
 
         //动作
-        if (permit1.exists())
-            permit1.click();
-        else if (permit2.exists())
-            permit2.click();
-        SystemClock.sleep(500);
+        //注册uiwatcher
+        mDevice.registerWatcher("warnings", watcher);
+        //启动时是否第一次判断
+//        if (permit1.exists())
+//            permit1.click();
+//        else if (permit2.exists())
+//            permit2.click();
+//        SystemClock.sleep(500);
         while (upgradeImg.exists()){
             if (!start.exists()){
                 upgradeImg.swipeLeft(6);
@@ -508,6 +530,27 @@ public class AutomatorDemo extends InstrumentationTestCase{
 
     private void discover_circle() throws UiObjectNotFoundException{
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+        //授权允许
+        final UiObject permit1 = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName()).index(1));
+        final UiObject permit2 = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName()).resourceId("android:id/button1"));
+        UiWatcher watcher = new UiWatcher() {
+            @Override
+            public boolean checkForCondition() {
+                try {
+                    if (permit1.exists()){
+                        permit1.click();
+                        return true;
+                    }
+                    else if (permit2.exists()){
+                        permit1.click();
+                        return true;
+                    }
+                }catch (UiObjectNotFoundException e){
+                    fail(e.toString());
+                }
+                return false;
+            }
+        };
         //控件
         UiObject index = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/home"));
         //粉粉圈入口
@@ -641,9 +684,6 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject startRecord = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/audio_view_img_bg"));
         UiObject reRecord = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/audio_view_remake"));
         UiObject deleteRecord = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/audio_view_delete"));
-        //授权允许
-        UiObject permit1 = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName()).text("允许"));
-        UiObject permit2 = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName()).resourceId("android:id/button1"));
         //投票功能
         UiObject startvote = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_topic_release_bottom_lay")
                 .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(3)));
@@ -688,6 +728,8 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject cancel = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/popup_layout").index(4));
 
         //动作
+        //注册uiwatcher
+        mDevice.registerWatcher("warnings", watcher);
         //开始
         discover.click();
         SystemClock.sleep(1500);
@@ -851,11 +893,11 @@ public class AutomatorDemo extends InstrumentationTestCase{
         try {
             enterRecord.click();
             SystemClock.sleep(1000);
-            //如果出现录音授权需要确认
-            if(permit1.exists())
-                permit1.click();
-            else if (permit2.exists())
-                permit2.click();
+//            //如果出现录音授权需要确认
+//            if(permit1.exists())
+//                permit1.click();
+//            else if (permit2.exists())
+//                permit2.click();
             //停止录音按钮坐标
             int recordButtonX = startRecord.getBounds().centerX();
             int recordButtonY = startRecord.getBounds().centerY();
@@ -945,6 +987,27 @@ public class AutomatorDemo extends InstrumentationTestCase{
 
     private void discover_groupChat() throws UiObjectNotFoundException{
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+        //授权允许
+        final UiObject permit1 = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName()).index(1));
+        final UiObject permit2 = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName()).resourceId("android:id/button1"));
+        UiWatcher watcher = new UiWatcher() {
+            @Override
+            public boolean checkForCondition() {
+                try {
+                    if (permit1.exists()){
+                        permit1.click();
+                        return true;
+                    }
+                    else if (permit2.exists()){
+                        permit1.click();
+                        return true;
+                    }
+                }catch (UiObjectNotFoundException e){
+                    fail(e.toString());
+                }
+                return false;
+            }
+        };
         //控件
         UiObject index = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/home"));
         //群组入口
@@ -1111,9 +1174,6 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject playRecording = mDevice.findObject(new UiSelector().className(android.widget.RelativeLayout.class.getName())
                 .resourceId("pinkdiary.xiaoxiaotu.com:id/play_audio_lay")
                 .clickable(true));
-        //授权允许
-        UiObject permit1 = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName()).text("允许"));
-        UiObject permit2 = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName()).resourceId("android:id/button1"));
         //群聊界面功能入口
         UiObject chatSubFunction = mDevice.findObject(new UiSelector().className(android.widget.ImageView.class.getName())
                 .resourceId("pinkdiary.xiaoxiaotu.com:id/sq_gc_chat_morebtn"));
@@ -1127,6 +1187,8 @@ public class AutomatorDemo extends InstrumentationTestCase{
                 .resourceId("pinkdiary.xiaoxiaotu.com:id/sns_dialog_bt_positiveButton"));
 
         //动作
+        //注册uiwatcher
+        mDevice.registerWatcher("warnings", watcher);
         //进群组
         discover.click();
         SystemClock.sleep(1000);
@@ -1302,13 +1364,13 @@ public class AutomatorDemo extends InstrumentationTestCase{
             }
             //录音
             addRecording.click();
+//            if (permit1.exists())
+//                permit1.click();
+//            else if (permit2.exists())
+//                permit2.click();
             startRecording.click();
-            if (permit1.exists())
-                permit1.click();
-            else if (permit2.exists())
-                permit2.click();
             SystemClock.sleep(1500);
-            longClick(startRecording,3000);
+            longClick(startRecording,2400);
             if (playRecording.exists()) {
                 playRecording.click();
                 SystemClock.sleep(2500);
@@ -1551,17 +1613,17 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject followInInfo = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snsherinfo_followed_lay"));
         UiObject followInList = mDevice.findObject(new UiSelector().resourceId("android:id/list")
                 .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(1)
-                        .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_recommend_lay")
-                                .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_recommend_list_lay")
-                                        .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_myfans_userinfo_lay")
-                                                .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snsfeed_recomuser_item_follow").index(2)))))));
+                .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_recommend_lay")
+                .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_recommend_list_lay")
+                .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_myfans_userinfo_lay")
+                .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snsfeed_recomuser_item_follow").index(2)))))));
         //列表切换
         UiObject recommendCircle = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/indicator")
                 .childSelector(new UiSelector().className(android.widget.LinearLayout.class.getName())
-                        .childSelector(new UiSelector().className(android.widget.LinearLayout.class.getName()).index(1))));
+                .childSelector(new UiSelector().className(android.widget.LinearLayout.class.getName()).index(1))));
         UiObject recommendGroup = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/indicator")
                 .childSelector(new UiSelector().className(android.widget.LinearLayout.class.getName())
-                        .childSelector(new UiSelector().className(android.widget.LinearLayout.class.getName()).index(2))));
+                .childSelector(new UiSelector().className(android.widget.LinearLayout.class.getName()).index(2))));
         //不同位置-加圈子
         UiObject joinCircleInList = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_recgroup_join"));
         UiObject joinCircleInDetail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_group_add_exit"));
