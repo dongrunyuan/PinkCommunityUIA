@@ -2297,6 +2297,9 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject share_sina = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/umeng_share_sina"));
         UiObject share_wechat = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/umeng_share_weixin"));
         UiObject share_wechat_circle = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/umeng_share_weixin_circle"));
+        UiObject cancel_wechat_circle_share = mDevice.findObject(new UiSelector().className(android.widget.LinearLayout.class.getName()).index(1)
+                .childSelector(new UiSelector().className(android.widget.LinearLayout.class.getName())
+                        .childSelector(new UiSelector().className(android.widget.Button.class.getName()).index(1))));
         UiObject share_tencent = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/umeng_share_tencent"));
         UiObject share_renren = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/umeng_share_renren"));
         UiObject share_sms = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/umeng_share_sms"));
@@ -2596,12 +2599,53 @@ public class AutomatorDemo extends InstrumentationTestCase{
         readyToPublish.clickAndWaitForNewWindow(5000);
         //发布后分享
         share_qzone.click();
+        SystemClock.sleep(500);
         if (share_denied.exists()){
             share_denied.click();
+        } else {
+            while (!share_qzone.exists()){
+                mDevice.pressBack();
+            }
         }
-        else {
-            //TODO
+        share_qq.click();
+        SystemClock.sleep(500);
+        while (!share_qzone.exists()){
+            mDevice.pressBack();
         }
+        share_sina.click();
+        SystemClock.sleep(500);
+        while (!share_qzone.exists()){
+            mDevice.pressBack();
+        }
+        share_wechat.click();
+        SystemClock.sleep(500);
+        while (!share_qzone.exists()){
+            mDevice.pressBack();
+        }
+        share_wechat_circle.click();
+        SystemClock.sleep(500);
+        while (!share_qzone.exists()){
+            if (cancel_wechat_circle_share.exists())
+                cancel_wechat_circle_share.click();
+            else
+                mDevice.pressBack();
+        }
+        share_tencent.click();
+        SystemClock.sleep(500);
+        while (!share_qzone.exists()){
+            mDevice.pressBack();
+        }
+        share_renren.click();
+        SystemClock.sleep(500);
+        while (!share_qzone.exists()){
+            mDevice.pressBack();
+        }
+        share_sms.click();
+        SystemClock.sleep(500);
+        while (!share_qzone.exists()){
+            mDevice.pressBack();
+        }
+        //发布
         publish.click();
         SystemClock.sleep(3000);
         index.click();
