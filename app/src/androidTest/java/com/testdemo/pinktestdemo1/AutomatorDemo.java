@@ -2301,9 +2301,9 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject editTopic = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/topic_create_et"));
         UiObject confirmTopic = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/diarytopic_create_sure"));
         UiObject historyTopic = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/history_diary_topic_listview")
-                .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_ability_class_lay")).index(1));
+                .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_ability_class_lay").index(1)));
         UiObject hotTopic = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/diary_topic_listview")
-                .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_ability_class_lay")).index(1));
+                .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_ability_class_lay").index(1)));
         //选择位置
         UiObject location = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/location_layout"));
         //准备发布点滴
@@ -2427,12 +2427,10 @@ public class AutomatorDemo extends InstrumentationTestCase{
         previewDetail.swipeLeft(30);
         //双击放大&失效对策
         doubleClick(2,previewDetail);
-        if (previewDetail.exists()){
+        if (previewDetail.exists())
             doubleClick(2,previewDetail);
-        }
-        if (previewDetail.exists()){
+        if (previewDetail.exists())
             previewDetail.click();
-        }
         //切换相册
         categoryColumn.click();
         category.click();
@@ -2620,7 +2618,8 @@ public class AutomatorDemo extends InstrumentationTestCase{
         cancelPublish.click();
         abandonCancel.click();
         readyToPublish.clickAndWaitForNewWindow(5000);
-        //发布后分享
+        //发布后分享(容易乱跳，建议直接手动测试)
+        /*
         share_qzone.click();
         SystemClock.sleep(500);
         if (share_denied.exists()){
@@ -2668,6 +2667,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
                 mDevice.pressBack();
             }
         }
+        */
         //发布
         publish.click();
         SystemClock.sleep(3000);
