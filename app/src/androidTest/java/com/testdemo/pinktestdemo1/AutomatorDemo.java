@@ -263,6 +263,17 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiScrollable home_scroll = new UiScrollable(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/home_scroll")).setAsVerticalList();
         //换肤
         UiObject skinShop = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/mine_skin_img"));
+        UiScrollable generalList = new UiScrollable(new UiSelector().resourceId("android:id/list"));
+        UiObject defaultGreen_Use = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_font_list_item_lay").index(2)
+                .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_skin_list_item_lay"))
+                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()))
+                .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/skin_detail_buy_lay")));
+        UiObject defaultPurple_Detail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_font_list_item_lay").index(3)
+                .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_skin_list_item_lay")));
+        UiObject detailImgList = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/skin_preview_image_hs"));
+        UiObject designer = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/designer_cover"));
+        UiObject detailUse = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/skin_detail_use_lay"));
+        UiObject skinSettings = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/skin_setting"));
         //签到
         UiObject checkIn = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/home_checkin"));
         //天气
@@ -365,7 +376,22 @@ public class AutomatorDemo extends InstrumentationTestCase{
         home_scroll.flingToBeginning(3);
         //首页皮肤商店入口
         skinShop.clickAndWaitForNewWindow(2500);
-        SystemClock.sleep(1500);
+        SystemClock.sleep(3500);
+        defaultGreen_Use.click();
+        SystemClock.sleep(3500);
+        defaultPurple_Detail.clickAndWaitForNewWindow(2500);
+        detailImgList.swipeLeft(50);
+        designer.clickAndWaitForNewWindow(2500);
+        mDevice.pressBack();
+        detailUse.click();
+        SystemClock.sleep(3500);
+        mDevice.pressBack();
+        generalList.flingToEnd(8);
+        generalList.swipeUp(50);
+        generalList.flingToEnd(3);
+        skinSettings.click();
+        generalList.flingToEnd(5);
+        mDevice.pressBack();
         mDevice.pressBack();
         //首页签到入口
         checkIn.clickAndWaitForNewWindow(2500);
@@ -2745,7 +2771,6 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject dress = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/specific_dress_lay"));
         UiObject settings = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/setting_lay"));
         //个人主页
-        //TODO
         UiObject editInfo = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/edit_info"));
         UiObject tag1 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_tag_tv_1"));
         UiObject portrait = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/user_portrait"));
@@ -2768,10 +2793,25 @@ public class AutomatorDemo extends InstrumentationTestCase{
                 .childSelector(new UiSelector().className(android.widget.LinearLayout.class.getName()).index(2)));
         UiObject transpondConfirm = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/btn_send"));
 
-
         //个人资料
         //头像
-
+        UiObject addPhoto = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/gc_cover_item_jiahao"));
+        UiObject choosePhoto = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/grid")
+                .childSelector(new UiSelector().className(android.widget.FrameLayout.class.getName()).index(rand.nextInt(10) + 1)));
+        UiObject turnPhoto = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/lsq_trunButton"));
+        UiObject mirrorPhoto = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/lsq_mirrorButton"));
+        UiObject filter = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/lsq_filterButton"));
+        UiScrollable groupList = new UiScrollable(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/lsq_group_list_view")).setAsHorizontalList();
+        UiObject chooseGroup = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/lsq_group_list_view")
+                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(rand.nextInt(5))));
+        UiScrollable filterList = new UiScrollable(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/lsq_filter_list_view")).setAsHorizontalList();
+        UiObject chooseFilter = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/lsq_filter_list_view")
+                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(rand.nextInt(4) + 1)));
+        UiObject editComplete = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/lsq_completeButton"));
+        UiObject avatar1 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/gcimg_edit_lay").index(0));
+        UiObject avatar2 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/gcimg_edit_lay").index(1));
+        UiObject avatarDetail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_viewavatar_img"));
+        UiObject avatarDelete = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_gcCover_delete"));
         //昵称
         UiObject reviseNickname = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snsmyprofile_edit_nickname_layout"));
         UiObject edit = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_edit_input_save"));
@@ -2825,9 +2865,18 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject accuse = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_her_more_lay"));
 
         //个性装扮
-
+        UiObject skinShop = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/skin_lay"));
+        UiObject paperShop = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/paper_lay"));
+        UiObject fontShop = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/font_lay"));
+        UiObject emotionShop = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/emotion_lay"));
+        //社区点滴
+        UiObject publicDiary = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/public_diary_lay"));
+        UiObject secretDiary = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/secret_diary_lay"));
+        UiObject myTopic = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/my_topic_lay"));
+        UiObject myLike = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/my_like_lay"));
+        UiObject myComment = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/my_comments_lay"));
+        UiObject draft = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/drafts_lay"));
         //设置
-
-
+        
     }
 }
