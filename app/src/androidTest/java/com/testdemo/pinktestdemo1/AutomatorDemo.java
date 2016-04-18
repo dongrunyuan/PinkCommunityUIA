@@ -2111,6 +2111,27 @@ public class AutomatorDemo extends InstrumentationTestCase{
     private void publishCommunityDiary() throws UiObjectNotFoundException{
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
         Random rand = new Random();
+        //授权允许
+        final UiObject permit1 = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName()).index(1));
+        final UiObject permit2 = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName()).resourceId("android:id/button1"));
+        UiWatcher watcher = new UiWatcher() {
+            @Override
+            public boolean checkForCondition() {
+                try {
+                    if (permit1.exists()){
+                        permit1.click();
+                        return true;
+                    }
+                    else if (permit2.exists()){
+                        permit1.click();
+                        return true;
+                    }
+                }catch (UiObjectNotFoundException e){
+                    fail(e.toString());
+                }
+                return false;
+            }
+        };
         //控件
         UiObject index = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/home"));
         //社区入口
@@ -2131,9 +2152,9 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject chooseWeather = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/viewdiary_weather_imgbtn"));
         UiObject chooseMood = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/view_diary_emotion_imgbtn"));
         UiObject changeWeather = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/select_tag_gridview_weather")
-                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName())).index(rand.nextInt(16)));
+                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(rand.nextInt(16))));
         UiObject changeMood = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/select_tag_gridview_emotion")
-                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName())).index(rand.nextInt(16)));
+                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(rand.nextInt(16))));
         UiObject confirm = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_iv_sure"));
         //字体字号颜色
         UiObject fontSettings = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snskeepdiary_txt_style"));
@@ -2190,9 +2211,6 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject startRecord = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/audio_view_img_bg"));
         UiObject reRecord = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/audio_view_remake"));
         UiObject deleteRecord = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/audio_view_delete"));
-        //录音授权
-        UiObject permit1 = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName()).text("允许"));
-        UiObject permit2 = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName()).resourceId("android:id/button1"));
         //照片
         UiObject addImg = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snskeepdiary_attach_first_image_preview"));
         //选择照片
@@ -2230,8 +2248,6 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject chooseFilter = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/lsq_filter_list_view")
                 .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(3)));
         UiObject dragPoint = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/lsq_seekDrag"));
-        int dragX = dragPoint.getBounds().centerX();
-        int dragY = dragPoint.getBounds().centerY();
         UiObject resetDragPoint = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/lsq_rest_button"));
         UiObject hueLabel = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/lsq_params_view")
                 .childSelector(new UiSelector().className(android.widget.TextView.class.getName()).index(0)));
@@ -2281,6 +2297,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject deleteEmotion = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/delete_emotion"));
         //添加话题
         UiObject topicEntrance = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/create_dtopic_txt"));
+        UiScrollable topicList = new UiScrollable(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/scroll_lay"));
         UiObject editTopic = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/topic_create_et"));
         UiObject confirmTopic = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/diarytopic_create_sure"));
         UiObject historyTopic = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/history_diary_topic_listview")
@@ -2319,27 +2336,29 @@ public class AutomatorDemo extends InstrumentationTestCase{
                 .childSelector(new UiSelector().className(android.widget.LinearLayout.class.getName()).index(3)));
 
         //动作
+        //注册UiWatcher
+        mDevice.registerWatcher("warnings", watcher);
         //检查3个写点滴入口
         community.click();
         SystemClock.sleep(500);
-        community.clickAndWaitForNewWindow(1000);
+        community.click();
+        SystemClock.sleep(500);
         if (editAccount.exists()){
             editAccount.setText("test6789");
             editPassword.setText("q");
             loginButton.click();
             SystemClock.sleep(1800);
         }
+        if (!createWordDiary.exists()){
+            community.click();
+            SystemClock.sleep(500);
+        }
         createWordDiary.clickAndWaitForNewWindow(1000);
         mDevice.pressBack();
         SystemClock.sleep(500);
         community.click();
         createRecordDiary.click();
-        //如果出现录音授权需要确认
-        if(permit1.exists())
-            permit1.click();
-        else if (permit2.exists())
-            permit2.click();
-        SystemClock.sleep(2500);
+        SystemClock.sleep(1500);
         //放弃编辑，录音存草稿
         mDevice.pressBack();
         SystemClock.sleep(300);
@@ -2388,13 +2407,16 @@ public class AutomatorDemo extends InstrumentationTestCase{
         scanFilter.flingToEnd(1);
         chooseFilter.click();
         chooseFilter.click();
-        dragPoint.dragTo(dragX - 50, dragY, 2);
+        int dragX = dragPoint.getBounds().centerX();
+        int dragY = dragPoint.getBounds().centerY();
+        dragPoint.dragTo(dragX - 350, dragY, 2);
         resetDragPoint.click();
-        rangeLabel.click();
-        dragPoint.dragTo(dragX + 50, dragY, 2);
-        hueLabel.click();
-        dragPoint.dragTo(dragX - 30, dragY, 2);
+//        rangeLabel.click();
+        dragPoint.dragTo(dragX + 500, dragY, 2);
+//        hueLabel.click();
+        dragPoint.dragTo(dragX - 300, dragY, 2);
         filterConfirm.click();
+        editImgConfirm.click();
         editImgConfirm.click();
         //贴纸为混合h5，uiautomator跳过
         SystemClock.sleep(3000);
@@ -2442,12 +2464,13 @@ public class AutomatorDemo extends InstrumentationTestCase{
         confirmTopic.click();
         SystemClock.sleep(500);
         topicEntrance.clickAndWaitForNewWindow(1500);
-        if (hotTopic.exists())
-            hotTopic.click();
-        else
-            mDevice.pressBack();
+        mDevice.pressBack();
+        SystemClock.sleep(1500);
+        topicList.scrollIntoView(hotTopic);
+        hotTopic.click();
         SystemClock.sleep(500);
         topicEntrance.clickAndWaitForNewWindow(1500);
+        mDevice.pressBack();
         if (historyTopic.exists())
             historyTopic.click();
         else
@@ -2564,11 +2587,6 @@ public class AutomatorDemo extends InstrumentationTestCase{
         try {
             enterRecord.click();
             SystemClock.sleep(1000);
-            //如果出现录音授权需要确认
-            if(permit1.exists())
-                permit1.click();
-            else if (permit2.exists())
-                permit2.click();
             //停止录音按钮坐标
             int recordButtonX = startRecord.getBounds().centerX();
             int recordButtonY = startRecord.getBounds().centerY();
@@ -2611,44 +2629,44 @@ public class AutomatorDemo extends InstrumentationTestCase{
             while (!share_qzone.exists()){
                 mDevice.pressBack();
             }
-        }
-        share_qq.click();
-        SystemClock.sleep(500);
-        while (!share_qzone.exists()){
-            mDevice.pressBack();
-        }
-        share_sina.click();
-        SystemClock.sleep(500);
-        while (!share_qzone.exists()){
-            mDevice.pressBack();
-        }
-        share_wechat.click();
-        SystemClock.sleep(500);
-        while (!share_qzone.exists()){
-            mDevice.pressBack();
-        }
-        share_wechat_circle.click();
-        SystemClock.sleep(500);
-        while (!share_qzone.exists()){
-            if (cancel_wechat_circle_share.exists())
-                cancel_wechat_circle_share.click();
-            else
+            share_qq.click();
+            SystemClock.sleep(500);
+            while (!share_qzone.exists()){
                 mDevice.pressBack();
-        }
-        share_tencent.click();
-        SystemClock.sleep(500);
-        while (!share_qzone.exists()){
-            mDevice.pressBack();
-        }
-        share_renren.click();
-        SystemClock.sleep(500);
-        while (!share_qzone.exists()){
-            mDevice.pressBack();
-        }
-        share_sms.click();
-        SystemClock.sleep(500);
-        while (!share_qzone.exists()){
-            mDevice.pressBack();
+            }
+            share_sina.click();
+            SystemClock.sleep(500);
+            while (!share_qzone.exists()){
+                mDevice.pressBack();
+            }
+            share_wechat.click();
+            SystemClock.sleep(500);
+            while (!share_qzone.exists()){
+                mDevice.pressBack();
+            }
+            share_wechat_circle.click();
+            SystemClock.sleep(500);
+            while (!share_qzone.exists()){
+                if (cancel_wechat_circle_share.exists())
+                    cancel_wechat_circle_share.click();
+                else
+                    mDevice.pressBack();
+            }
+            share_tencent.click();
+            SystemClock.sleep(500);
+            while (!share_qzone.exists()){
+                mDevice.pressBack();
+            }
+            share_renren.click();
+            SystemClock.sleep(500);
+            while (!share_qzone.exists()){
+                mDevice.pressBack();
+            }
+            share_sms.click();
+            SystemClock.sleep(500);
+            while (!share_qzone.exists()){
+                mDevice.pressBack();
+            }
         }
         //发布
         publish.click();
