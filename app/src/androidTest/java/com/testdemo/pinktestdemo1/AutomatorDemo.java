@@ -2191,9 +2191,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject selectFontStyle = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/text_font_lay")
                 .childSelector(new UiSelector().className(android.widget.GridView.class.getName()))
                 .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(rand.nextInt(3))));
-        UiObject addFontStyle = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/text_font_lay")
-                .childSelector(new UiSelector().className(android.widget.GridView.class.getName()))
-                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(1)));
+        UiObject addFontStyle = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/text_font_img"));
         UiObject fontItem1 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_font_list_item_lay").index(rand.nextInt(5)));
         UiObject fontItem2 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_font_list_item_lay").index(rand.nextInt(5)));
         UiObject downloadFont = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/font_detail_buy_lay"));
@@ -2753,7 +2751,6 @@ public class AutomatorDemo extends InstrumentationTestCase{
         index.click();
     }
 
-    @SuppressWarnings("unused")
     private void mine() throws UiObjectNotFoundException{
         final UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
         Random rand = new Random();
@@ -2932,6 +2929,25 @@ public class AutomatorDemo extends InstrumentationTestCase{
                 .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snspeople_black_remove_btn")));
 
         //动作
+        //进入个人主页
+        mine.click();
+        account.clickAndWaitForNewWindow(2500);
+        tag1.clickAndWaitForNewWindow(1500);
+
+
+
+
+        editInfo.clickAndWaitForNewWindow(500);
+
+
+
+        follow.clickAndWaitForNewWindow(1500);
+        generalList.flingToEnd(3);
+        generalList.swipeUp(50);
+        generalList.flingToEnd(3);
+        mDevice.pressBack();
+        fans.clickAndWaitForNewWindow(1500);
+
 
     }
 }
