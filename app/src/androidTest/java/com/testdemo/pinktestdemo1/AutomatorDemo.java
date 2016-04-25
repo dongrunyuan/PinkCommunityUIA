@@ -2774,8 +2774,8 @@ public class AutomatorDemo extends InstrumentationTestCase{
         //个人主页
         UiObject editInfo = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/edit_info"));
         UiObject tag1 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_tag_tv_1"));
-        UiObject portrait = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/user_portrait"));
         UiObject tag5 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_tag_tv_5"));
+        UiObject portrait = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/user_portrait"));
         UiObject level = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/show_user_level_img"));
         UiObject follownum = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/user_follow_num_txt"));
         UiObject fansnum = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/user_fans_num_txt"));
@@ -2813,6 +2813,10 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject avatar2 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/gcimg_edit_lay").index(1));
         UiObject avatarDetail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_viewavatar_img"));
         UiObject avatarDelete = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_gcCover_delete"));
+        UiObject confirmDelete = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/popup_layout").index(1)
+                .childSelector(new UiSelector().className(android.widget.TextView.class.getName())));
+        UiObject cancelDelete = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/popup_layout").index(2)
+                .childSelector(new UiSelector().className(android.widget.TextView.class.getName())));
         //昵称
         UiObject reviseNickname = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snsmyprofile_edit_nickname_layout"));
         UiObject edit = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_edit_input_save"));
@@ -2836,13 +2840,12 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject reviseSign = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snsmyprofile_edit_sign_layout"));
         //标签
         UiObject reviseTag = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snsmyprofile_edit_tag_layout"));
-        UiObject chosenTag1 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/all_tags_lay").index(0));
-        UiObject chosenTag3 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/all_tags_lay").index(2));
-        UiObject chosenTag5 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/all_tags_lay").index(4));
-        UiObject deleteTag3 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/all_tags_lay").index(2)
-                .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_del_tag")));
-        UiObject deleteTag5 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/all_tags_lay").index(4)
-                .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_del_tag")));
+        UiObject chosenTag1 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/user_hava_tags_gv")
+                .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/all_tags_lay").index(0)));
+        UiObject chosenTag3 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/user_hava_tags_gv")
+                .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/all_tags_lay").index(2)));
+        UiObject chosenTag5 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/user_hava_tags_gv")
+                .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/all_tags_lay").index(4)));
         UiScrollable tagColumn = new UiScrollable(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/fancyCoverFlow")).setAsHorizontalList();
         UiObject tagColumnItem = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/fancyCoverFlow")
                 .childSelector(new UiSelector().className(android.view.View.class.getName()).index(rand.nextInt(4))));
@@ -2932,13 +2935,106 @@ public class AutomatorDemo extends InstrumentationTestCase{
         //进入个人主页
         mine.click();
         account.clickAndWaitForNewWindow(2500);
-        tag1.clickAndWaitForNewWindow(1500);
-
-
-
-
+        //进入个人资料编辑界面
         editInfo.clickAndWaitForNewWindow(500);
-
+        //修改头像
+        if (addPhoto.exists()){
+            choosePhoto.clickAndWaitForNewWindow(1500);
+            turnPhoto.click();
+            turnPhoto.click();
+            mirrorPhoto.click();
+            mirrorPhoto.click();
+            filter.click();
+            groupList.swipeLeft(3);
+            chooseGroup.click();
+            filterList.swipeLeft(2);
+            filterList.flingToBeginning(1);
+            chooseFilter.click();
+            editComplete.click();
+            SystemClock.sleep(3000);
+        }
+        avatar1.clickAndWaitForNewWindow(2500);
+        avatarDetail.click();
+        if (avatar2.exists()){
+            avatar2.clickAndWaitForNewWindow(2500);
+            avatarDelete.click();
+            cancelDelete.click();
+            avatarDelete.click();
+            confirmDelete.click();
+            SystemClock.sleep(1500);
+        }else{
+            avatar1.click();
+            avatarDelete.click();
+            confirmDelete.click();
+        }
+        //修改昵称
+        reviseNickname.clickAndWaitForNewWindow(300);
+        edit.clearTextField();
+        edit.setText("测试姬的" + rand.nextInt(50) + "号鱼");
+        nicknameConfirm.click();
+        SystemClock.sleep(1500);
+        //修改性别
+        reviseGender.click();
+        woman.click();
+        SystemClock.sleep(1500);
+        reviseGender.click();
+        man.click();
+        SystemClock.sleep(1500);
+        reviseGender.click();
+        secret.click();
+        SystemClock.sleep(1500);
+        //修改年龄
+        reviseAge.click();
+        ageCancel.click();
+        reviseAge.click();
+        birthYear.swipeDown(30);
+        birthYear.swipeUp(50);
+        birthMonth.flingToBeginning(1);
+        birthDay.flingToEnd(1);
+        ageConfirm.click();
+        SystemClock.sleep(1500);
+        //修改城市
+        reviseCity.clickAndWaitForNewWindow(1500);
+        generalList.flingToEnd(2);
+        editCity.click();
+        generalList.flingToEnd(1);
+        editCity.click();
+        SystemClock.sleep(1500);
+        //修改签名
+        reviseSign.clickAndWaitForNewWindow(500);
+        edit.clearTextField();
+        edit.setText("416c77617973206c696b6520746869732e");
+        nicknameConfirm.click();
+        SystemClock.sleep(1500);
+        //修改个人标签
+        reviseTag.clickAndWaitForNewWindow(500);
+        for (int i = 0; i < 2; i++) {
+            if (chosenTag5.exists()) {
+                chosenTag5.click();
+            } else if (chosenTag3.exists()) {
+                chosenTag3.click();
+            } else if (chosenTag1.exists()) {
+                chosenTag1.click();
+            } else {
+                break;
+            }
+        }
+        tagColumn.swipeLeft(3);
+        tagColumn.swipeRight(5);
+        tagColumnItem.click();
+        selectTag1.click();
+        selectTag2.click();
+        selectTag3.click();
+        selectTag4.click();
+        confirmTag.click();
+        SystemClock.sleep(1500);
+        //返回个人主页
+        mDevice.pressBack();
+        //个人主页头像
+        portrait.clickAndWaitForNewWindow(1500);
+        mDevice.pressBack();
+        //个人主页标签
+        tag1.clickAndWaitForNewWindow(1500);
 
 
         follow.clickAndWaitForNewWindow(1500);
