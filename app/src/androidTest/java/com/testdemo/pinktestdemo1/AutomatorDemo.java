@@ -2877,8 +2877,18 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject remarkText = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_edit_input_mask"));
         UiObject confirmRemark = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_maskset_ok"));
         UiObject sendMsg = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snsherinfo_sendmsg_lay"));
+        UiObject msgGuide = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/guide_once_emotion_main_bg_layout"));
+        UiObject msgText = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/edit_text"));
+        UiObject msgSend = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/btn_send"));
         UiObject followState = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snsherinfo_followed_lay"));
-        UiObject accuse = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_her_more_lay"));
+        UiObject accusation = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_her_more_lay"));
+        UiObject block = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/popup_layout").index(1)
+                .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/popup_text")));
+        UiObject blockConfirm = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_dialog_bt_positiveButton"));
+        UiObject report = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/popup_layout").index(2)
+                .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/popup_text")));
+        UiObject cancelAccusation = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/popup_layout").index(3)
+                .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/popup_text")));
 
         //个性装扮
         UiObject skinShop = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/skin_lay"));
@@ -3072,57 +3082,99 @@ public class AutomatorDemo extends InstrumentationTestCase{
         generalList.flingToEnd(2);
         generalList.swipeUp(50);
         generalList.flingToEnd(1);
-        fanUser.clickAndWaitForNewWindow(1500);
-        for (int i = 0; i < 1; i++){
-            if (!editRemark.exists()){
-                followState.click();
-                mDevice.pressBack();
-                mDevice.pressBack();
-                break;
-            }else{
-                mDevice.pressBack();
-                generalList.flingToEnd(1);
-                fanUser.clickAndWaitForNewWindow(1500);
-                i--;
+        if (fanUser.exists()){
+            fanUser.clickAndWaitForNewWindow(1500);
+            for (int i = 0; i < 1; i++){
+                if (!editRemark.exists()){
+                    followState.click();
+                    mDevice.pressBack();
+                    mDevice.pressBack();
+                    break;
+                }else{
+                    mDevice.pressBack();
+                    generalList.flingToEnd(1);
+                    fanUser.clickAndWaitForNewWindow(1500);
+                    i--;
+                }
             }
+        }else{
+            mDevice.pressBack();
         }
         follownum.clickAndWaitForNewWindow(2500);
         generalList.flingToEnd(2);
         generalList.swipeUp(50);
         generalList.flingToEnd(1);
-        followUser.clickAndWaitForNewWindow(1500);
-        editRemark.clickAndWaitForNewWindow(500);
-        remarkText.clearTextField();
-        remarkText.setText("Ta是条死鱼" + rand.nextInt(10));
-        confirmRemark.click();
-        SystemClock.sleep(1500);
-        follownum.clickAndWaitForNewWindow(1500);
-        generalList.flingToEnd(2);
-        generalList.swipeUp(50);
-        mDevice.pressBack();
-        fansnum.clickAndWaitForNewWindow(1500);
-        generalList.flingToEnd(2);
-        generalList.swipeUp(50);
-        mDevice.pressBack();
-        topicnum.clickAndWaitForNewWindow(1500);
+        if (followUser.exists()){
+            followUser.clickAndWaitForNewWindow(1500);
+            editRemark.clickAndWaitForNewWindow(500);
+            //改备注
+            remarkText.clearTextField();
+            remarkText.setText("Ta是条死鱼" + rand.nextInt(10));
+            confirmRemark.click();
+            SystemClock.sleep(1500);
+            //Ta的关注列表
+            follownum.clickAndWaitForNewWindow(1500);
+            generalList.flingToEnd(2);
+            generalList.swipeUp(50);
+            mDevice.pressBack();
+            //Ta的粉丝列表
+            fansnum.clickAndWaitForNewWindow(1500);
+            generalList.flingToEnd(2);
+            generalList.swipeUp(50);
+            mDevice.pressBack();
+            //Ta的话题列表
+            topicnum.clickAndWaitForNewWindow(1500);
+            generalList.flingToEnd(2);
+            generalList.swipeUp(50);
+            mDevice.pressBack();
+            //Ta的喜欢列表
+            likenum.clickAndWaitForNewWindow(1500);
+            generalList.flingToEnd(2);
+            generalList.swipeUp(50);
+            mDevice.pressBack();
+            //Ta的点滴列表
+            generalList.flingToEnd(5);
+            generalList.swipeUp(50);
+            //私信
+            sendMsg.clickAndWaitForNewWindow(1500);
+            if (msgGuide.exists())
+                msgGuide.click();
+            SystemClock.sleep(500);
+            msgText.click();
+            msgText.clearTextField();
+            msgText.setText("你好");
+            msgSend.click();
+            SystemClock.sleep(500);
+            mDevice.pressBack();
+            //取关
+            followState.click();
+            //拉黑/举报
+            accusation.click();
+            cancelAccusation.click();
+            accusation.click();
+            report.clickAndWaitForNewWindow(500);
+            mDevice.pressBack();
+            accusation.click();
+            block.click();
+            blockConfirm.click();
+            mDevice.pressBack();
+            mDevice.pressBack();
+        }else{
+            mDevice.pressBack();
+        }
 
 
-
-
-        followState.click();
-        mDevice.pressBack();
-        mDevice.pressBack();
-
-
-
-
+        //“我的”列表
+        //关注/粉丝
         follow.clickAndWaitForNewWindow(1500);
-        generalList.flingToEnd(3);
-        generalList.swipeUp(50);
-        generalList.flingToEnd(3);
         mDevice.pressBack();
         fans.clickAndWaitForNewWindow(1500);
-
+        mDevice.pressBack();
+        //我的日记入口
+        myDiary.clickAndWaitForNewWindow(1000);
+        mDevice.pressBack();
+        //社区点滴入口
+        snsDiary.clickAndWaitForNewWindow(1000);
 
     }
 }
