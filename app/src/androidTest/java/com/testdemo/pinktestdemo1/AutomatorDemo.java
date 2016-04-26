@@ -2754,7 +2754,6 @@ public class AutomatorDemo extends InstrumentationTestCase{
     private void mine() throws UiObjectNotFoundException{
         final UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
         Random rand = new Random();
-        UiObject back = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/btn_back"));
         UiScrollable generalList = new UiScrollable(new UiSelector().className(android.widget.ListView.class.getName())).setAsVerticalList();
         //控件
         UiObject index = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/home"));
@@ -2773,14 +2772,32 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject settings = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/setting_lay"));
         //个人主页
         UiObject editInfo = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/edit_info"));
+        //标签
         UiObject tag1 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_tag_tv_1"));
         UiObject tag5 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_tag_tv_5"));
+        int tempA = rand.nextInt(5)+1;
+        UiObject userOfSameInterest = mDevice.findObject(new UiSelector().className(android.widget.ListView.class.getName())
+                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(tempA)));
+        UiObject followUserOfSameInterest = mDevice.findObject(new UiSelector().className(android.widget.ListView.class.getName())
+                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(tempA))
+                .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snsfeed_recomuser_item_follow")));
+        UiObject userRecommend = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_list_message_add_attention_btn"));
+        //头像
         UiObject portrait = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/user_portrait"));
+        //等级
         UiObject level = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/show_user_level_img"));
+        UiScrollable levelScroll = new UiScrollable(new UiSelector().className(android.widget.ScrollView.class.getName())).setAsVerticalList();
+        //关注
         UiObject follownum = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/user_follow_num_txt"));
+        UiObject followUser = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_item_people_follow_lay").index(1));
+        //粉丝
         UiObject fansnum = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/user_fans_num_txt"));
+        UiObject fanUser = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_item_people_follow_lay").index(rand.nextInt(5)+1));
+        //话题
         UiObject topicnum = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/user_topic_layout"));
+        //喜欢
         UiObject likenum = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/user_like_layout"));
+        //点滴列表
         UiObject diaryList = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/diary_item_lay"));
 
         UiObject deletePCDiary = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_mydiary_list_delete"));
@@ -2856,14 +2873,9 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject confirmTag = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_edit_tags_btn_ok"));
         //关注详情
         //TODO
-        UiObject following = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_item_people_follow_lay").index(rand.nextInt(7)));
         UiObject editRemark = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_mask_her"));
         UiObject remarkText = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_edit_input_mask"));
         UiObject confirmRemark = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_maskset_ok"));
-        UiObject hisFollowing = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/user_follow_num_txt"));
-        UiObject hisFans = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/user_fans_num_txt"));
-        UiObject hisTopic = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/user_topic_layout"));
-        UiObject hisLike = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/user_like_layout"));
         UiObject sendMsg = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snsherinfo_sendmsg_lay"));
         UiObject followState = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snsherinfo_followed_lay"));
         UiObject accuse = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_her_more_lay"));
@@ -3034,7 +3046,74 @@ public class AutomatorDemo extends InstrumentationTestCase{
         portrait.clickAndWaitForNewWindow(1500);
         mDevice.pressBack();
         //个人主页标签
+        if (tag5.exists()){
+            tag5.clickAndWaitForNewWindow(1500);
+            mDevice.pressBack();
+        }
         tag1.clickAndWaitForNewWindow(1500);
+        followUserOfSameInterest.click();
+        SystemClock.sleep(1500);
+        userOfSameInterest.clickAndWaitForNewWindow(1500);
+        followState.click();
+        SystemClock.sleep(1500);
+        mDevice.pressBack();
+        generalList.flingToEnd(3);
+        generalList.swipeUp(50);
+        generalList.flingToEnd(1);
+        userRecommend.clickAndWaitForNewWindow(1500);
+        mDevice.pressBack();
+        mDevice.pressBack();
+        //个人主页等级
+        level.clickAndWaitForNewWindow(1000);
+        levelScroll.flingToEnd(1);
+        mDevice.pressBack();
+        //关注、粉丝列表
+        fansnum.clickAndWaitForNewWindow(2500);
+        generalList.flingToEnd(2);
+        generalList.swipeUp(50);
+        generalList.flingToEnd(1);
+        fanUser.clickAndWaitForNewWindow(1500);
+        for (int i = 0; i < 1; i++){
+            if (!editRemark.exists()){
+                followState.click();
+                mDevice.pressBack();
+                mDevice.pressBack();
+                break;
+            }else{
+                mDevice.pressBack();
+                generalList.flingToEnd(1);
+                fanUser.clickAndWaitForNewWindow(1500);
+                i--;
+            }
+        }
+        follownum.clickAndWaitForNewWindow(2500);
+        generalList.flingToEnd(2);
+        generalList.swipeUp(50);
+        generalList.flingToEnd(1);
+        followUser.clickAndWaitForNewWindow(1500);
+        editRemark.clickAndWaitForNewWindow(500);
+        remarkText.clearTextField();
+        remarkText.setText("Ta是条死鱼" + rand.nextInt(10));
+        confirmRemark.click();
+        SystemClock.sleep(1500);
+        follownum.clickAndWaitForNewWindow(1500);
+        generalList.flingToEnd(2);
+        generalList.swipeUp(50);
+        mDevice.pressBack();
+        fansnum.clickAndWaitForNewWindow(1500);
+        generalList.flingToEnd(2);
+        generalList.swipeUp(50);
+        mDevice.pressBack();
+        topicnum.clickAndWaitForNewWindow(1500);
+
+
+
+
+        followState.click();
+        mDevice.pressBack();
+        mDevice.pressBack();
+
+
 
 
         follow.clickAndWaitForNewWindow(1500);
