@@ -1499,7 +1499,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         //达人分享
         UiObject ability_share = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/ability_share_btn"));
         //分享到群和粉丝
-        UiObject groupAndFans = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/lay0").index(1)
+        UiObject groupAndFans = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/lay0").index(0)
                 .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(0)));
         UiObject myFans = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/indicator").index(0)
                 .childSelector(new UiSelector().className(android.widget.LinearLayout.class.getName())
@@ -1509,7 +1509,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject shareText = mDevice.findObject(new UiSelector().className(android.widget.EditText.class.getName()).index(1));
         UiObject shareSend = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName()).index(2));
         //分享到我的点滴
-        UiObject myDrip = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/lay0").index(1)
+        UiObject myDrip = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/lay0").index(0)
                 .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(1)));
         //日记特权
         UiObject privilege1 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_ability_1"));
@@ -1565,20 +1565,20 @@ public class AutomatorDemo extends InstrumentationTestCase{
             myFans.click();
             GNFItem.click();
             shareText.clearTextField();
-            shareText.setText("测试中~~请忽视QAQ");
+            shareText.setText("测试姬卖萌中~~请无视QAQ");
             shareSend.clickAndWaitForNewWindow(5000);
             mDevice.pressBack();
             ability_share.click();
             groupAndFans.click();
             GNFItem.click();
             shareText.clearTextField();
-            shareText.setText("测试中~~请忽视QAQ");
+            shareText.setText("测试姬卖萌中~~请无视QAQ");
             shareSend.clickAndWaitForNewWindow(5000);
             mDevice.pressBack();
             ability_share.click();
             myDrip.click();
             shareText.clearTextField();
-            shareText.setText("测试中~~请忽视QAQ");
+            shareText.setText("测试姬卖萌中~~请无视QAQ");
             shareSend.clickAndWaitForNewWindow(5000);
             SystemClock.sleep(500);
             mDevice.pressBack();
@@ -1588,7 +1588,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
                 regist_ability.click();
                 category.click();
                 registText.clearTextField();
-                registText.setText("测试中~~请不要忽视QAQ");
+                registText.setText("测试姬卖萌中~~请不要无视QAQ");
                 registSubmit.click();
                 mDevice.pressBack();
                 mDevice.pressBack();
@@ -2192,8 +2192,8 @@ public class AutomatorDemo extends InstrumentationTestCase{
                 .childSelector(new UiSelector().className(android.widget.GridView.class.getName()))
                 .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(rand.nextInt(3))));
         UiObject addFontStyle = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/text_font_img"));
-        UiObject fontItem1 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_font_list_item_lay").index(rand.nextInt(5)));
-        UiObject fontItem2 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_font_list_item_lay").index(rand.nextInt(5)));
+        UiObject fontItem1 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_font_list_item_lay").index(rand.nextInt(5)+1));
+        UiObject fontItem2 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_font_list_item_lay").index(rand.nextInt(5)+1));
         UiObject downloadFont = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/font_detail_buy_lay"));
         UiObject fontSize = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/text_size_lay")
                 .childSelector(new UiSelector().className(android.widget.GridView.class.getName()))
@@ -2792,15 +2792,22 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject followUser = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_item_people_follow_lay").index(1));
         //粉丝
         UiObject fansnum = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/user_fans_num_txt"));
-        UiObject fanUser = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_item_people_follow_lay").index(rand.nextInt(5)+1));
+        UiObject fanUser = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_item_people_follow_lay").index(tempA));
         //话题
         UiObject topicnum = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/user_topic_layout"));
+        UiObject topicDetail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_topic_item_rl"));
         //喜欢
         UiObject likenum = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/user_like_layout"));
+        UiObject likeDiary = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/indicator")
+                .childSelector(new UiSelector().className(android.widget.LinearLayout.class.getName()))
+                .childSelector(new UiSelector().className(android.widget.LinearLayout.class.getName()).index(0)));
+        UiObject likeTopic = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/indicator")
+                .childSelector(new UiSelector().className(android.widget.LinearLayout.class.getName()))
+                .childSelector(new UiSelector().className(android.widget.LinearLayout.class.getName()).index(1)));
+        UiObject likeDiaryDetail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/txt_plazatimeline_content"));
         //点滴列表
-        UiObject diaryList = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/diary_item_lay"));
-
         UiObject deletePCDiary = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_mydiary_list_delete"));
+        UiObject confirmDeleteDiary = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_dialog_bt_positiveButton"));
         UiObject review = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/btn_plazatimeline_review_lay"));
         UiObject transpond = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/btn_plazatimeline_transpond_lay"));
         UiObject like = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/btn_plazatimeline_like_lay"));
@@ -2810,7 +2817,6 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject transpondIcon = mDevice.findObject(new UiSelector().className(android.widget.GridView.class.getName())
                 .childSelector(new UiSelector().className(android.widget.LinearLayout.class.getName()).index(2)));
         UiObject transpondConfirm = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/btn_send"));
-
         //个人资料
         //头像
         UiObject addPhoto = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/gc_cover_item_jiahao"));
@@ -2872,7 +2878,6 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject selectTag4 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/all_tags_lay").index(15));
         UiObject confirmTag = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_edit_tags_btn_ok"));
         //关注详情
-        //TODO
         UiObject editRemark = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_mask_her"));
         UiObject remarkText = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_edit_input_mask"));
         UiObject confirmRemark = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_maskset_ok"));
@@ -2889,7 +2894,6 @@ public class AutomatorDemo extends InstrumentationTestCase{
                 .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/popup_text")));
         UiObject cancelAccusation = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/popup_layout").index(3)
                 .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/popup_text")));
-
         //个性装扮
         UiObject skinShop = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/skin_lay"));
         UiObject paperShop = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/paper_lay"));
@@ -2901,7 +2905,10 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject myTopic = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/my_topic_lay"));
         UiObject myLike = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/my_like_lay"));
         UiObject myComment = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/my_comments_lay"));
+        UiObject commentToDetail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/txt_comment_content"));
         UiObject draft = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/drafts_lay"));
+        UiObject draftItem = mDevice.findObject(new UiSelector().className(android.widget.ListView.class.getName())
+                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName())));
         //设置
         //账号管理
         //TODO
@@ -2992,7 +2999,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         //修改昵称
         reviseNickname.clickAndWaitForNewWindow(300);
         edit.clearTextField();
-        edit.setText("测试姬的" + rand.nextInt(50) + "号鱼");
+        edit.setText("测试姬的"+rand.nextInt(50)+"号鱼");
         nicknameConfirm.click();
         SystemClock.sleep(1500);
         //修改性别
@@ -3082,6 +3089,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         generalList.flingToEnd(2);
         generalList.swipeUp(50);
         generalList.flingToEnd(1);
+        //防止关注列表为空的情况，在粉丝中找一个关注人（如果有粉丝的话）
         if (fanUser.exists()){
             fanUser.clickAndWaitForNewWindow(1500);
             for (int i = 0; i < 1; i++){
@@ -3109,7 +3117,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
             editRemark.clickAndWaitForNewWindow(500);
             //改备注
             remarkText.clearTextField();
-            remarkText.setText("Ta是条死鱼" + rand.nextInt(10));
+            remarkText.setText("Ta是条死鱼"+rand.nextInt(10)+"号");
             confirmRemark.click();
             SystemClock.sleep(1500);
             //Ta的关注列表
@@ -3162,8 +3170,50 @@ public class AutomatorDemo extends InstrumentationTestCase{
         }else{
             mDevice.pressBack();
         }
-
-
+        //个人主页话题
+        topicnum.clickAndWaitForNewWindow(1500);
+        topicDetail.clickAndWaitForNewWindow(1500);
+        mDevice.pressBack();
+        mDevice.pressBack();
+        //个人主页喜欢
+        likenum.clickAndWaitForNewWindow(1500);
+        likeTopic.click();
+        topicDetail.clickAndWaitForNewWindow(1500);
+        mDevice.pressBack();
+        likeDiary.click();
+        likeDiaryDetail.clickAndWaitForNewWindow(1500);
+        mDevice.pressBack();
+        mDevice.pressBack();
+        //个人主页点滴
+        generalList.flingToEnd(10);
+        generalList.swipeUp(50);
+        generalList.flingToEnd(5);
+        //列表中转发、评论、删除
+        generalList.scrollIntoView(transpond);
+        transpond.click();
+        transpondEditText.clearTextField();
+        transpondEditText.setText("赞~！");
+        transpondTansfer.click();
+        transpondIcon.click();
+        transpondIcon.click();
+        transpondIcon.click();
+        transpondConfirm.click();
+        SystemClock.sleep(2500);
+        review.click();
+        transpondEditText.clearTextField();
+        transpondEditText.setText("好评~！");
+        transpondConfirm.click();
+        SystemClock.sleep(2500);
+        //列表-喜欢,分享
+        like.click();
+        share.click();
+        mDevice.pressBack();
+        generalList.scrollIntoView(deletePCDiary);
+        deletePCDiary.click();
+        confirmDeleteDiary.click();
+        SystemClock.sleep(1500);
+        //返回“我的”
+        mDevice.pressBack();
         //“我的”列表
         //关注/粉丝
         follow.clickAndWaitForNewWindow(1500);
@@ -3175,6 +3225,59 @@ public class AutomatorDemo extends InstrumentationTestCase{
         mDevice.pressBack();
         //社区点滴入口
         snsDiary.clickAndWaitForNewWindow(1000);
-
+        publicDiary.clickAndWaitForNewWindow(1500);
+        mDevice.pressBack();
+        secretDiary.clickAndWaitForNewWindow(1500);
+        mDevice.pressBack();
+        myTopic.clickAndWaitForNewWindow(1500);
+        mDevice.pressBack();
+        myLike.clickAndWaitForNewWindow(1500);
+        mDevice.pressBack();
+        myComment.clickAndWaitForNewWindow(1500);
+        if (commentToDetail.exists()){
+            generalList.flingToEnd(8);
+            generalList.swipeUp(50);
+            generalList.flingToEnd(1);
+            commentToDetail.clickAndWaitForNewWindow(1500);
+            mDevice.pressBack();
+        }
+        mDevice.pressBack();
+        draft.clickAndWaitForNewWindow(1500);
+        likeTopic.click();
+        likeDiary.click();
+        if (draftItem.exists()){
+            draftItem.clickAndWaitForNewWindow(1000);
+            mDevice.pressBack();
+        }
+        mDevice.pressBack();
+        mDevice.pressBack();
+        //时光机
+        if (timeMachine.exists()){
+            timeMachine.clickAndWaitForNewWindow(1500);
+            webviewRefresh.click();
+            SystemClock.sleep(1000);
+            mDevice.pressBack();
+        }
+        //粉笔乐园
+        coinCenter.clickAndWaitForNewWindow(3000);
+        webviewRefresh.click();
+        SystemClock.sleep(3000);
+        mDevice.pressBack();
+        //个性装扮
+        dress.clickAndWaitForNewWindow(500);
+        skinShop.clickAndWaitForNewWindow(3000);
+        mDevice.pressBack();
+        paperShop.clickAndWaitForNewWindow(3000);
+        mDevice.pressBack();
+        fontShop.clickAndWaitForNewWindow(3000);
+        mDevice.pressBack();
+        emotionShop.clickAndWaitForNewWindow(3000);
+        mDevice.pressBack();
+        mDevice.pressBack();
+        //设置
+        settings.clickAndWaitForNewWindow(500);
+        //TODO
+        //返回到主界面
+        index.click();
     }
 }
