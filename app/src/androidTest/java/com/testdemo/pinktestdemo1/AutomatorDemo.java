@@ -2755,6 +2755,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         final UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
         Random rand = new Random();
         UiScrollable generalList = new UiScrollable(new UiSelector().className(android.widget.ListView.class.getName())).setAsVerticalList();
+        UiScrollable scrollList = new UiScrollable(new UiSelector().className(android.widget.ScrollView.class.getName())).setAsVerticalList();
         //控件
         UiObject index = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/home"));
         UiObject mine = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/mine"));
@@ -2911,14 +2912,27 @@ public class AutomatorDemo extends InstrumentationTestCase{
                 .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName())));
         //设置
         //账号管理
-        //TODO
 
+        //TODO
         //密码锁
-        //TODO
-
+        UiObject lock = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_locker_lay"));
+        UiObject setPwd = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/inputView"));
+        UiObject nextStep = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/setup_locker_stepnext2"));
+        UiObject inputMail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/lock_passwd_email_edt"));
+        UiObject skipMail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/setup_locker_clear_pwd"));
+        UiObject skipBinding = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_dialog_bt_positiveButton"));
+        UiObject nowBinding = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_dialog_bt_negativeButton"));
+        UiObject saveMail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/lock_passwd_email_btn"));
+        UiObject autolock = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/passwd_detail_auto_lay"));
+        UiObject changeMail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/passwd_detail_email_lay"));
+        UiObject erasePwd = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/passwd_detail_close_pwd_lay"));
+        UiObject changePwd = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/passwd_detail_upadte_pwd_lay1"));
+        UiObject one_minute = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/lock_auto_lay1"));
+        UiObject five_minute = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/lock_auto_lay2"));
+        UiObject thirty_minute = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/lock_auto_lay3"));
         //消息通知
         UiObject remindSwitch = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/news_remind_lay"));
-        UiScrollable remindList = new UiScrollable(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/big_parm_body_lay"));
+        UiScrollable remindList = new UiScrollable(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/big_parm_body_lay")).setAsVerticalList();
         UiObject messageSwitch = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/push_message_lay"));
         UiObject commentSwitch = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/push_comment_lay"));
         UiObject newFansSwitch = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/push_new_fans_lay"));
@@ -2927,6 +2941,8 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject dailyRemind = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_daily_remind_lay"));
         UiObject dailyRemindSwitch = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/setup_daily_remind_if_lay"));
         UiObject dailyRemindTime = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/setup_daily_remind_time_lay"));
+        UiObject remindHour = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/time_hour"));
+        UiObject remindMinute = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/time_minute"));
         UiObject disturbSwitch = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/push_night_prevent_disturb_lay"));
         UiObject pushContentSwitch = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/push_display_push_content_lay"));
         //同步管理
@@ -2945,6 +2961,9 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject shortcut = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_shortcut_lay"));
         //关于粉粉
         UiObject aboutPink = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_about_lay"));
+        UiObject about_sina = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/about_link_sina"));
+        UiObject about_tencent = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/about_link_tencent"));
+        UiObject about_mail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/about_link_mail"));
         //社区公约
         UiObject convention = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_gongyue_lay"));
         //新版本检测
@@ -2954,11 +2973,8 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject webviewRefresh = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/web_right_refresh_btn"));
         //黑名单
         UiObject blacklist = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_black_lay"));
-        UiObject inBlacklist = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/push_activity_lay").index(1));
-        UiObject removeFromBlacklist = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/push_activity_lay").index(1)
-                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()))
-                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()))
-                .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snspeople_black_remove_btn")));
+        UiObject inBlacklist = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_item_people_black_lay"));
+        UiObject removeFromBlacklist = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snspeople_black_remove_btn"));
 
         //动作
         //进入个人主页
@@ -3276,7 +3292,82 @@ public class AutomatorDemo extends InstrumentationTestCase{
         mDevice.pressBack();
         //设置
         settings.clickAndWaitForNewWindow(500);
-        //TODO
+        //黑名单
+        scrollList.scrollIntoView(blacklist);
+        blacklist.clickAndWaitForNewWindow(1500);
+        if (inBlacklist.exists()){
+            inBlacklist.clickAndWaitForNewWindow(3000);
+            mDevice.pressBack();
+            removeFromBlacklist.click();
+            SystemClock.sleep(1000);
+        }
+        mDevice.pressBack();
+        //常见问题和反馈
+        feedback.clickAndWaitForNewWindow(1000);
+        webviewRefresh.click();
+        SystemClock.sleep(1000);
+        mDevice.pressBack();
+        //新版本自动检测
+        versionCheck.click();
+        versionCheck.click();
+        //粉粉社区公约
+        convention.clickAndWaitForNewWindow(1000);
+        webviewRefresh.click();
+        SystemClock.sleep(1000);
+        mDevice.pressBack();
+        //关于粉粉
+        aboutPink.clickAndWaitForNewWindow(1000);
+        about_sina.clickAndWaitForNewWindow(5000);
+        mDevice.pressBack();
+        about_tencent.clickAndWaitForNewWindow(5000);
+        mDevice.pressBack();
+        about_mail.clickAndWaitForNewWindow(5000);
+        if (!about_mail.exists()){
+            mDevice.pressBack();
+        }
+        mDevice.pressBack();
+        //创建桌面快捷图标
+        shortcut.click();
+        SystemClock.sleep(1000);
+        //通用设置
+        generalSettings.clickAndWaitForNewWindow(1000);
+        noPicMode.click();
+        noPicMode.click();
+        watermark.click();
+        randomPaper.click();
+        cleanCache.click();
+        SystemClock.sleep(500);
+        mDevice.pressBack();
+        scrollList.flingToBeginning(2);
+        //消息通知
+        remindSwitch.clickAndWaitForNewWindow(1000);
+        for (int i=0; i<rand.nextInt(2)+1; i++){
+            messageSwitch.click();
+            commentSwitch.click();
+            newFansSwitch.click();
+            activitySwitch.click();
+            soundSwitch.click();
+        }
+        remindList.flingToEnd(1);
+        for (int i=0; i<rand.nextInt(2)+1; i++){
+            disturbSwitch.click();
+            pushContentSwitch.click();
+        }
+        dailyRemind.clickAndWaitForNewWindow(500);
+        for (int i=0; i<rand.nextInt(2)+1; i++){
+            dailyRemindSwitch.click();
+        }
+        dailyRemindTime.click();
+        remindHour.swipeDown(10);
+        remindMinute.swipeUp(10);
+        ageConfirm.click();
+        mDevice.pressBack();
+        mDevice.pressBack();
+        //同步管理
+        
+        //密码锁
+        //备份恢复
+        //账号管理
         //返回到主界面
         index.click();
     }
