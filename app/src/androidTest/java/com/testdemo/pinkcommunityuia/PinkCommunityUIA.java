@@ -1,7 +1,6 @@
-package com.testdemo.pinktestdemo1;
+package com.testdemo.pinkcommunityuia;
 
 import android.graphics.Rect;
-import android.os.Environment;
 import android.os.SystemClock;
 import android.support.test.uiautomator.Configurator;
 import android.support.test.uiautomator.UiDevice;
@@ -25,7 +24,7 @@ import java.util.Random;
  * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class AutomatorDemo extends InstrumentationTestCase{
+public class PinkCommunityUIA extends InstrumentationTestCase{
 
     //获取手机api版本
     public static int currentApiVersion = android.os.Build.VERSION.SDK_INT;
@@ -76,7 +75,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
             excuteCommand("am start -n pinkdiary.xiaoxiaotu.com/pinkdiary.xiaoxiaotu.com.LogoScreen");
             SystemClock.sleep(4000);
         } catch (Exception e) {
-            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/startApp.png"));
+            mDevice.takeScreenshot(new File("/storage/sdcard0/PinkCommunityUIA"+"/startApp.png"));
             fail(e.toString());
         }
     }
@@ -88,7 +87,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         try {
             index();
         } catch (UiObjectNotFoundException e) {
-            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/testIndex.png"));
+            mDevice.takeScreenshot(new File("/storage/sdcard0/PinkCommunityUIA"+"/testIndex.png"));
             fail(e.toString());
         }
     }
@@ -99,7 +98,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         try {
             discover_search();
         } catch (UiObjectNotFoundException e) {
-            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/testSearch.png"));
+            mDevice.takeScreenshot(new File("/storage/sdcard0/PinkCommunityUIA"+"/testSearch.png"));
             fail(e.toString());
         }
     }
@@ -110,7 +109,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         try {
             discover_circle();
         } catch (UiObjectNotFoundException e) {
-            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/testCircle.png"));
+            mDevice.takeScreenshot(new File("/storage/sdcard0/PinkCommunityUIA"+"/testCircle.png"));
             fail(e.toString());
         }
     }
@@ -121,7 +120,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         try {
             discover_groupChat();
         } catch (UiObjectNotFoundException e){
-            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/testGroupChat.png"));
+            mDevice.takeScreenshot(new File("/storage/sdcard0/PinkCommunityUIA"+"/testGroupChat.png"));
             fail(e.toString());
         }
     }
@@ -132,7 +131,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         try {
             discover_dyingChatRoom();
         } catch (UiObjectNotFoundException e){
-            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/testDyingChatRoom.png"));
+            mDevice.takeScreenshot(new File("/storage/sdcard0/PinkCommunityUIA"+"/testDyingChatRoom.png"));
             fail(e.toString());
         }
     }
@@ -143,7 +142,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         try {
             discover_ability();
         } catch (UiObjectNotFoundException e){
-            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/testAblilty.png"));
+            mDevice.takeScreenshot(new File("/storage/sdcard0/PinkCommunityUIA"+"/testAblilty.png"));
             fail(e.toString());
         }
     }
@@ -154,7 +153,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         try {
             discover_find();
         } catch (UiObjectNotFoundException e){
-            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/testFind.png"));
+            mDevice.takeScreenshot(new File("/storage/sdcard0/PinkCommunityUIA"+"/testFind.png"));
             fail(e.toString());
         }
     }
@@ -166,7 +165,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         try {
             discover_ranking();
         } catch (UiObjectNotFoundException e){
-            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/testRanking.png"));
+            mDevice.takeScreenshot(new File("/storage/sdcard0/PinkCommunityUIA"+"/testRanking.png"));
             fail(e.toString());
         }
     }
@@ -177,7 +176,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         try {
             visitCommunity();
         } catch (UiObjectNotFoundException e){
-            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/testVisitCommunity.png"));
+            mDevice.takeScreenshot(new File("/storage/sdcard0/PinkCommunityUIA"+"/testVisitCommunity.png"));
             fail(e.toString());
         }
     }
@@ -188,7 +187,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         try {
             publishCommunityDiary();
         } catch (UiObjectNotFoundException e){
-            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/publishCommunityDiary.png"));
+            mDevice.takeScreenshot(new File("/storage/sdcard0/PinkCommunityUIA"+"/publishCommunityDiary.png"));
             fail(e.toString());
         }
     }
@@ -199,7 +198,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         try {
             notification();
         } catch (UiObjectNotFoundException e){
-            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/testNotification.png"));
+            mDevice.takeScreenshot(new File("/storage/sdcard0/PinkCommunityUIA"+"/testNotification.png"));
             fail(e.toString());
         }
     }
@@ -210,7 +209,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         try {
             mine();
         } catch (UiObjectNotFoundException e){
-            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/testMine.png"));
+            mDevice.takeScreenshot(new File("/storage/sdcard0/PinkCommunityUIA"+"/testMine.png"));
             fail(e.toString());
         }
     }
@@ -224,7 +223,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
             excuteCommand("logcat -f /sdcard.log");
             System.out.println("All testcases have been checked.Logs have been saved in /sdcard.log");
         }catch (Exception e){
-            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/TestFinished.png"));
+            mDevice.takeScreenshot(new File("/storage/sdcard0/PinkCommunityUIA"+"/TestFinished.png"));
             fail(e.toString());
         }
     }
@@ -290,11 +289,11 @@ public class AutomatorDemo extends InstrumentationTestCase{
         //首页banner
         UiObject home_banner = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/home_banner_lay"));
         //每日一语
-        UiObject dialy_word = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/dialy_word_lay"));
+        UiObject daily_word = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/dialy_word_lay"));
         //每日一语分享(首页)
-        UiObject dialy_word_home_share = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/daily_word_share"));
+        UiObject daily_word_home_share = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/daily_word_share"));
         //每日一语分享(内部)
-        UiObject dialy_word_detail_share = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/web_right_refresh_btn"));
+        UiObject daily_word_detail_share = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/web_right_refresh_btn"));
         UiObject share_cancel = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName())
                 .resourceId("pinkdiary.xiaoxiaotu.com:id/cancel"));
         //为你推荐-列表
@@ -425,11 +424,11 @@ public class AutomatorDemo extends InstrumentationTestCase{
         }
         //每日一语入口
         home_scroll.scrollForward(50);
-        dialy_word_home_share.click();
+        daily_word_home_share.click();
         share_cancel.click();
-        dialy_word.clickAndWaitForNewWindow();
+        daily_word.clickAndWaitForNewWindow();
         SystemClock.sleep(500);
-        dialy_word_detail_share.click();
+        daily_word_detail_share.click();
         share_cancel.click();
         mDevice.pressBack();
         //为你推荐入口
@@ -650,10 +649,10 @@ public class AutomatorDemo extends InstrumentationTestCase{
         UiObject topicShare = mDevice.findObject(new UiSelector().className(android.widget.ImageView.class.getName())
                 .resourceId("pinkdiary.xiaoxiaotu.com:id/sns_topic_share"));
         //精华
-        UiObject cirlceBest = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName())
+        UiObject circleBest = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName())
                 .resourceId("pinkdiary.xiaoxiaotu.com:id/sns_gi_essence"));
         //最新
-        UiObject cirlceNewest = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName())
+        UiObject circleNewest = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName())
                 .resourceId("pinkdiary.xiaoxiaotu.com:id/sns_gi_new"));
         //发布话题
         UiObject publish = mDevice.findObject(new UiSelector().className(android.widget.RelativeLayout.class.getName())
@@ -841,9 +840,9 @@ public class AutomatorDemo extends InstrumentationTestCase{
         back.click();
         SystemClock.sleep(1000);
         //精华 & 最新
-        cirlceBest.click();
+        circleBest.click();
         SystemClock.sleep(1000);
-        cirlceNewest.click();
+        circleNewest.click();
         SystemClock.sleep(1000);
         //发布话题
         publish.clickAndWaitForNewWindow(2000);
@@ -944,7 +943,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
             mDevice.click(recordButtonX,recordButtonY);
             SystemClock.sleep(500);
         } catch (UiObjectNotFoundException e) {
-            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/EndRecordNotExist.png"));
+            mDevice.takeScreenshot(new File("/storage/sdcard0/PinkCommunityUIA"+"/EndRecordNotExist.png"));
             fail(e.toString());
         }
         //更改发布的圈子
@@ -1422,7 +1421,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
                 mDevice.pressBack();
                 myGroup.click();
             } catch (UiObjectNotFoundException e) {
-                mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo" + "/DissolveNotExist.png"));
+                mDevice.takeScreenshot(new File("/storage/sdcard0/PinkCommunityUIA" + "/DissolveNotExist.png"));
                 fail(e.toString());
             }
         } 
@@ -1524,10 +1523,10 @@ public class AutomatorDemo extends InstrumentationTestCase{
         //活动特权
         UiObject privilege6 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_ability_6"));
         //达人申请
-        UiObject regist_ability = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName()).index(7));
+        UiObject register_ability = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName()).index(7));
         UiObject category = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_ability_class_radio3").index(2));
-        UiObject registText = mDevice.findObject(new UiSelector().className(android.widget.EditText.class.getName()).index(0));
-        UiObject registSubmit = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/ability_submit_btn").index(4));
+        UiObject registerText = mDevice.findObject(new UiSelector().className(android.widget.EditText.class.getName()).index(0));
+        UiObject registerSubmit = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/ability_submit_btn").index(4));
 
         //动作
         index.click();
@@ -1582,14 +1581,14 @@ public class AutomatorDemo extends InstrumentationTestCase{
             shareSend.clickAndWaitForNewWindow(5000);
             SystemClock.sleep(500);
             mDevice.pressBack();
-        }else if (regist_ability.exists()){
+        }else if (register_ability.exists()){
             //申请
-            if(regist_ability.isClickable()) {
-                regist_ability.click();
+            if(register_ability.isClickable()) {
+                register_ability.click();
                 category.click();
-                registText.clearTextField();
-                registText.setText("测试姬卖萌中~~请不要无视QAQ");
-                registSubmit.click();
+                registerText.clearTextField();
+                registerText.setText("测试姬卖萌中~~请不要无视QAQ");
+                registerSubmit.click();
                 mDevice.pressBack();
                 mDevice.pressBack();
             }
@@ -1800,7 +1799,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
         //动作
         discover.click();
         rankingEntrance.clickAndWaitForNewWindow(3000);
-        mDevice.takeScreenshot(new File("//storage//sdcard0//AutomatorDemo" + "//rankingDisplay.png"));
+        mDevice.takeScreenshot(new File("//storage//sdcard0//PinkCommunityUIA" + "//rankingDisplay.png"));
         refresh.click();
         SystemClock.sleep(3500);
         back.click();
@@ -2075,7 +2074,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
             mDevice.pressBack();
             mDevice.pressBack();
         }catch (Exception e){
-            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/NoTopicInList.png"));
+            mDevice.takeScreenshot(new File("/storage/sdcard0/PinkCommunityUIA"+"/NoTopicInList.png"));
             fail(e.toString());
         }
         //最新列表--找到并进入LBS列表
@@ -2102,7 +2101,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
             mDevice.pressBack();
             mDevice.pressBack();
         }catch (Exception e){
-            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/NoLocationInList.png"));
+            mDevice.takeScreenshot(new File("/storage/sdcard0/PinkCommunityUIA"+"/NoLocationInList.png"));
             fail(e.toString());
         }
         //社区-用户推荐
@@ -2633,7 +2632,7 @@ public class AutomatorDemo extends InstrumentationTestCase{
             SystemClock.sleep(500);
             enterRecord.click();
         } catch (UiObjectNotFoundException e) {
-            mDevice.takeScreenshot(new File("/storage/sdcard0/AutomatorDemo"+"/EndRecordNotExist.png"));
+            mDevice.takeScreenshot(new File("/storage/sdcard0/PinkCommunityUIA"+"/EndRecordNotExist.png"));
             fail(e.toString());
         }
         //位置（随机是否显示）
