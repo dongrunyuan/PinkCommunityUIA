@@ -1,4 +1,5 @@
-﻿# AutomatorDemo
+﻿# PinkCommunityUIA
+
 --
 
 ### 手动测试部分
