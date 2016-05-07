@@ -2,7 +2,6 @@ package com.testdemo.pinkcommunityuia;
 
 import android.graphics.Rect;
 import android.os.SystemClock;
-import android.support.test.espresso.action.KeyEventAction;
 import android.support.test.uiautomator.Configurator;
 import android.support.test.uiautomator.UiDevice;
 import android.support.test.uiautomator.UiObject;
@@ -2788,7 +2787,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         UiObject index = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/home"));
         UiObject mine = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/mine"));
         //入口
-        UiObject account = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_acc_pink_lay"));
+        UiObject accountInfo = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_acc_pink_lay"));
         UiObject follow = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/follow_lay"));
         UiObject fans = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/fan_lay"));
         UiObject myDiary = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/my_diary_lay"));
@@ -2941,6 +2940,9 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         //设置
         //账号管理
         UiObject manageAccount = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_acc_mang_lay"));
+        UiObject login_btn = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/login_login_btn").index(5));
+        UiObject accountText = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/login_account_edt").index(0));
+        UiObject pwdText = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/login_pwd_edt").index(0));
         UiObject accountIndex = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_acc_pink_lay"));
         UiObject mobileBinding = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/mobile_binding_arrow"));
         UiObject qqBinding = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/qq_binding_arrow"));
@@ -2952,7 +2954,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         UiObject newPwd = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_changepwd_newpwd1"));
         UiObject confirmPwd = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_changepwd_newpwd2"));
         UiObject logout = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_logout_lay"));
-        //TODO
+        UiObject confirmChange = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_changepwd_btn_send"));
         //密码锁
         UiObject lock = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_locker_lay"));
         UiObject setPwd = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/inputView"));
@@ -3034,7 +3036,14 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         //动作
         //进入个人主页
         mine.click();
-        account.clickAndWaitForNewWindow(2500);
+        accountInfo.clickAndWaitForNewWindow(2500);
+        if (login_btn.exists()) {
+            accountText.setText(account);
+            pwdText.setText(password);
+            login_btn.click();
+            SystemClock.sleep(3000);
+            accountInfo.clickAndWaitForNewWindow(2500);
+        }
         //进入个人资料编辑界面
         editInfo.clickAndWaitForNewWindow(500);
         //修改头像
@@ -3429,6 +3438,8 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         }
         checkWifi.click();
         syncMode.click();
+        syncMode.click();
+        syncMode.click();
         scrollList.scrollIntoView(buyTraffic);
         buyTraffic.clickAndWaitForNewWindow(1500);
         mDevice.pressBack();
@@ -3523,6 +3534,13 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         mDevice.pressBack();
         //账号管理
         manageAccount.clickAndWaitForNewWindow(1500);
+        if (login_btn.exists()) {
+            accountText.setText(account);
+            pwdText.setText(password);
+            login_btn.click();
+            SystemClock.sleep(3000);
+            manageAccount.clickAndWaitForNewWindow(1500);
+        }
         accountIndex.clickAndWaitForNewWindow(1500);
         mDevice.pressBack();
         weixinBinding.clickAndWaitForNewWindow(1500);
@@ -3535,17 +3553,33 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         while (!qqBinding.exists())
             mDevice.pressBack();
         mobileBinding.clickAndWaitForNewWindow(500);
-
-
+        //TODO
+        mDevice.pressBack();
         updateEmail.clickAndWaitForNewWindow(500);
         edit.clearTextField();
         edit.setText("xxtstudio@Hotmail.com");
         nicknameConfirm.click();
         SystemClock.sleep(1500);
         updatePwd.clickAndWaitForNewWindow(500);
-
+        oldPwd.setText("q");
+        newPwd.setText("w");
+        confirmPwd.setText("w");
+        confirmChange.click();
+        SystemClock.sleep(1500);
+        oldPwd.setText("w");
+        newPwd.setText("q");
+        confirmPwd.setText("q");
+        confirmChange.click();
+        SystemClock.sleep(1500);
         logout.click();
-        //TODO
+        blockConfirm.click();
+        settings.clickAndWaitForNewWindow(500);
+        manageAccount.clickAndWaitForNewWindow(1500);
+        accountText.setText(account);
+        pwdText.setText(password);
+        login_btn.click();
+        SystemClock.sleep(3000);
+        mDevice.pressBack();
         //返回到主界面
         index.click();
     }
