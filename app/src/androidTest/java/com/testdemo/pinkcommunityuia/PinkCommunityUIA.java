@@ -2876,9 +2876,8 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         UiObject reviseGender = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snsmyprofile_edit_gender_layout"));
         UiObject woman = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_showsex_dialog_button1"));
         UiObject man = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_showsex_dialog_button2"));
-        UiObject secret = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_showsex_dialog_button3"));
         //年龄
-        UiObject reviseAge = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snsmyprofile_edit_gender_layout"));
+        UiObject reviseAge = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/edit_age_layout"));
         UiScrollable birthYear = new UiScrollable(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/time_year")).setAsVerticalList();
         UiScrollable birthMonth = new UiScrollable(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/time_month")).setAsVerticalList();
         UiScrollable birthDay = new UiScrollable(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/time_day")).setAsVerticalList();
@@ -3082,15 +3081,14 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         edit.setText("测试姬的"+rand.nextInt(50)+"号鱼");
         nicknameConfirm.click();
         SystemClock.sleep(1500);
-        //修改性别
+        //修改性别--(女生认证)
+        //TODO
         reviseGender.click();
-        woman.click();
-        SystemClock.sleep(1500);
-        reviseGender.click();
-        man.click();
-        SystemClock.sleep(1500);
-        reviseGender.click();
-        secret.click();
+        if (woman.exists()){
+            woman.click();
+            mDevice.pressBack();
+
+        }
         SystemClock.sleep(1500);
         //修改年龄
         reviseAge.click();
