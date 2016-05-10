@@ -174,8 +174,19 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         }
     }
 
+    //发现--快聊站
+    public void test004ImChat(){
+        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+        try {
+            discover_imChat();
+        } catch (UiObjectNotFoundException e) {
+            mDevice.takeScreenshot(new File("/storage/sdcard0/PinkCommunityUIA"+"/testImChat.png"));
+            fail(e.toString());
+        }
+    }
+
     //发现--粉粉圈
-    public void test004Circle(){
+    public void test005Circle(){
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
         try {
             discover_circle();
@@ -186,7 +197,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
     }
 
     //群组
-    public void test005GroupChat(){
+    public void test006GroupChat(){
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
         try {
             discover_groupChat();
@@ -197,7 +208,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
     }
 
     //旧版聊天室
-    public void test005P_DyingChatRoom(){
+    public void test007_DyingChatRoom(){
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
         try {
             discover_dyingChatRoom();
@@ -207,19 +218,30 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         }
     }
 
-    //申请达人认证
-    public void test006Ablilty(){
+    //排行榜
+    public void test008Ranking(){
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
         try {
-            discover_ability();
+            discover_ranking();
         } catch (UiObjectNotFoundException e){
-            mDevice.takeScreenshot(new File("/storage/sdcard0/PinkCommunityUIA"+"/testAblilty.png"));
+            mDevice.takeScreenshot(new File("/storage/sdcard0/PinkCommunityUIA"+"/testRanking.png"));
+            fail(e.toString());
+        }
+    }
+
+    //福利社
+    public void test009Welfare(){
+        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+        try {
+            discover_welfare();
+        } catch (UiObjectNotFoundException e){
+            mDevice.takeScreenshot(new File("/storage/sdcard0/PinkCommunityUIA"+"/testWelfare.png"));
             fail(e.toString());
         }
     }
 
     //找找
-    public void test007Find(){
+    public void test010Find(){
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
         try {
             discover_find();
@@ -229,20 +251,19 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         }
     }
 
-    //排行榜
-    public void test008Ranking(){
+    //精选回顾
+    public void test011Review(){
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
-
         try {
-            discover_ranking();
+            discover_review();
         } catch (UiObjectNotFoundException e){
-            mDevice.takeScreenshot(new File("/storage/sdcard0/PinkCommunityUIA"+"/testRanking.png"));
+            mDevice.takeScreenshot(new File("/storage/sdcard0/PinkCommunityUIA"+"/testReview.png"));
             fail(e.toString());
         }
     }
 
     //社区浏览
-    public void test009VisitCommunity(){
+    public void test012VisitCommunity(){
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
         try {
             visitCommunity();
@@ -253,7 +274,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
     }
 
     //写社区点滴
-    public void test010PublishCommunityDiary(){
+    public void test013PublishCommunityDiary(){
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
         try {
             publishCommunityDiary();
@@ -264,7 +285,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
     }
 
     //消息
-    public void test011Notification(){
+    public void test014Notification(){
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
         try {
             notification();
@@ -274,8 +295,19 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         }
     }
 
+    //申请达人认证
+    public void test015Ablilty(){
+        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+        try {
+            discover_ability();
+        } catch (UiObjectNotFoundException e){
+            mDevice.takeScreenshot(new File("/storage/sdcard0/PinkCommunityUIA"+"/testAblilty.png"));
+            fail(e.toString());
+        }
+    }
+
     //我的
-    public void test012Mine(){
+    public void test016Mine(){
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
         try {
             mine();
@@ -581,6 +613,22 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         SystemClock.sleep(500);
     }
 
+    private void discover_imChat() throws UiObjectNotFoundException{
+        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+        //控件
+        UiObject index = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/home"));
+        //排行榜入口
+        UiObject discover = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/discover"));
+        UiObject imChatEntrance = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/im_chat_room").index(0));
+
+        //动作
+        discover.click();
+        imChatEntrance.clickAndWaitForNewWindow(3000);
+        //TODO
+        mDevice.pressBack();
+        index.click();
+    }
+
     private void discover_circle() throws UiObjectNotFoundException{
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
         //授权允许
@@ -608,7 +656,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         UiObject index = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/home"));
         //粉粉圈入口
         UiObject discover = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/discover"));
-        UiObject topicCenter = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/discover_item_lay").index(1));
+        UiObject topicCenter = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/group").index(2));
         //推荐话题&我的圈子&评论我的
         UiObject top_recommend_topic = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_topic_item_rl").index(1));
         UiObject recommend_topic_button = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_radio_recommend_topics"));
@@ -1066,7 +1114,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         UiObject index = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/home"));
         //群组入口
         UiObject discover = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/discover"));
-        UiObject groupChat = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/discover_item_lay").index(2));
+        UiObject groupChat = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/group_room").index(1));
         /*旧功能键
 		UiObject back = mDevice.findObject(new UiSelector().className(android.widget.ImageView.class.getName()).clickable(true).index(0))
 				.getFromParent(new UiSelector().className(android.widget.RelativeLayout.class.getName()));
@@ -1470,7 +1518,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         UiObject index = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/home"));
         //聊天室入口
         UiObject discover = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/discover"));
-        UiObject chatRoomEntrance = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/discover_item_lay").index(3));
+        UiObject chatRoomEntrance = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/discover_item_lay").index(2));
         //聊天记录
         UiScrollable chatList = new UiScrollable(new UiSelector().className(android.widget.ListView.class.getName()));
         //输入内容
@@ -1623,6 +1671,24 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         }else{
             mDevice.pressBack();
         }
+    }
+
+    private void discover_welfare() throws UiObjectNotFoundException{
+        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+        //控件
+        UiObject index = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/home"));
+        //排行榜入口
+        UiObject discover = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/discover"));
+        UiObject welfareEntrance = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/discover_item_lay").index(5));
+        UiObject back = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/duiba_back_btn"));
+
+        //动作
+        discover.click();
+        welfareEntrance.clickAndWaitForNewWindow(3000);
+        SystemClock.sleep(3500);
+        mDevice.takeScreenshot(new File("//storage//sdcard0//PinkCommunityUIA" + "//welfareDisplay.png"));
+        back.click();
+        index.click();
     }
 
     private void discover_find() throws UiObjectNotFoundException{
@@ -1820,7 +1886,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         UiObject index = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/home"));
         //排行榜入口
         UiObject discover = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/discover"));
-        UiObject rankingEntrance = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/discover_item_lay").index(7));
+        UiObject rankingEntrance = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/discover_item_lay").index(4));
         UiObject refresh = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/web_right_refresh_btn"));
         UiObject back = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/web_browser_btn_back"));
 
@@ -1831,6 +1897,45 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         refresh.click();
         SystemClock.sleep(3500);
         back.click();
+        index.click();
+    }
+
+    private void discover_review() throws UiObjectNotFoundException{
+        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+        //控件
+        UiObject index = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/home"));
+        //排行榜入口
+        UiObject discover = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/discover"));
+        UiScrollable discoverList = new UiScrollable(new UiSelector().className(android.widget.ExpandableListView.class.getName())).setAsVerticalList();
+        UiObject outsideReview1 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_wonderful_review"));
+        UiObject outsideReview2 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_wonderful_review1"));
+        UiObject moreReview = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/discover_item_lay").index(4)
+                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()))
+                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName())));
+        UiObject moreReviewRefresh = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/web_right_refresh_btn"));
+        UiScrollable webviewScroll = new UiScrollable(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/main_webView1")).setAsVerticalList();
+
+        //动作
+        discover.click();
+        discoverList.swipeDown(50);
+        discoverList.scrollIntoView(outsideReview2);
+        outsideReview2.clickAndWaitForNewWindow(3000);
+        mDevice.pressBack();
+        outsideReview1.clickAndWaitForNewWindow(3000);
+        mDevice.pressBack();
+        moreReview.clickAndWaitForNewWindow(1500);
+        moreReviewRefresh.click();
+        SystemClock.sleep(3000);
+        webviewScroll.flingToEnd(7);
+        int webviewX = webviewScroll.getBounds().top;
+        int webviewY = webviewScroll.getBounds().left;
+        while (webviewScroll.exists()){
+            webviewScroll.flingToEnd(1);
+            mDevice.click(webviewX+50,webviewY+210);
+        }
+        if (!moreReview.exists()){
+            mDevice.pressBack();
+        }
         index.click();
     }
 
@@ -3087,7 +3192,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         if (woman.exists()){
             woman.click();
             mDevice.pressBack();
-
+            
         }
         SystemClock.sleep(1500);
         //修改年龄
