@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Random;
 
+import jp.jun_nama.test.utf7ime.helper.Utf7ImeHelper;
 /**
  * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
  */
@@ -621,7 +622,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         searchDiary.click();
         SystemClock.sleep(500);
         keywords.clearTextField();
-        keywords.setText("图");
+        keywords.setText(Utf7ImeHelper.e("图"));
         search.click();
         SystemClock.sleep(2500);
         DiaryResult.clickAndWaitForNewWindow(2500);

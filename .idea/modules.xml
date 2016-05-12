@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/PinkCommunityUIA.iml" filepath="$PROJECT_DIR$/PinkCommunityUIA.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/helper-library/helper-library.iml" filepath="$PROJECT_DIR$/helper-library/helper-library.iml" />
     </modules>
   </component>
 </project>
