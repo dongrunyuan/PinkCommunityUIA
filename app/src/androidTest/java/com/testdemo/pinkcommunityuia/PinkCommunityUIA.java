@@ -333,6 +333,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
 
     private void index() throws UiObjectNotFoundException{
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+        Random rand = new Random();
         //控件
         //授权允许
         final UiObject permit1 = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName()).index(1));
@@ -379,8 +380,8 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         //个人头像，点击并确认登录
         UiObject portrait = mDevice.findObject (new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/home_portrait_lay"));
         UiObject login_btn = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/login_login_btn").index(5));
-        UiObject accountText = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/login_account_edt").index(0));
-        UiObject pwdText = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/login_pwd_edt").index(0));
+        UiObject accountText = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/login_account_edt"));
+        UiObject pwdText = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/login_pwd_edt"));
         //我的日记
         UiObject home_mydiary = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/home_mydiary_lay"));
         //记一记
@@ -420,12 +421,19 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         UiObject more_diary_like = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/btn_plazatimeline_like_lay"));
         //分享按钮
         UiObject more_diary_share = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/btn_plazatimeline_share_lay"));
+        //首页机器人
+        UiObject robot = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/home_robot")
+                .childSelector(new UiSelector().className(android.widget.ImageView.class.getName())));
+        UiObject robotFace = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/robot_face"));
+        UiObject robotClose = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/robot_close"));
+        UiObject robotGoto = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/robot_go"));
         //管理卡片
         UiObject card_manage = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/card_manage_btn"));
         //管理卡片开关
         UiObject weather_switch = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/weather_lay").index(1));
         UiObject daily_word_switch = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/daily_word_lay").index(3));
         UiObject rec_foryou_switch = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/rec_foryou_lay").index(5));
+        UiObject rec_robot_switch = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/rec_robot_lay").index(7));
 
         //动作
         //注册uiwatcher
@@ -440,10 +448,13 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
             defaultGreen_Use.click();
             SystemClock.sleep(3500);
         }
-        mDevice.pressBack();
+        if (!defaultPurple_Detail.exists()){
+            mDevice.pressBack();
+        }
         defaultPurple_Detail.clickAndWaitForNewWindow(2500);
         detailImgList.swipeLeft(50);
         designer.clickAndWaitForNewWindow(2500);
+        SystemClock.sleep(3000);
         mDevice.pressBack();
         detailUse.click();
         SystemClock.sleep(3500);
@@ -467,6 +478,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         portrait.clickAndWaitForNewWindow(1000);
         if (login_btn.exists()) {
             accountText.setText(account);
+            pwdText.click();
             pwdText.setText(password);
             login_btn.click();
             SystemClock.sleep(3000);
@@ -486,7 +498,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
             mDevice.pressBack();
         }
         //每日一语入口
-        home_scroll.scrollForward(50);
+        home_scroll.scrollIntoView(daily_word_home_share);
         daily_word_home_share.click();
         share_cancel.click();
         daily_word.clickAndWaitForNewWindow();
@@ -525,6 +537,29 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         more_diary_share.click();
         mDevice.pressBack();
         mDevice.pressBack();
+        //首页机器人
+        robot.click();
+        SystemClock.sleep(500);
+        robotClose.click();
+        robot.click();
+        SystemClock.sleep(500);
+        while (robotFace.exists()){
+            if (robotGoto.exists()){
+                int i = rand.nextInt(2);
+                if (i == 1)/*点还是不点 这是个问题*/{
+                    robotGoto.click();
+                    SystemClock.sleep(1500);
+                    if (!index.exists())
+                        mDevice.pressBack();
+                    else
+                        index.click();
+                    SystemClock.sleep(500);
+                    break;
+                }
+            }
+            robotFace.click();
+            SystemClock.sleep(500);
+        }
         //管理卡片
         for (int i = 0; i < 2; i++) {
             home_scroll.scrollIntoView(card_manage);
@@ -532,6 +567,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
             weather_switch.click();
             daily_word_switch.click();
             rec_foryou_switch.click();
+            rec_robot_switch.click();
             mDevice.pressBack();
         }
         home_scroll.scrollIntoView(skinShop);
@@ -3150,6 +3186,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         accountInfo.clickAndWaitForNewWindow(2500);
         if (login_btn.exists()) {
             accountText.setText(account);
+            pwdText.click();
             pwdText.setText(password);
             login_btn.click();
             SystemClock.sleep(3000);
@@ -3646,6 +3683,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         manageAccount.clickAndWaitForNewWindow(1500);
         if (login_btn.exists()) {
             accountText.setText(account);
+            pwdText.click();
             pwdText.setText(password);
             login_btn.click();
             SystemClock.sleep(3000);
@@ -3686,6 +3724,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         settings.clickAndWaitForNewWindow(500);
         manageAccount.clickAndWaitForNewWindow(1500);
         accountText.setText(account);
+        pwdText.click();
         pwdText.setText(password);
         login_btn.click();
         SystemClock.sleep(3000);
