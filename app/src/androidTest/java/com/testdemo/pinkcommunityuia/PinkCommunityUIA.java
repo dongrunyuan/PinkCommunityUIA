@@ -54,7 +54,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         mDevice.swipe(coordinates.centerX(), coordinates.centerY(), coordinates.centerX(), coordinates.centerY(), steps);
     }
 
-    //中文输入方法（防止部分手机出现无法输入中文文字的情况，需要安装Utf7Ime.apk并设置为默认输入法）
+    //中文输入方法（防止部分手机出现无法输入中文文字的情况，无法在默认状态输入汉字时需要安装Utf7Ime.apk并设置为默认输入法）
     public void setText(UiObject mObject, String text) throws UiObjectNotFoundException{
         mObject.setText(Utf7ImeHelper.e(text));
         if (mObject.getText() != text){
@@ -80,8 +80,8 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         }
     }
 
-    //启动
     @Before
+    //启动
     public void test001StartApp() throws UiObjectNotFoundException{
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
         try {
