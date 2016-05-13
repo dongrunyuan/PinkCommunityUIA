@@ -54,6 +54,15 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         mDevice.swipe(coordinates.centerX(), coordinates.centerY(), coordinates.centerX(), coordinates.centerY(), steps);
     }
 
+    //中文输入方法（防止部分手机出现无法输入中文文字的情况，需要安装Utf7Ime.apk并设置为默认输入法）
+    public void setText(UiObject mObject, String text) throws UiObjectNotFoundException{
+        mObject.setText(Utf7ImeHelper.e(text));
+        if (mObject.getText() != text){
+            mObject.clearTextField();
+            mObject.setText(text);
+        }
+    }
+
     //启动命令
     public static void executeCommand(String command) {
         Runtime r = Runtime.getRuntime();
@@ -622,7 +631,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         searchDiary.click();
         SystemClock.sleep(500);
         keywords.clearTextField();
-        keywords.setText(Utf7ImeHelper.e("图"));
+        setText(keywords, "图");
         search.click();
         SystemClock.sleep(2500);
         DiaryResult.clickAndWaitForNewWindow(2500);
@@ -632,7 +641,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         searchTopic.click();
         SystemClock.sleep(500);
         keywords.clearTextField();
-        keywords.setText("图");
+        setText(keywords, "图");
         search.click();
         SystemClock.sleep(2500);
         TopicResult.clickAndWaitForNewWindow(2500);
@@ -642,7 +651,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         searchGroup.click();
         SystemClock.sleep(500);
         keywords.clearTextField();
-        keywords.setText("图");
+        setText(keywords, "图");
         search.click();
         SystemClock.sleep(2500);
         GroupResult.clickAndWaitForNewWindow(2500);
@@ -921,7 +930,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         if(accuse.exists()){
             accuse.clickAndWaitForNewWindow();
             accuseType.click();
-            accuseDesc.setText("测试姬测试举报功能中，请勿删除话题，谢谢~");
+            setText(accuseDesc, "测试姬测试举报功能中，请勿删除话题，谢谢~");
             accuseConfirm.click();
         }else{
             mDevice.pressBack();
@@ -939,7 +948,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         //评论&喜欢&分享弹出
         comment.click();
         SystemClock.sleep(1000);
-        inputBox.setText("楼主好顶赞~");
+        setText(inputBox, "楼主好顶赞~");
         expression.click();
         SystemClock.sleep(1000);
         heart.click();
@@ -966,11 +975,11 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
             publishGuide.click();
             SystemClock.sleep(1000);
         }
-        title.setText("测试姬话题试验场~");
+        setText(title, "测试姬话题试验场~");
         SystemClock.sleep(500);
         Random ne = new Random();
         int i = ne.nextInt(10000);
-        topicContent.setText("测试姬话题试验中，这个话题马上就要炸上天了哦~boom~！" + i);
+        setText(topicContent, "测试姬话题试验中，这个话题马上就要炸上天了哦~boom~！" + i);
         addEmotion.click();
         SystemClock.sleep(500);
         enterEmotionShop.clickAndWaitForNewWindow(1500);
@@ -1090,7 +1099,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         SystemClock.sleep(500);
         if (floorReply.exists()) {
             floorReply.click();
-            inputBox.setText("楼主好顶赞~");
+            setText(inputBox, "楼主好顶赞~");
             commentConfirm.click();
             SystemClock.sleep(5000);
             back.click();
@@ -1358,7 +1367,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         mDevice.pressBack();
         //加入群组
         apply.clickAndWaitForNewWindow(500);
-        applyReason.setText("群申请测试中，请拒绝，谢谢~");
+        setText(applyReason, "群申请测试中，请拒绝，谢谢~");
         SystemClock.sleep(500);
         applyConfirm.click();
         SystemClock.sleep(2500);
@@ -1398,13 +1407,13 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
                 createTag.click();
                 tagNext.clickAndWaitForNewWindow(1000);
                 createGroupName.clearTextField();
-                createGroupName.setText("测试姬の里屋");
+                setText(createGroupName, "测试姬の里屋");
                 createGroupCover.clickAndWaitForNewWindow(1500);
                 chooseImg.click();
                 imgConfirm.click();
                 groupInfoNext.clickAndWaitForNewWindow(1500);
                 createGroupIntro.clearTextField();
-                createGroupIntro.setText("测试姬的小黑屋呐～不要过来呐～！");
+                setText(createGroupIntro, "测试姬的小黑屋～不要过来呐～！");
                 introConfirm.clickAndWaitForNewWindow(2500);
                 createSuccess.click();
             }
@@ -1422,7 +1431,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
             imgConfirm.click();
             editGroupName.clickAndWaitForNewWindow(500);
             editNameText.clearTextField();
-            editNameText.setText("测试姬の里屋~");
+            setText(editNameText, "测试姬の里屋~");
             editNameNext.clickAndWaitForNewWindow();
             SystemClock.sleep(500);
             editTag.clickAndWaitForNewWindow(500);
@@ -1431,7 +1440,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
             SystemClock.sleep(500);
             editGroupIntro.clickAndWaitForNewWindow(500);
             createGroupIntro.clearTextField();
-            createGroupIntro.setText("测试姬的小黑屋呐～不要过来呐～！！");
+            setText(createGroupIntro, "测试姬的小黑屋呐～不要过来呐～！");
             introConfirm.click();
             mDevice.pressBack();
             //消息提醒
@@ -1455,7 +1464,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
             if (enterGroupChat.exists()) {
                 enterGroupChat.click();
             }
-            inputText.setText("Hello World");
+            setText(inputText, "Hello World");
             expression.click();
             heart.click();
             heart.click();
@@ -1494,7 +1503,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
             if (topicToShare.exists()) {
                 topicToShare.click();
                 shareRemarks.clearTextField();
-                shareRemarks.setText("Hello World");
+                setText(shareRemarks, "Hello World");
                 shareConfirm.click();
                 SystemClock.sleep(2500);
             } else {
@@ -1582,7 +1591,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         chatList.flingToBeginning(4);
         SystemClock.sleep(1500);
         input.click();
-        input.setText("新人报道");
+        setText(input, "新人报道");
         expression.click();
         expressionList.scrollForward(2);
         if (chooseExpression.exists()) {
@@ -1680,20 +1689,20 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
             myFans.click();
             GNFItem.click();
             shareText.clearTextField();
-            shareText.setText("测试姬卖萌中~~请无视QAQ");
+            setText(shareText, "测试姬卖萌中~~请无视QAQ");
             shareSend.clickAndWaitForNewWindow(5000);
             mDevice.pressBack();
             ability_share.click();
             groupAndFans.click();
             GNFItem.click();
             shareText.clearTextField();
-            shareText.setText("测试姬卖萌中~~请无视QAQ");
+            setText(shareText, "测试姬卖萌中~~请无视QAQ");
             shareSend.clickAndWaitForNewWindow(5000);
             mDevice.pressBack();
             ability_share.click();
             myDrip.click();
             shareText.clearTextField();
-            shareText.setText("测试姬卖萌中~~请无视QAQ");
+            setText(shareText, "测试姬卖萌中~~请无视QAQ");
             shareSend.clickAndWaitForNewWindow(5000);
             SystemClock.sleep(500);
             mDevice.pressBack();
@@ -1703,7 +1712,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
                 register_ability.click();
                 category.click();
                 registerText.clearTextField();
-                registerText.setText("测试姬卖萌中~~请不要无视QAQ");
+                setText(registerText, "测试姬卖萌中~~请不要无视QAQ");
                 registerSubmit.click();
                 mDevice.pressBack();
                 mDevice.pressBack();
@@ -1822,19 +1831,19 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         searchDiary.click();
         SystemClock.sleep(500);
         keywords.clearTextField();
-        keywords.setText("图");
+        setText(keywords, "图");
         search.click();
         //search by topic
         searchTopic.click();
         SystemClock.sleep(500);
         keywords.clearTextField();
-        keywords.setText("图");
+        setText(keywords, "图");
         search.click();
         //search by group
         searchGroup.click();
         SystemClock.sleep(500);
         keywords.clearTextField();
-        keywords.setText("图");
+        setText(keywords, "图");
         search.click();
         searchID.click();
         mDevice.pressBack();
@@ -1904,7 +1913,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         //加入群组
         apply.clickAndWaitForNewWindow(500);
         if(applyReason.exists()){
-            applyReason.setText("群申请测试中，请拒绝，谢谢~");
+            setText(applyReason, "群申请测试中，请拒绝，谢谢~");
             SystemClock.sleep(500);
             applyConfirm.click();
             SystemClock.sleep(2500);
@@ -2132,7 +2141,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         //列表中转发、评论
         generalList.scrollIntoView(transpondInList);
         transpondInList.click();
-        transpondEditText.setText("赞~！");
+        setText(transpondEditText, "赞~！");
         transpondTansfer.click();
         transpondIcon.click();
         transpondIcon.click();
@@ -2140,7 +2149,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         transpondConfirm.click();
         SystemClock.sleep(2500);
         reviewInList.click();
-        transpondEditText.setText("好评~！");
+        setText(transpondEditText, "好评~！");
         transpondConfirm.click();
         SystemClock.sleep(2500);
         //列表-喜欢,分享
@@ -2182,11 +2191,11 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         diaryCommentList.swipeDown(50);
         //转发、评论
         transpondInDetail.click();
-        transpondEditText.setText("赞~！");
+        setText(transpondEditText, "赞~！");
         transpondConfirm.click();
         SystemClock.sleep(2500);
         reviewInDetail.click();
-        transpondEditText.setText("好评~！");
+        setText(transpondEditText, "好评~！");
         transpondConfirm.click();
         SystemClock.sleep(2500);
         //点赞楼层
@@ -2195,7 +2204,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         likeComment.click();
         //回复楼层
         replyComment.click();
-        transpondEditText.setText("nice~!");
+        setText(transpondEditText, "nice~!");
         SystemClock.sleep(3000);
         transpondConfirm.click();
         SystemClock.sleep(2500);
@@ -2548,8 +2557,8 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         community.click();
         SystemClock.sleep(500);
         if (editAccount.exists()){
-            editAccount.setText("test6789");
-            editPassword.setText("q");
+            editAccount.setText(account);
+            editPassword.setText(password);
             loginButton.click();
             SystemClock.sleep(1800);
         }
@@ -2662,7 +2671,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         //添加话题
         topicEntrance.clickAndWaitForNewWindow(1500);
         editTopic.clearTextField();
-        editTopic.setText("啊哇哇哇哇");
+        setText(editTopic, "啊哇哇哇哇");
         confirmTopic.click();
         SystemClock.sleep(500);
         topicEntrance.clickAndWaitForNewWindow(1500);
@@ -2689,7 +2698,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         SystemClock.sleep(500);
         //添加正文
         context.clearTextField();
-        context.setText("野生的测试姬出现了！！！" + rand.nextInt(10000));
+        setText(context, "野生的测试姬出现了！！！" + rand.nextInt(10000));
         //添加表情
         addEmotion.click();
         //购买免费表情
@@ -3228,7 +3237,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         //修改昵称
         reviseNickname.clickAndWaitForNewWindow(300);
         edit.clearTextField();
-        edit.setText("测试姬的"+rand.nextInt(50)+"号鱼");
+        setText(edit, "测试姬的"+rand.nextInt(50)+"号鱼");
         nicknameConfirm.click();
         SystemClock.sleep(1500);
         //修改性别--(女生认证)
@@ -3260,7 +3269,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         //修改签名
         reviseSign.clickAndWaitForNewWindow(500);
         edit.clearTextField();
-        edit.setText("416c77617973206c696b6520746869732e");
+        setText(edit, "416c77617973206c696b6520746869732e");
         nicknameConfirm.click();
         SystemClock.sleep(1500);
         //修改个人标签
@@ -3345,7 +3354,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
             editRemark.clickAndWaitForNewWindow(500);
             //改备注
             remarkText.clearTextField();
-            remarkText.setText("Ta是条死鱼"+rand.nextInt(10)+"号");
+            setText(remarkText, "Ta是死鱼"+rand.nextInt(10)+"号");
             confirmRemark.click();
             SystemClock.sleep(1500);
             //Ta的关注列表
@@ -3378,7 +3387,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
             SystemClock.sleep(500);
             msgText.click();
             msgText.clearTextField();
-            msgText.setText("你好");
+            setText(msgText, "你好");
             msgSend.click();
             SystemClock.sleep(500);
             mDevice.pressBack();
@@ -3420,7 +3429,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         generalList.scrollIntoView(transpond);
         transpond.click();
         transpondEditText.clearTextField();
-        transpondEditText.setText("赞~！");
+        setText(transpondEditText, "赞~！");
         transpondTansfer.click();
         transpondIcon.click();
         transpondIcon.click();
@@ -3429,7 +3438,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         SystemClock.sleep(2500);
         review.click();
         transpondEditText.clearTextField();
-        transpondEditText.setText("好评~！");
+        setText(transpondEditText, "好评~！");
         transpondConfirm.click();
         SystemClock.sleep(2500);
         //列表-喜欢,分享
