@@ -548,27 +548,29 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         mDevice.pressBack();
         mDevice.pressBack();
         //首页机器人
-        robot.click();
-        SystemClock.sleep(500);
-        robotClose.click();
-        robot.click();
-        SystemClock.sleep(500);
-        while (robotFace.exists()){
-            if (robotGoto.exists()){
-                int i = rand.nextInt(2);
-                if (i == 1)/*点还是不点 这是个问题*/{
-                    robotGoto.click();
-                    SystemClock.sleep(1500);
-                    if (!index.exists())
-                        mDevice.pressBack();
-                    else
-                        index.click();
-                    SystemClock.sleep(500);
-                    break;
-                }
-            }
-            robotFace.click();
+        if (robot.exists()){
+            robot.click();
             SystemClock.sleep(500);
+            robotClose.click();
+            robot.click();
+            SystemClock.sleep(500);
+            while (robotFace.exists()){
+                if (robotGoto.exists()){
+                    int i = rand.nextInt(2);
+                    if (i == 1)/*点还是不点 这是个问题*/{
+                        robotGoto.click();
+                        SystemClock.sleep(1500);
+                        if (!index.exists())
+                            mDevice.pressBack();
+                        else
+                            index.click();
+                        SystemClock.sleep(500);
+                        break;
+                    }
+                }
+                robotFace.click();
+                SystemClock.sleep(500);
+            }
         }
         //管理卡片
         for (int i = 0; i < 2; i++) {
@@ -577,7 +579,8 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
             weather_switch.click();
             daily_word_switch.click();
             rec_foryou_switch.click();
-            rec_robot_switch.click();
+            if (rec_robot_switch.exists())
+                rec_robot_switch.click();
             mDevice.pressBack();
         }
         home_scroll.scrollIntoView(skinShop);
