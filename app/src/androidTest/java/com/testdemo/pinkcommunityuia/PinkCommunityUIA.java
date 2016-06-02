@@ -526,6 +526,13 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         SystemClock.sleep(1500);
         mDevice.pressBack();
         hot_diary_refresh.click();
+        //防止误触机器人
+        while (robotClose.exists()){
+            robotClose.click();
+            mDevice.swipe(home_scroll.getBounds().centerX(), home_scroll.getBounds().centerY(),
+                    home_scroll.getBounds().centerX(), home_scroll.getBounds().centerY()-100, 1);
+            hot_diary_refresh.click();
+        }
         SystemClock.sleep(1500);
         home_hotdiary_item1.clickAndWaitForNewWindow();
         SystemClock.sleep(1500);
@@ -1052,11 +1059,6 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         try {
             enterRecord.click();
             SystemClock.sleep(1000);
-//            //如果出现录音授权需要确认
-//            if(permit1.exists())
-//                permit1.click();
-//            else if (permit2.exists())
-//                permit2.click();
             //停止录音按钮坐标
             int recordButtonX = startRecord.getBounds().centerX();
             int recordButtonY = startRecord.getBounds().centerY();
@@ -1065,6 +1067,10 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
             SystemClock.sleep(5000);
             mDevice.click(recordButtonX,recordButtonY);
             SystemClock.sleep(500);
+            if (!reRecord.exists()){
+                mDevice.click(recordButtonX,recordButtonY);
+                SystemClock.sleep(500);
+            }
             reRecord.click();
             SystemClock.sleep(5000);
             mDevice.click(recordButtonX,recordButtonY);
