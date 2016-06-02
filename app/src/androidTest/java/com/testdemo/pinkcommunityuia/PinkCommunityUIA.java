@@ -56,10 +56,12 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
 
     //中文输入方法（防止部分手机出现无法输入中文文字的情况，无法在默认状态输入汉字时需要安装Utf7Ime.apk并设置为默认输入法）
     public void setText(UiObject mObject, String text) throws UiObjectNotFoundException{
-        mObject.setText(Utf7ImeHelper.e(text));
-        if (mObject.getText() != text){
+        mObject.clearTextField();
+        mObject.setText(text);
+        int resultStrLength = mObject.getText().length();
+        if (resultStrLength != text.length()){
             mObject.clearTextField();
-            mObject.setText(text);
+            mObject.setText(Utf7ImeHelper.e(text));
         }
     }
 
@@ -517,11 +519,18 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         share_cancel.click();
         mDevice.pressBack();
         //为你推荐入口
-        home_scroll.scrollIntoView(hot_diary_list);
+        home_scroll.scrollIntoView(home_hotdiary_item0);
         home_hotdiary_item0.clickAndWaitForNewWindow();
         SystemClock.sleep(1500);
         mDevice.pressBack();
         hot_diary_refresh.click();
+        //防止误触机器人
+        while (robotClose.exists()){
+            robotClose.click();
+            mDevice.swipe(home_scroll.getBounds().centerX(), home_scroll.getBounds().centerY(),
+                    home_scroll.getBounds().centerX(), home_scroll.getBounds().centerY()-100, 1);
+            hot_diary_refresh.click();
+        }
         SystemClock.sleep(1500);
         home_hotdiary_item1.clickAndWaitForNewWindow();
         SystemClock.sleep(1500);
@@ -1047,11 +1056,6 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         try {
             enterRecord.click();
             SystemClock.sleep(1000);
-//            //如果出现录音授权需要确认
-//            if(permit1.exists())
-//                permit1.click();
-//            else if (permit2.exists())
-//                permit2.click();
             //停止录音按钮坐标
             int recordButtonX = startRecord.getBounds().centerX();
             int recordButtonY = startRecord.getBounds().centerY();
@@ -1060,6 +1064,10 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
             SystemClock.sleep(5000);
             mDevice.click(recordButtonX,recordButtonY);
             SystemClock.sleep(500);
+            if (!reRecord.exists()){
+                mDevice.click(recordButtonX,recordButtonY);
+                SystemClock.sleep(500);
+            }
             reRecord.click();
             SystemClock.sleep(5000);
             mDevice.click(recordButtonX,recordButtonY);
@@ -1987,7 +1995,6 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
             SystemClock.sleep(3000);
             mDevice.click(webviewX+350,webviewY+510);
             SystemClock.sleep(3000);
-            break;
         }
         while (!moreReview.exists()){
             mDevice.pressBack();
