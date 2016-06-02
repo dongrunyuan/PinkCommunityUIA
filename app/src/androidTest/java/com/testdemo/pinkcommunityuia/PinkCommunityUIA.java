@@ -1567,13 +1567,8 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
             if (!index.exists()) {
                 mDevice.pressBack();
             }
-            else {
-                //回到主页
-                index.click();
-                SystemClock.sleep(500);
-                break;
-            }
         }
+        index.click();
     }
 
     @SuppressWarnings("unused")
@@ -1786,6 +1781,9 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         UiObject inviteFromTencent = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_invite_qq_friend_layout"));
         UiObject weChatExit = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName()).index(1));
         UiObject weChatBack = mDevice.findObject(new UiSelector().className(android.widget.LinearLayout.class.getName()).index(0).clickable(true));
+        UiObject weChatConfirm = mDevice.findObject(new UiSelector().className(android.widget.LinearLayout.class.getName()).index(2)
+                .childSelector(new UiSelector().className(android.widget.LinearLayout.class.getName()))
+                .childSelector(new UiSelector().className(android.widget.TextView.class.getName()).clickable(true)));
         //推荐列表
         UiScrollable recommendList = new UiScrollable(new UiSelector().className(android.widget.ListView.class.getName())).setAsVerticalList();
         //列表项详情
@@ -1835,6 +1833,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         index.click();
         discover.click();
         findEntrance.click();
+        SystemClock.sleep(2500);
         startSearch.click();
         //search by ID
         keywords.setText("1111111");
@@ -1869,9 +1868,11 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         mDevice.pressBack();
         inviteFromWechat.click();
         SystemClock.sleep(5000);
-        if(weChatBack.exists()){
-            weChatBack.click();
-            weChatExit.clickAndWaitForNewWindow();
+        if (weChatConfirm.exists()){
+            if(weChatBack.exists()){
+                weChatBack.click();
+                weChatExit.clickAndWaitForNewWindow();
+            }
         }
         inviteFromTencent.clickAndWaitForNewWindow();
         SystemClock.sleep(5000);
@@ -1943,6 +1944,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         mDevice.pressBack();
         SystemClock.sleep(500);
         mDevice.pressBack();
+        index.click();
     }
 
     private void discover_ranking() throws UiObjectNotFoundException{
@@ -1974,7 +1976,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         UiScrollable discoverList = new UiScrollable(new UiSelector().className(android.widget.ExpandableListView.class.getName())).setAsVerticalList();
         UiObject outsideReview1 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_wonderful_review"));
         UiObject outsideReview2 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_wonderful_review1"));
-        UiObject moreReview = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/discover_item_lay").index(10)
+        UiObject moreReview = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/discover_item_lay").index(5)
                 .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()))
                 .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName())));
         UiObject moreReviewRefresh = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/web_right_refresh_btn"));
@@ -1983,6 +1985,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         //动作
         discover.click();
         discoverList.swipeDown(50);
+        discoverList.flingToEnd(5);
         discoverList.scrollIntoView(outsideReview2);
         outsideReview2.clickAndWaitForNewWindow(3000);
         mDevice.pressBack();
