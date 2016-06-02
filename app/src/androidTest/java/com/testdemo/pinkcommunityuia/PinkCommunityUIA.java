@@ -56,12 +56,16 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
 
     //中文输入方法（防止部分手机出现无法输入中文文字的情况，无法在默认状态输入汉字时需要安装Utf7Ime.apk并设置为默认输入法）
     public void setText(UiObject mObject, String text) throws UiObjectNotFoundException{
-        mObject.setText(Utf7ImeHelper.e(text));
-        if (mObject.getText() != text){
+        mObject.clearTextField();
+        mObject.setText(text);
+        int resultStrLength = mObject.getText().length();
+        if (resultStrLength != text.length()){
             mObject.clearTextField();
-            mObject.setText(text);
+            mObject.setText(Utf7ImeHelper.e(text));
         }
     }
+
+
 
     //启动命令
     public static void executeCommand(String command) {
@@ -517,7 +521,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         share_cancel.click();
         mDevice.pressBack();
         //为你推荐入口
-        home_scroll.scrollIntoView(hot_diary_list);
+        home_scroll.scrollIntoView(home_hotdiary_item0);
         home_hotdiary_item0.clickAndWaitForNewWindow();
         SystemClock.sleep(1500);
         mDevice.pressBack();
@@ -548,27 +552,29 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         mDevice.pressBack();
         mDevice.pressBack();
         //首页机器人
-        robot.click();
-        SystemClock.sleep(500);
-        robotClose.click();
-        robot.click();
-        SystemClock.sleep(500);
-        while (robotFace.exists()){
-            if (robotGoto.exists()){
-                int i = rand.nextInt(2);
-                if (i == 1)/*点还是不点 这是个问题*/{
-                    robotGoto.click();
-                    SystemClock.sleep(1500);
-                    if (!index.exists())
-                        mDevice.pressBack();
-                    else
-                        index.click();
-                    SystemClock.sleep(500);
-                    break;
-                }
-            }
-            robotFace.click();
+        if (robot.exists()){
+            robot.click();
             SystemClock.sleep(500);
+            robotClose.click();
+            robot.click();
+            SystemClock.sleep(500);
+            while (robotFace.exists()){
+                if (robotGoto.exists()){
+                    int i = rand.nextInt(2);
+                    if (i == 1)/*点还是不点 这是个问题*/{
+                        robotGoto.click();
+                        SystemClock.sleep(1500);
+                        if (!index.exists())
+                            mDevice.pressBack();
+                        else
+                            index.click();
+                        SystemClock.sleep(500);
+                        break;
+                    }
+                }
+                robotFace.click();
+                SystemClock.sleep(500);
+            }
         }
         //管理卡片
         for (int i = 0; i < 2; i++) {
@@ -577,7 +583,8 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
             weather_switch.click();
             daily_word_switch.click();
             rec_foryou_switch.click();
-            rec_robot_switch.click();
+            if (rec_robot_switch.exists())
+                rec_robot_switch.click();
             mDevice.pressBack();
         }
         home_scroll.scrollIntoView(skinShop);
@@ -703,6 +710,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         };
         //控件
         UiObject index = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/home"));
+        UiScrollable discoverList = new UiScrollable(new UiSelector().className(android.widget.ExpandableListView.class.getName())).setAsVerticalList();
         //粉粉圈入口
         UiObject discover = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/discover"));
         UiObject topicCenter = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/group").index(2));
@@ -780,8 +788,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         UiObject circleNewest = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName())
                 .resourceId("pinkdiary.xiaoxiaotu.com:id/sns_gi_new"));
         //发布话题
-        UiObject publish = mDevice.findObject(new UiSelector().className(android.widget.RelativeLayout.class.getName())
-                .resourceId("pinkdiary.xiaoxiaotu.com:id/sns_keep_topic_lay"));
+        UiObject publish = mDevice.findObject(new UiSelector().className(android.widget.LinearLayout.class.getName()).index(2));
         UiObject publishGuide = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_keepdiary_guide_layout"));
         UiObject title = mDevice.findObject(new UiSelector().className(android.widget.EditText.class.getName())
                 .resourceId("pinkdiary.xiaoxiaotu.com:id/sns_topic_title"));
@@ -883,6 +890,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         //开始
         discover.click();
         SystemClock.sleep(1500);
+        discoverList.scrollIntoView(topicCenter);
         topicCenter.clickAndWaitForNewWindow(2000);
         //进入圈子
         myCircle.click();
@@ -970,7 +978,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         circleNewest.click();
         SystemClock.sleep(1000);
         //发布话题
-        publish.clickAndWaitForNewWindow(2000);
+        publish.clickAndWaitForNewWindow(3000);
         if (publishGuide.exists()) {
             publishGuide.click();
             SystemClock.sleep(1000);
@@ -1420,6 +1428,9 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
             mDevice.pressBack();
             myGroup.click();
             officialGroup1.click();
+            if (guideImg.exists()){
+                guideImg.click();
+            }
             chatSubFunction.click();
             groupData.clickAndWaitForNewWindow(1500);
             //更改群资料
@@ -1515,10 +1526,6 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
             }
             //录音
             addRecording.click();
-//            if (permit1.exists())
-//                permit1.click();
-//            else if (permit2.exists())
-//                permit2.click();
             startRecording.click();
             SystemClock.sleep(1500);
             longClick(startRecording,2400);
@@ -1555,6 +1562,9 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
                 mDevice.pressBack();
             }
             else {
+                //回到主页
+                index.click();
+                SystemClock.sleep(500);
                 break;
             }
         }
@@ -1958,7 +1968,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         UiScrollable discoverList = new UiScrollable(new UiSelector().className(android.widget.ExpandableListView.class.getName())).setAsVerticalList();
         UiObject outsideReview1 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_wonderful_review"));
         UiObject outsideReview2 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_wonderful_review1"));
-        UiObject moreReview = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/discover_item_lay").index(4)
+        UiObject moreReview = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/discover_item_lay").index(10)
                 .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()))
                 .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName())));
         UiObject moreReviewRefresh = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/web_right_refresh_btn"));
@@ -1984,7 +1994,6 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
             SystemClock.sleep(3000);
             mDevice.click(webviewX+350,webviewY+510);
             SystemClock.sleep(3000);
-            break;
         }
         while (!moreReview.exists()){
             mDevice.pressBack();
