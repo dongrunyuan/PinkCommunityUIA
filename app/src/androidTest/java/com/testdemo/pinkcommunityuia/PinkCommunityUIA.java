@@ -344,6 +344,17 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         }
     }
 
+    //设置
+    public void test017Settings(){
+        UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+        try {
+            settings();
+        } catch (UiObjectNotFoundException e){
+            mDevice.takeScreenshot(new File("/storage/sdcard0/PinkCommunityUIA"+"/testSettings.png"));
+            fail(e.toString());
+        }
+    }
+
     @After
     public void testzzzTestFinished(){
         UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
@@ -3220,7 +3231,6 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         final UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
         Random rand = new Random();
         UiScrollable generalList = new UiScrollable(new UiSelector().className(android.widget.ListView.class.getName())).setAsVerticalList();
-        UiScrollable scrollList = new UiScrollable(new UiSelector().className(android.widget.ScrollView.class.getName())).setAsVerticalList();
         //控件
         UiObject index = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/home"));
         UiObject mine = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/mine"));
@@ -3235,7 +3245,6 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         UiObject coinCenter = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/time_machine_lay").index(6)
                 .childSelector(new UiSelector().className(android.widget.LinearLayout.class.getName()).index(1)));
         UiObject dress = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/specific_dress_lay"));
-        UiObject settings = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/setting_lay"));
         //个人主页
         UiObject editInfo = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/edit_info"));
         //标签
@@ -3354,7 +3363,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         UiObject accusation = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_her_more_lay"));
         UiObject block = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/popup_layout").index(1)
                 .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/popup_text")));
-        UiObject blockConfirm = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_dialog_bt_positiveButton"));
+        UiObject dialogNegative = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_dialog_bt_positiveButton"));
         UiObject report = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/popup_layout").index(2)
                 .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/popup_text")));
         UiObject cancelAccusation = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/popup_layout").index(3)
@@ -3374,101 +3383,11 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         UiObject draft = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/drafts_lay"));
         UiObject draftItem = mDevice.findObject(new UiSelector().className(android.widget.ListView.class.getName())
                 .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName())));
-        //设置
-        //账号管理
-        UiObject manageAccount = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_acc_mang_lay"));
+        //设置拆分后剩余有效控件
         UiObject login_btn = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/login_login_btn").index(5));
         UiObject accountText = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/login_account_edt").index(0));
         UiObject pwdText = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/login_pwd_edt").index(0));
-        UiObject accountIndex = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_acc_pink_lay"));
-        UiObject mobileBinding = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/mobile_binding_arrow"));
-        UiObject qqBinding = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/qq_binding_arrow"));
-        UiObject weiboBinding = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/weibo_binding_arrow"));
-        UiObject weixinBinding = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/weixin_binding_arrow"));
-        UiObject updateEmail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/update_email_lay"));
-        UiObject updatePwd = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_update_pass_lay"));
-        UiObject oldPwd = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_changepwd_oldpwd"));
-        UiObject newPwd = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_changepwd_newpwd1"));
-        UiObject confirmPwd = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_changepwd_newpwd2"));
-        UiObject logout = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_logout_lay"));
-        UiObject confirmChange = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_changepwd_btn_send"));
-        //密码锁
-        UiObject lock = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_locker_lay"));
-        UiObject setPwd = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/inputView"));
-        UiObject inputMail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/lock_passwd_email_edt"));
-        UiObject skipMail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/setup_locker_clear_pwd"));
-        UiObject skipBinding = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_dialog_bt_positiveButton"));
-        UiObject nowBinding = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_dialog_bt_negativeButton"));
-        UiObject saveMail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/lock_passwd_email_btn"));
-        UiObject autolock = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/passwd_detail_auto_lay"));
-        UiObject changeMail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/passwd_detail_email_lay"));
-        UiObject erasePwd = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/passwd_detail_close_pwd_lay"));
-        UiObject changePwd = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/passwd_detail_upadte_pwd_lay1"));
-        UiObject one_minute = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/lock_auto_lay1"));
-        UiObject five_minute = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/lock_auto_lay2"));
-        UiObject thirty_minute = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/lock_auto_lay3"));
-        //消息通知
-        UiObject remindSwitch = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/news_remind_lay"));
-        UiScrollable remindList = new UiScrollable(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/big_parm_body_lay")).setAsVerticalList();
-        UiObject messageSwitch = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/push_message_lay"));
-        UiObject commentSwitch = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/push_comment_lay"));
-        UiObject newFansSwitch = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/push_new_fans_lay"));
-        UiObject activitySwitch = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/push_activity_lay"));
-        UiObject soundSwitch = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/push_sound_lay"));
-        UiObject dailyRemind = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_daily_remind_lay"));
-        UiObject dailyRemindSwitch = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/setup_daily_remind_if_lay"));
-        UiObject dailyRemindTime = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/setup_daily_remind_time_lay"));
-        UiObject remindHour = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/time_hour"));
-        UiObject remindMinute = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/time_minute"));
-        UiObject disturbSwitch = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/push_night_prevent_disturb_lay"));
-        UiObject pushContentSwitch = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/push_display_push_content_lay"));
-        //同步管理
-        UiObject syncManage = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sync_manage_lay"));
-        UiObject guide = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sync_manage_continue"));
-        UiObject startGuide = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sync_manage_help"));
-        UiObject syncMode = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sync_mode_check"));
-        UiObject checkWifi = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sync_mode_wifi_check"));
-        UiObject startSync = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/right_away_sync_lay"));
-        UiObject buyTraffic = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/buy_traffic_btn"));
-        //备份恢复
-        UiObject backup = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_zip_lay"));
-        UiObject startBackup = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_start_zipbtn"));
-        UiObject backupHelp = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/backup_help"));
-        UiScrollable helpScroll = new UiScrollable(new UiSelector().className(android.widget.ScrollView.class.getName())).setAsHorizontalList();
-        UiObject backupSettings = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/backup_setting"));
-        UiObject autoBackup = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_backuphint_lay"));
-        UiObject backupPeriod = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_cycle_lay"));
-        UiObject selectPeriod = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/popup_layout").index(rand.nextInt(6)));
-        UiObject backupTime = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_timepick_lay"));
-        UiObject autoDel = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_delbu_lay"));
-        UiObject packCount = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_bucount_lay"));
-        UiObject packItem = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_zip_item"));
-        UiObject restore = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/popup_layout").index(0));
-        UiObject del = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/popup_layout").index(1));
-        //通用设置
-        UiObject generalSettings = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/general_setting_lay"));
-        UiObject noPicMode = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/no_pic_lay"));
-        UiObject watermark = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/water_mark_lay"));
-        UiObject randomPaper = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/pager_random_lay"));
-        UiObject cleanCache = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_cache_clean"));
-        //快捷图标
-        UiObject shortcut = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_shortcut_lay"));
-        //关于粉粉
-        UiObject aboutPink = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_about_lay"));
-        UiObject about_sina = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/about_link_sina"));
-        UiObject about_tencent = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/about_link_tencent"));
-        UiObject about_mail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/about_link_mail"));
-        //社区公约
-        UiObject convention = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_gongyue_lay"));
-        //新版本检测
-        UiObject versionCheck = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_version_check_lay"));
-        //问题反馈
-        UiObject feedback = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_feedback_lay"));
         UiObject webviewRefresh = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/web_right_refresh_btn"));
-        //黑名单
-        UiObject blacklist = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_black_lay"));
-        UiObject inBlacklist = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_item_people_black_lay"));
-        UiObject removeFromBlacklist = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snspeople_black_remove_btn"));
 
         //动作
         //进入个人主页
@@ -3681,7 +3600,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
             mDevice.pressBack();
             accusation.click();
             block.click();
-            blockConfirm.click();
+            dialogNegative.click();
             mDevice.pressBack();
             mDevice.pressBack();
         }else{
@@ -3775,7 +3694,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
             SystemClock.sleep(1000);
             mDevice.pressBack();
         }
-        //粉笔乐园
+        //粉币乐园
         coinCenter.clickAndWaitForNewWindow(3000);
         webviewRefresh.click();
         SystemClock.sleep(3000);
@@ -3791,6 +3710,116 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         emotionShop.clickAndWaitForNewWindow(3000);
         mDevice.pressBack();
         mDevice.pressBack();
+
+        //返回到主界面
+        index.click();
+    }
+
+    private void settings() throws UiObjectNotFoundException{
+        final UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
+        Random rand = new Random();
+        //设置
+        UiObject settings = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/setting_lay"));
+        UiScrollable scrollList = new UiScrollable(new UiSelector().className(android.widget.ScrollView.class.getName())).setAsVerticalList();
+        UiObject ageConfirm = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/dialog_ok"));
+        UiObject dialogNegative = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_dialog_bt_positiveButton"));
+        UiObject edit = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_edit_input_save"));
+        UiObject nicknameConfirm = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_edit_input_btn_ok"));
+        //账号管理
+        UiObject manageAccount = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_acc_mang_lay"));
+        UiObject login_btn = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/login_login_btn").index(5));
+        UiObject accountText = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/login_account_edt").index(0));
+        UiObject pwdText = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/login_pwd_edt").index(0));
+        UiObject accountIndex = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_acc_pink_lay"));
+        UiObject mobileBinding = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/mobile_binding_arrow"));
+        UiObject qqBinding = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/qq_binding_arrow"));
+        UiObject weiboBinding = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/weibo_binding_arrow"));
+        UiObject weixinBinding = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/weixin_binding_arrow"));
+        UiObject updateEmail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/update_email_lay"));
+        UiObject updatePwd = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_update_pass_lay"));
+        UiObject oldPwd = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_changepwd_oldpwd"));
+        UiObject newPwd = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_changepwd_newpwd1"));
+        UiObject confirmPwd = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_changepwd_newpwd2"));
+        UiObject logout = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_logout_lay"));
+        UiObject confirmChange = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_changepwd_btn_send"));
+        //密码锁
+        UiObject lock = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_locker_lay"));
+        UiObject setPwd = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/inputView"));
+        UiObject inputMail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/lock_passwd_email_edt"));
+        UiObject skipMail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/setup_locker_clear_pwd"));
+        UiObject skipBinding = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_dialog_bt_positiveButton"));
+        UiObject nowBinding = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_dialog_bt_negativeButton"));
+        UiObject saveMail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/lock_passwd_email_btn"));
+        UiObject autolock = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/passwd_detail_auto_lay"));
+        UiObject changeMail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/passwd_detail_email_lay"));
+        UiObject erasePwd = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/passwd_detail_close_pwd_lay"));
+        UiObject changePwd = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/passwd_detail_upadte_pwd_lay1"));
+        UiObject one_minute = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/lock_auto_lay1"));
+        UiObject five_minute = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/lock_auto_lay2"));
+        UiObject thirty_minute = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/lock_auto_lay3"));
+        //消息通知
+        UiObject remindSwitch = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/news_remind_lay"));
+        UiScrollable remindList = new UiScrollable(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/big_parm_body_lay")).setAsVerticalList();
+        UiObject messageSwitch = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/push_message_lay"));
+        UiObject commentSwitch = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/push_comment_lay"));
+        UiObject newFansSwitch = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/push_new_fans_lay"));
+        UiObject activitySwitch = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/push_activity_lay"));
+        UiObject soundSwitch = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/push_sound_lay"));
+        UiObject dailyRemind = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_daily_remind_lay"));
+        UiObject dailyRemindSwitch = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/setup_daily_remind_if_lay"));
+        UiObject dailyRemindTime = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/setup_daily_remind_time_lay"));
+        UiObject remindHour = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/time_hour"));
+        UiObject remindMinute = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/time_minute"));
+        UiObject disturbSwitch = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/push_night_prevent_disturb_lay"));
+        UiObject pushContentSwitch = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/push_display_push_content_lay"));
+        //同步管理
+        UiObject syncManage = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sync_manage_lay"));
+        UiObject guide = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sync_manage_continue"));
+        UiObject startGuide = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sync_manage_help"));
+        UiObject syncMode = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sync_mode_check"));
+        UiObject checkWifi = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sync_mode_wifi_check"));
+        UiObject startSync = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/right_away_sync_lay"));
+        UiObject buyTraffic = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/buy_traffic_btn"));
+        //备份恢复
+        UiObject backup = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_zip_lay"));
+        UiObject startBackup = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_start_zipbtn"));
+        UiObject backupHelp = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/backup_help"));
+        UiScrollable helpScroll = new UiScrollable(new UiSelector().className(android.widget.ScrollView.class.getName())).setAsHorizontalList();
+        UiObject backupSettings = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/backup_setting"));
+        UiObject autoBackup = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_backuphint_lay"));
+        UiObject backupPeriod = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_cycle_lay"));
+        UiObject selectPeriod = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/popup_layout").index(rand.nextInt(6)));
+        UiObject backupTime = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_timepick_lay"));
+        UiObject autoDel = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_delbu_lay"));
+        UiObject packCount = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_bucount_lay"));
+        UiObject packItem = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_zip_item"));
+        UiObject restore = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/popup_layout").index(0));
+        UiObject del = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/popup_layout").index(1));
+        //通用设置
+        UiObject generalSettings = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/general_setting_lay"));
+        UiObject noPicMode = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/no_pic_lay"));
+        UiObject watermark = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/water_mark_lay"));
+        UiObject randomPaper = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/pager_random_lay"));
+        UiObject cleanCache = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_cache_clean"));
+        //快捷图标
+        UiObject shortcut = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_shortcut_lay"));
+        //关于粉粉
+        UiObject aboutPink = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_about_lay"));
+        UiObject about_sina = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/about_link_sina"));
+        UiObject about_tencent = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/about_link_tencent"));
+        UiObject about_mail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/about_link_mail"));
+        //社区公约
+        UiObject convention = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_gongyue_lay"));
+        //新版本检测
+        UiObject versionCheck = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_version_check_lay"));
+        //问题反馈
+        UiObject feedback = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_feedback_lay"));
+        UiObject webviewRefresh = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/web_right_refresh_btn"));
+        //黑名单
+        UiObject blacklist = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_black_lay"));
+        UiObject inBlacklist = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_item_people_black_lay"));
+        UiObject removeFromBlacklist = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snspeople_black_remove_btn"));
+
         //设置
         settings.clickAndWaitForNewWindow(500);
         //黑名单
@@ -3963,11 +3992,11 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         mDevice.pressBack();
         packItem.click();
         restore.click();
-        blockConfirm.click();
+        dialogNegative.click();
         SystemClock.sleep(60000);//恢复备份等待1分钟
         packItem.click();
         del.click();
-        blockConfirm.click();
+        dialogNegative.click();
         mDevice.pressBack();
         //账号管理
         manageAccount.clickAndWaitForNewWindow(1500);
@@ -4010,7 +4039,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         confirmChange.click();
         SystemClock.sleep(1500);
         logout.click();
-        blockConfirm.click();
+        dialogNegative.click();
         settings.clickAndWaitForNewWindow(500);
         manageAccount.clickAndWaitForNewWindow(1500);
         accountText.setText(account);
@@ -4019,7 +4048,5 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         login_btn.click();
         SystemClock.sleep(3000);
         mDevice.pressBack();
-        //返回到主界面
-        index.click();
     }
 }
