@@ -728,7 +728,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
                 .index(rand.nextInt(8)+1));
         UiObject choose1stSeries = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/chatroom_item_lay").index(1));
         //选第1个聊天室
-        UiObject choose1stChatroom = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/chatroom_item_lay").index(2));
+        UiObject choose1stChatroom = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/chatlist_item_lay").index(2));
         //聊天室详情
         UiObject chatroomMember = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/chatroom_detail_member_lay"));
         UiObject chatroomOwnerDetail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/cr_ownerinfo_lay"));
@@ -813,6 +813,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         imChatEntrance.clickAndWaitForNewWindow(3000);
         //初始化--退出所有已加入聊天室
         myChatroom.clickAndWaitForNewWindow(1500);
+        SystemClock.sleep(1500);
         while (myChatroomItem.exists()){
             myChatroomItem.clickAndWaitForNewWindow(2500);
             chatroomMore.click();
@@ -820,14 +821,17 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
             if (dialogNegative.exists()){
                 dialogPositive.click();
             }
-            SystemClock.sleep(500);
+            SystemClock.sleep(1500);
         }
+        mDevice.pressBack();
         //随机进个快聊站分类
         chooseSeries.clickAndWaitForNewWindow(2500);
+        SystemClock.sleep(2500);
         //随机分类中是否存在快聊站
         if (!choose1stChatroom.exists()){
             mDevice.pressBack();
             choose1stSeries.clickAndWaitForNewWindow(2500);
+            SystemClock.sleep(2500);
         }
         //若随机分类中不存在快聊站，进第1个分类检查是否存在快聊站，存在的话进入别人的聊天室测试流程
         if (choose1stChatroom.exists()){
@@ -848,8 +852,9 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
             int maxHeight = series.getBounds().bottom;
             int elsesChatroomEntrCenterY = maxHeight - dip2px(105/2);
             int elsesChatroomEntrCenterX = dip2px((26+452/2)/2);
-            int elsesChatroomQuitCenterX = dip2px((26+452-41)/2);
+            int elsesChatroomQuitCenterX = dip2px((26+452-81)/2);
             mDevice.click(elsesChatroomEntrCenterX,elsesChatroomEntrCenterY);
+            SystemClock.sleep(1500);
             //检查快捷入口是否点击成功,成功的话点击返回
             if (chatroomMember.exists())
                 mDevice.pressBack();
@@ -880,8 +885,6 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
             SystemClock.sleep(1500);
             mDevice.pressBack();
         }else{
-            chatroomCreate.click();
-            SystemClock.sleep(500);
             setText(chatroomTitle,"测试姬の安全屋");
             setText(chatroomDesc,"名字叫安全屋...其实是最不安全的地方...嘿嘿嘿...");
             chatroomConfim.click();
@@ -946,7 +949,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
             SystemClock.sleep(2500);
             if (playRecording.exists()) {
                 playRecording.click();
-                SystemClock.sleep(2500);
+                SystemClock.sleep(15000);
             }
             //新建聊天室--解散
             chatroomMore.click();
@@ -1798,7 +1801,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
             SystemClock.sleep(1500);
             longClick(startRecording,1500);
             longClick(startRecording,1800);
-            SystemClock.sleep(2500);
+            SystemClock.sleep(15000);
             if (playRecording.exists()) {
                 playRecording.click();
                 SystemClock.sleep(2500);
