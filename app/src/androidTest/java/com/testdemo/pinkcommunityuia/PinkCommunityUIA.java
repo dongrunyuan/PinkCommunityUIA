@@ -3243,6 +3243,27 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         Random rand = new Random();
         UiScrollable generalList = new UiScrollable(new UiSelector().className(android.widget.ListView.class.getName())).setAsVerticalList();
         UiScrollable ScrollList = new UiScrollable(new UiSelector().className(android.widget.ScrollView.class.getName()));
+        //授权允许
+        final UiObject permit1 = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName()).index(1));
+        final UiObject permit2 = mDevice.findObject(new UiSelector().className(android.widget.Button.class.getName()).resourceId("android:id/button1"));
+        UiWatcher watcher = new UiWatcher() {
+            @Override
+            public boolean checkForCondition() {
+                try {
+                    if (permit1.exists()){
+                        permit1.click();
+                        return true;
+                    }
+                    else if (permit2.exists()){
+                        permit1.click();
+                        return true;
+                    }
+                }catch (UiObjectNotFoundException e){
+                    fail(e.toString());
+                }
+                return false;
+            }
+        };
         //控件
         UiObject index = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/home"));
         UiObject mine = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/mine"));
@@ -3262,6 +3283,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         //标签
         UiObject tag1 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_tag_tv_1"));
         UiObject tag5 = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_tag_tv_5"));
+        UiObject identifySex = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/identify_sex"));
         UiObject userOfSameInterest = mDevice.findObject(new UiSelector().className(android.widget.ListView.class.getName())
                 .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(rand.nextInt(5)+1)));
         UiObject followUserOfSameInterest = mDevice.findObject(new UiSelector().className(android.widget.ListView.class.getName())
@@ -3336,8 +3358,15 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         UiObject nicknameConfirm = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_edit_input_btn_ok"));
         //性别
         UiObject reviseGender = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snsmyprofile_edit_gender_layout"));
-        UiObject woman = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_showsex_dialog_button1"));
-        UiObject man = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_showsex_dialog_button2"));
+        UiObject female = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_showsex_dialog_button1"));
+        /*UiObject male = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_showsex_dialog_button2"));*/
+        UiObject identify = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/girl_identify_apply_btn"));
+        UiObject startRecord = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/audio_view_img_bg"));
+        UiObject playRecord = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/audio_view_play_rela"));
+        UiObject reRecord = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/audio_view_remake"));
+        UiObject deleteRecord = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/audio_view_delete"));
+        UiObject identifyConfirm = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/girl_identify_apply_btn"));
+        UiObject identifyOK = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/girl_identify_ok_btn"));
         //年龄
         UiObject reviseAge = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/edit_age_layout"));
         UiScrollable birthYear = new UiScrollable(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/time_year")).setAsVerticalList();
@@ -3411,6 +3440,8 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         //动作
         //进入个人主页
         mine.click();
+        //注册uiwatcher
+        mDevice.registerWatcher("warnings", watcher);
         accountInfo.clickAndWaitForNewWindow(1500);
         SystemClock.sleep(1500);
         if (login_btn.exists()){
@@ -3467,13 +3498,42 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         //修改性别--(女生认证)
         if (isUnrecoverableCaseToCheck){
             reviseGender.click();
-            if (woman.exists()){
-                woman.click();
+            if (female.exists()){
+                female.click();
+                SystemClock.sleep(500);
+                identify.clickAndWaitForNewWindow(1500);
+                SystemClock.sleep(500);
+                int maxHeight = ScrollList.getBounds().bottom;
+                int midWidth = ScrollList.getBounds().centerX();
+                int endRecordY = maxHeight - dip2px(200/2);
+                startRecord.click();
+                SystemClock.sleep(15000);
+                mDevice.click(midWidth,endRecordY);
+                deleteRecord.click();
+                startRecord.click();
+                SystemClock.sleep(5000);
+                mDevice.click(midWidth,endRecordY);
+                reRecord.click();
+                SystemClock.sleep(10000);
+                mDevice.click(midWidth,endRecordY);
+                playRecord.click();
+                SystemClock.sleep(11000);
+                ScrollList.scrollIntoView(identifyConfirm);
+                identifyConfirm.click();
+                SystemClock.sleep(30000);
+                playRecord.click();
+                SystemClock.sleep(1500);
+                playRecord.click();
+                SystemClock.sleep(500);
+                identifyOK.click();
+                SystemClock.sleep(500);
+                identifySex.clickAndWaitForNewWindow(1500);
+                SystemClock.sleep(1500);
                 mDevice.pressBack();
-
+                editInfo.clickAndWaitForNewWindow(1500);
+                SystemClock.sleep(1500);
             }
         }
-        //TODO
         SystemClock.sleep(1500);
         //修改年龄
         reviseAge.click();
