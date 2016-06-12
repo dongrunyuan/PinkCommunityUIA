@@ -58,7 +58,10 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         mDevice.swipe(coordinates.centerX(), coordinates.centerY(), coordinates.centerX(), coordinates.centerY(), steps);
     }
 
-    //中文输入方法（防止部分手机出现无法输入中文文字的情况，无法在默认状态输入汉字时需要安装Utf7Ime.apk并设置为默认输入法）
+    /**
+     * 中文输入方法（防止部分手机出现无法输入中文文字的情况，无法在默认状态输入汉字时需要安装Utf7Ime.apk并设置为默认输入法）
+     * 输入密码时请使用自带的.setText()方法，不要使用这个方法
+     */
     public void setText(UiObject mObject, String text) throws UiObjectNotFoundException{
         mObject.clearTextField();
         mObject.setText(text);
@@ -3839,10 +3842,11 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         final UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
         Random rand = new Random();
         //设置
+        UiObject mine = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/mine"));
         UiObject settings = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/setting_lay"));
         UiScrollable scrollList = new UiScrollable(new UiSelector().className(android.widget.ScrollView.class.getName())).setAsVerticalList();
         UiObject ageConfirm = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/dialog_ok"));
-        UiObject dialogNegative = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_dialog_bt_positiveButton"));
+        UiObject dialogPositive = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_dialog_bt_positiveButton"));
         UiObject edit = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_edit_input_save"));
         UiObject nicknameConfirm = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_edit_input_btn_ok"));
         //账号管理
@@ -3895,6 +3899,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         //同步管理
         UiObject syncManage = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sync_manage_lay"));
         UiObject guide = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sync_manage_continue"));
+        UiObject guided = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sync_manage_know"));
         UiObject startGuide = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sync_manage_help"));
         UiObject syncMode = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sync_mode_check"));
         UiObject checkWifi = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sync_mode_wifi_check"));
@@ -3940,7 +3945,9 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         UiObject inBlacklist = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_item_people_black_lay"));
         UiObject removeFromBlacklist = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snspeople_black_remove_btn"));
 
-        //设置
+        //动作
+        mine.click();
+        scrollList.flingToEnd(2);
         settings.clickAndWaitForNewWindow(500);
         //黑名单
         scrollList.scrollIntoView(blacklist);
@@ -3967,14 +3974,18 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         mDevice.pressBack();
         //关于粉粉
         aboutPink.clickAndWaitForNewWindow(1000);
-        about_sina.clickAndWaitForNewWindow(5000);
-        mDevice.pressBack();
-        about_tencent.clickAndWaitForNewWindow(5000);
-        mDevice.pressBack();
-        about_mail.clickAndWaitForNewWindow(5000);
-        if (!about_mail.exists()){
+        about_sina.clickAndWaitForNewWindow(1500);
+        SystemClock.sleep(3000);
+        while (!about_mail.exists())
             mDevice.pressBack();
-        }
+        about_tencent.clickAndWaitForNewWindow(1500);
+        SystemClock.sleep(3000);
+        while (!about_mail.exists())
+            mDevice.pressBack();
+        about_mail.clickAndWaitForNewWindow(1500);
+        SystemClock.sleep(3000);
+        while (!about_mail.exists())
+            mDevice.pressBack();
         mDevice.pressBack();
         //创建桌面快捷图标
         shortcut.click();
@@ -4004,23 +4015,32 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
             pushContentSwitch.click();
         }
         dailyRemind.clickAndWaitForNewWindow(500);
-        for (int i=0; i<rand.nextInt(2)+1; i++){
-            dailyRemindSwitch.click();
-        }
+        dailyRemindSwitch.click();
         dailyRemindTime.click();
+        if (!remindHour.exists()){
+            dailyRemindSwitch.click();
+            dailyRemindTime.click();
+        }
         remindHour.swipeDown(10);
         remindMinute.swipeUp(10);
+        SystemClock.sleep(1000);
         ageConfirm.click();
         mDevice.pressBack();
         mDevice.pressBack();
         //同步管理
         syncManage.clickAndWaitForNewWindow(500);
-        while (guide.exists()){
+        if (guide.exists()){
             guide.click();
+            guided.click();
         }
         startGuide.click();
-        while (guide.exists()){
+        SystemClock.sleep(500);
+        if (guide.exists()){
             guide.click();
+            guided.click();
+        }
+        if (!checkWifi.exists()){
+            syncMode.click();
         }
         checkWifi.click();
         syncMode.click();
@@ -4028,12 +4048,14 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         syncMode.click();
         scrollList.scrollIntoView(buyTraffic);
         buyTraffic.clickAndWaitForNewWindow(1500);
+        SystemClock.sleep(1500);
         mDevice.pressBack();
         startSync.click();
         SystemClock.sleep(60000);//同步等待1分钟
         mDevice.pressBack();
         //密码锁
         lock.clickAndWaitForNewWindow(500);
+        SystemClock.sleep(500);
         if (setPwd.exists()) {
             mDevice.pressKeyCode(KeyEvent.KEYCODE_2);
             mDevice.pressKeyCode(KeyEvent.KEYCODE_2);
@@ -4047,6 +4069,8 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
             SystemClock.sleep(100);
             skipMail.click();
             nowBinding.click();
+            //收键盘，否则会出错
+            mDevice.pressBack();
             skipMail.click();
             skipBinding.click();
         }
@@ -4103,6 +4127,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         backupTime.click();
         remindHour.swipeUp(6);
         remindMinute.swipeDown(39);
+        SystemClock.sleep(1000);
         ageConfirm.click();
         autoDel.click();
         packCount.click();//自动删除备份关掉后点自动保留会出错误提示
@@ -4112,11 +4137,11 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         mDevice.pressBack();
         packItem.click();
         restore.click();
-        dialogNegative.click();
+        dialogPositive.click();
         SystemClock.sleep(60000);//恢复备份等待1分钟
         packItem.click();
         del.click();
-        dialogNegative.click();
+        dialogPositive.click();
         mDevice.pressBack();
         //账号管理
         manageAccount.clickAndWaitForNewWindow(1500);
@@ -4159,7 +4184,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         confirmChange.click();
         SystemClock.sleep(1500);
         logout.click();
-        dialogNegative.click();
+        dialogPositive.click();
         settings.clickAndWaitForNewWindow(500);
         manageAccount.clickAndWaitForNewWindow(1500);
         accountText.setText(account);
