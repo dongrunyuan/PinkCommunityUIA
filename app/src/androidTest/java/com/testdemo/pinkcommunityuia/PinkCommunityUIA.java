@@ -2348,7 +2348,8 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         UiScrollable DetailList = new UiScrollable(new UiSelector().className(android.widget.ListView.class.getName()));
         UiObject jumpToCircle = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_essence_url_group_name1"));
         //点滴详情
-        UiObject diaryDetail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_diary_list_mainlay"));
+        UiObject diaryDetail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_diary_list_mainlay")
+                .childSelector(new UiSelector().className(android.widget.TextView.class.getName())));
         UiScrollable diaryCommentList = new UiScrollable(new UiSelector().className(android.widget.ListView.class.getName()));
         UiObject followInDiaryDetail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_follow_btn"));
         UiObject enterUserInfo = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_user_brief_info_lay"));
@@ -2372,7 +2373,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         //话题、位置详情列表
         UiObject detailFromAdditionalList = mDevice.findObject(new UiSelector().className(android.widget.TextView.class.getName())
                 .resourceId("pinkdiary.xiaoxiaotu.com:id/txt_plazatimeline_content"));
-        UiObject createDiaryFromBannerDetail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/dtopic_list_add"));
+        UiObject createDiaryFromBannerDetail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/dtopic_lay"));
         UiObject createDiaryGuide = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_keepdiary_guide_layout"));
         //社区用户推荐
         UiObject userRecommend = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_list_message_add_attention_btn"));
@@ -2402,11 +2403,16 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
             mDevice.pressBack();
         //进banner
         hotList.click();
-        generalList.flingToBeginning(1);
+        generalList.scrollIntoView(banner);
         banner.clickAndWaitForNewWindow(2500);
         SystemClock.sleep(1500);
         mDevice.pressBack();
+        SystemClock.sleep(1000);
         //话题banner
+        while (!tbanner1.exists()){
+            topicScroll.flingToBeginning(1);
+            SystemClock.sleep(1000);
+        }
         tbanner1.clickAndWaitForNewWindow(1500);
         generalList.flingToEnd(5);
         generalList.swipeUp(30);
@@ -2463,7 +2469,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         shareInList.click();
         mDevice.pressBack();
         //热门-话题
-        generalList.flingToBeginning(6);
+        generalList.flingToBeginning(10);
         generalList.scrollIntoView(hotTopicInList);
         hotTopicInList.clickAndWaitForNewWindow(2500);
         DetailList.flingToEnd(3);
