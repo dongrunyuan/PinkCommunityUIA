@@ -3317,7 +3317,6 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
                 .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName())));
         //点滴列表
         UiObject deletePCDiary = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_mydiary_list_delete"));
-        UiObject confirmDeleteDiary = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_dialog_bt_positiveButton"));
         UiObject review = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/btn_plazatimeline_review_lay"));
         UiObject transpond = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/btn_plazatimeline_transpond_lay"));
         UiObject like = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/btn_plazatimeline_like_lay"));
@@ -3338,7 +3337,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         UiScrollable groupList = new UiScrollable(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/lsq_group_list_view"))
                 .setAsHorizontalList();
         UiObject chooseGroup = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/lsq_group_list_view")
-                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(rand.nextInt(5))));
+                .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(rand.nextInt(4)+1)));
         UiScrollable filterList = new UiScrollable(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/lsq_filter_list_view"))
                 .setAsHorizontalList();
         UiObject chooseFilter = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/lsq_filter_list_view")
@@ -3407,7 +3406,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         UiObject accusation = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_her_more_lay"));
         UiObject block = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/popup_layout").index(1)
                 .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/popup_text")));
-        UiObject dialogNegative = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_dialog_bt_positiveButton"));
+        UiObject dialogPositive = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_dialog_bt_positiveButton"));
         UiObject report = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/popup_layout").index(2)
                 .childSelector(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/popup_text")));
         UiObject cancelAccusation = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/popup_layout").index(3)
@@ -3425,6 +3424,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
                 .childSelector(new UiSelector().className(android.widget.RelativeLayout.class.getName()).index(1))
                 .childSelector(new UiSelector().className(android.widget.ImageView.class.getName())));
         UiObject secret2public = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snsdiarydetail_transform_pub"));
+        UiObject public2secret = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/snsdiarydetail_transform_secret"));
         UiObject myLike = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/my_like_lay"));
         UiObject myComment = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/my_comments_lay"));
         UiObject commentToDetail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_comment_item_list"));
@@ -3589,6 +3589,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         //个人主页标签
         if (tag5.exists()){
             tag5.clickAndWaitForNewWindow(1500);
+            SystemClock.sleep(1500);
             mDevice.pressBack();
         }
         tag1.clickAndWaitForNewWindow(1500);
@@ -3602,6 +3603,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         generalList.swipeUp(50);
         generalList.flingToEnd(1);
         userRecommend.clickAndWaitForNewWindow(1500);
+        SystemClock.sleep(1500);
         mDevice.pressBack();
         mDevice.pressBack();
         //个人主页等级
@@ -3668,8 +3670,9 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
             msgText.clearTextField();
             setText(msgText, "你好");
             msgSend.click();
-            SystemClock.sleep(500);
-            mDevice.pressBack();
+            SystemClock.sleep(1500);
+            while (!followState.exists())
+                mDevice.pressBack();
             //取关/重新关注
             followState.click();
             followState.click();
@@ -3682,7 +3685,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
                 mDevice.pressBack();
                 accusation.click();
                 block.click();
-                dialogNegative.click();
+                dialogPositive.click();
                 mDevice.pressBack();
             }
             mDevice.pressBack();
@@ -3723,7 +3726,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         mDevice.pressBack();
         generalList.scrollIntoView(deletePCDiary);
         deletePCDiary.click();
-        confirmDeleteDiary.click();
+        dialogPositive.click();
         SystemClock.sleep(1500);
         //返回“我的”
         mDevice.pressBack();
@@ -3751,6 +3754,10 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
             secretDiaryItem.clickAndWaitForNewWindow(1500);
             SystemClock.sleep(2500);
             secret2public.click();
+            dialogPositive.click();
+            SystemClock.sleep(1500);
+            public2secret.click();
+            dialogPositive.click();
             SystemClock.sleep(1500);
             mDevice.pressBack();
             secretDiaryItemDel.click();
