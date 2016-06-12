@@ -3842,6 +3842,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         final UiDevice mDevice = UiDevice.getInstance(getInstrumentation());
         Random rand = new Random();
         //设置
+        UiObject index = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/home"));
         UiObject mine = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/mine"));
         UiObject settings = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/setting_lay"));
         UiScrollable scrollList = new UiScrollable(new UiSelector().className(android.widget.ScrollView.class.getName())).setAsVerticalList();
@@ -3856,6 +3857,9 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         UiObject pwdText = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/login_pwd_edt").index(0));
         UiObject accountIndex = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/parm_acc_pink_lay"));
         UiObject mobileBinding = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/mobile_binding_arrow"));
+        UiObject mobileNumber = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/mobile_number_edt"));
+        UiObject captcha = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/reg_image_code_edt"));
+        UiObject MBNextStep = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_binding_mobile_btn"));
         UiObject qqBinding = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/qq_binding_arrow"));
         UiObject weiboBinding = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/weibo_binding_arrow"));
         UiObject weixinBinding = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/weixin_binding_arrow"));
@@ -3871,8 +3875,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         UiObject setPwd = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/inputView"));
         UiObject inputMail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/lock_passwd_email_edt"));
         UiObject skipMail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/setup_locker_clear_pwd"));
-        UiObject skipBinding = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_dialog_bt_positiveButton"));
-        UiObject nowBinding = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_dialog_bt_negativeButton"));
+        UiObject dialogNegative = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/sns_dialog_bt_negativeButton"));
         UiObject saveMail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/lock_passwd_email_btn"));
         UiObject autolock = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/passwd_detail_auto_lay"));
         UiObject changeMail = mDevice.findObject(new UiSelector().resourceId("pinkdiary.xiaoxiaotu.com:id/passwd_detail_email_lay"));
@@ -3988,6 +3991,7 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
             mDevice.pressBack();
         mDevice.pressBack();
         //创建桌面快捷图标
+        scrollList.flingToBeginning(2);
         shortcut.click();
         SystemClock.sleep(1000);
         //通用设置
@@ -4068,11 +4072,11 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
             mDevice.pressKeyCode(KeyEvent.KEYCODE_2);
             SystemClock.sleep(100);
             skipMail.click();
-            nowBinding.click();
+            dialogNegative.click();
             //收键盘，否则会出错
             mDevice.pressBack();
             skipMail.click();
-            skipBinding.click();
+            dialogPositive.click();
         }
         changeMail.clickAndWaitForNewWindow(500);
         mDevice.pressKeyCode(KeyEvent.KEYCODE_2);
@@ -4154,24 +4158,51 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
             manageAccount.clickAndWaitForNewWindow(1500);
         }
         accountIndex.clickAndWaitForNewWindow(1500);
+        SystemClock.sleep(1500);
         mDevice.pressBack();
-        weixinBinding.clickAndWaitForNewWindow(1500);
-        while (!weixinBinding.exists())
-            mDevice.pressBack();
-        weiboBinding.clickAndWaitForNewWindow(1500);
-        while (!weiboBinding.exists())
-            mDevice.pressBack();
-        qqBinding.clickAndWaitForNewWindow(1500);
-        while (!qqBinding.exists())
-            mDevice.pressBack();
-        mobileBinding.clickAndWaitForNewWindow(500);
-        //TODO
-        mDevice.pressBack();
+        //第三方账号绑定（这里只检查入口，实际绑定行为要手动测试）
+        UiObject[] bindingList = {weiboBinding,weixinBinding,qqBinding};
+        for (int i=0; i<3; i++){
+            SystemClock.sleep(1000);
+            if (bindingList[i].exists()){
+                bindingList[i].clickAndWaitForNewWindow(1500);
+                SystemClock.sleep(3000);
+                if (dialogPositive.exists()){
+                    dialogNegative.click();
+                }else{
+                    while (!accountIndex.exists()){
+                        mDevice.pressBack();
+                        SystemClock.sleep(1000);
+                    }
+                }
+            }
+        }
+        //手机号绑定(图片验证码识别不了，没什么好自动测的...)
+        SystemClock.sleep(1000);
+        if (mobileBinding.exists()){
+            mobileBinding.clickAndWaitForNewWindow(1500);
+            SystemClock.sleep(1000);
+            if (dialogPositive.exists()){
+                dialogNegative.click();
+            }else{
+                mobileNumber.setText("13586458686");
+                captcha.setText("5555");
+                MBNextStep.click();
+                while (!accountIndex.exists()){
+                    mDevice.pressBack();
+                    SystemClock.sleep(1000);
+                }
+            }
+        }
+        //改邮箱
         updateEmail.clickAndWaitForNewWindow(500);
         edit.clearTextField();
         edit.setText("xxtstudio@Hotmail.com");
         nicknameConfirm.click();
         SystemClock.sleep(1500);
+        if (nicknameConfirm.exists())
+            mDevice.pressBack();
+        //改密码
         updatePwd.clickAndWaitForNewWindow(500);
         oldPwd.setText("q");
         newPwd.setText("w");
@@ -4193,5 +4224,6 @@ public class PinkCommunityUIA extends InstrumentationTestCase{
         login_btn.click();
         SystemClock.sleep(3000);
         mDevice.pressBack();
+        index.click();
     }
 }
