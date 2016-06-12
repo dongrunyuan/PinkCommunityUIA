@@ -2,7 +2,8 @@
     package="com.testdemo.pinkcommunityuia">
 
     <application android:allowBackup="true" android:label="@string/app_name"
-        android:icon="@mipmap/ic_launcher" android:theme="@style/AppTheme">
+        android:icon="@mipmap/ic_launcher" android:theme="@style/AppTheme"
+        android:name="com.testdemo.pinkcommunityuia.ContextUtil">
 
     </application>
 
